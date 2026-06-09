@@ -1,0 +1,116 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-serif: "DM Serif Display", ui-serif, Georgia, serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-warm: var(--warm);
+  --color-sage: var(--sage);
+  --color-terracotta: var(--terracotta);
+}
+
+:root {
+  --radius: 0.75rem;
+  /* Warm calm palette */
+  --background: oklch(0.985 0.012 85);          /* warm off-white */
+  --foreground: oklch(0.28 0.025 55);           /* warm dark */
+  --card: oklch(0.995 0.008 85);
+  --card-foreground: oklch(0.28 0.025 55);
+  --popover: oklch(0.995 0.008 85);
+  --popover-foreground: oklch(0.28 0.025 55);
+  --primary: oklch(0.52 0.06 155);              /* sage green */
+  --primary-foreground: oklch(0.985 0.012 85);
+  --secondary: oklch(0.93 0.025 80);            /* warm beige */
+  --secondary-foreground: oklch(0.32 0.03 55);
+  --muted: oklch(0.94 0.018 78);
+  --muted-foreground: oklch(0.48 0.022 60);
+  --accent: oklch(0.63 0.13 42);                /* muted terracotta */
+  --accent-foreground: oklch(0.99 0.01 85);
+  --destructive: oklch(0.55 0.18 28);
+  --destructive-foreground: oklch(0.99 0.01 85);
+  --border: oklch(0.88 0.018 75);
+  --input: oklch(0.9 0.018 75);
+  --ring: oklch(0.52 0.06 155);
+  --warm: oklch(0.96 0.02 78);
+  --sage: oklch(0.52 0.06 155);
+  --terracotta: oklch(0.63 0.13 42);
+  --sidebar: oklch(0.97 0.018 80);
+  --sidebar-foreground: oklch(0.28 0.025 55);
+  --sidebar-primary: oklch(0.52 0.06 155);
+  --sidebar-primary-foreground: oklch(0.99 0.01 85);
+  --sidebar-accent: oklch(0.93 0.025 80);
+  --sidebar-accent-foreground: oklch(0.32 0.03 55);
+  --sidebar-border: oklch(0.88 0.018 75);
+  --sidebar-ring: oklch(0.52 0.06 155);
+  --chart-1: oklch(0.52 0.06 155);
+  --chart-2: oklch(0.63 0.13 42);
+  --chart-3: oklch(0.7 0.05 80);
+  --chart-4: oklch(0.45 0.05 200);
+  --chart-5: oklch(0.6 0.1 60);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .font-serif { font-family: var(--font-serif); }
+  .font-sans { font-family: var(--font-sans); }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(30px,-40px) scale(1.05); }
+  }
+  @keyframes float-slower {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(-40px,30px) scale(1.08); }
+  }
+  .animate-float-slow { animation: float-slow 14s ease-in-out infinite; }
+  .animate-float-slower { animation: float-slower 18s ease-in-out infinite; }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-up { animation: fade-up 0.6s ease-out both; }
+}
