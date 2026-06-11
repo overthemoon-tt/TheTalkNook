@@ -1,6 +1,6 @@
 {
     "build": {
-      "builder": "NIXPACKS",
+      "builder": "RAILWAY",
       "buildCommand": "npm run build"
     },
     "deploy": {
