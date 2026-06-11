@@ -1,2 +1,2 @@
 name = "the-talk-nook"
-pages_build_output_dir = ".output/public"
+pages_build_output_dir = "dist/client"
