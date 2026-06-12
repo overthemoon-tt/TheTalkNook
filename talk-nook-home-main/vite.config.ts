@@ -7,7 +7,9 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  nitro: true, // <--- Add this line here to force-enable the Nitro server build
+  nitro: {
+    preset: "node-server",
+  },
   tanstackStart: {
     server: { entry: "server" },
   },
