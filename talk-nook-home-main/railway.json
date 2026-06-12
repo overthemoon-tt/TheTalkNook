@@ -1,10 +1,10 @@
 {
-    "build": {
-      "builder": "RAILWAY",
-      "buildCommand": "npm run build"
-    },
-    "deploy": {
-      "startCommand": "node .output/server/index.mjs",
-      "restartPolicyType": "ON_FAILURE"
-    }
+  "build": {
+    "builder": "RAILWAY",
+    "buildCommand": "npm run build"
+  },
+  "deploy": {
+    "startCommand": "node dist/server/server.js",
+    "restartPolicyType": "ON_FAILURE"
   }
+}
