@@ -4,8 +4,8 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev",
-    "build": "vinxi build",
+    "dev": "npx vinxi dev",
+    "build": "npx vinxi build",
     "start": "node .output/server/index.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
