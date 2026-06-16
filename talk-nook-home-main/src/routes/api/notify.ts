@@ -4,7 +4,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const APIRoute = createAPIFileRoute("/api/notify")({
+export const Route = createAPIFileRoute("/api/notify")({
   POST: async ({ request }) => {
     const { userName, service, txid, ref } = await request.json();
     
