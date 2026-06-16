@@ -1,5 +1,5 @@
 import { json } from "@tanstack/react-start";
-import { createAPIFileRoute } from "@tanstack/react-start/api";
+import { createAPIFileRoute } from "@tanstack/start/api";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
