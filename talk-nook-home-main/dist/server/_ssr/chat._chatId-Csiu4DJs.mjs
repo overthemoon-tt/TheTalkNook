@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { a as Route, s as supabase } from "./router-C-SFFsZ6.mjs";
+import { a as Route, s as supabase } from "./router-6bQfbwFX.mjs";
 import { R as Root2, P as Portal2, C as Content2, T as Title2, D as Description2, a as Cancel, A as Action, O as Overlay2 } from "../_libs/radix-ui__react-alert-dialog.mjs";
 import { c as cn } from "./utils-H80jjgLf.mjs";
 import { S as Slot } from "../_libs/radix-ui__react-slot.mjs";

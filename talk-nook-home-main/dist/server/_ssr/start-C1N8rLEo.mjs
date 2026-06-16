@@ -1,4 +1,4 @@
-import { c as createMiddleware } from "./server-C-3ga51k.mjs";
+import { c as createMiddleware } from "./server-BxPFKi5E.mjs";
 import { r as renderErrorPage } from "./index.mjs";
 import "../_libs/seroval.mjs";
 import "../_libs/react.mjs";

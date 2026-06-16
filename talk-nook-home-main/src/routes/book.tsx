@@ -203,7 +203,7 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
   
 
       try {
-        await fetch("http://localhost:4000/api/notify-booking", {
+        await fetch("/api/notify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
