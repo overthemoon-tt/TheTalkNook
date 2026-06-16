@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
 import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { R as Route$3, s as supabase } from "./router-BHM8YhEN.mjs";
+import { R as Route$3, s as supabase } from "./router-C-SFFsZ6.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
 import { j as Check, P as Phone, e as MessageCircle, k as Copy, A as ArrowRight } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";

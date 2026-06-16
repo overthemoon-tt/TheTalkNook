@@ -135,7 +135,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster, {})
   ] });
 }
-const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-DeL-C2ML.mjs");
+const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-DAtztqoT.mjs");
 const Route$7 = createFileRoute("/talknook-admin-panel")({
   head: () => ({
     meta: [{
@@ -151,13 +151,13 @@ const $$splitComponentImporter$6 = () => import("./peer-support-CybGJ1By.mjs");
 const Route$6 = createFileRoute("/peer-support")({
   head: () => ({
     meta: [{
-      title: "Peer Support — The Talk Nook"
+      title: "Peer Support — Talk Nook"
     }, {
       name: "description",
       content: "Talk to a trained peer listener. Text or voice. Not therapy — just being heard."
     }, {
       property: "og:title",
-      content: "Peer Support — The Talk Nook"
+      content: "Peer Support — Talk Nook"
     }, {
       property: "og:description",
       content: "Trained peer listeners. Text or voice sessions."
@@ -183,19 +183,19 @@ const Route$5 = createFileRoute("/health-navigation")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-const $$splitComponentImporter$4 = () => import("./contact-BT7PLCvR.mjs");
+const $$splitComponentImporter$4 = () => import("./contact-CSS2RfDU.mjs");
 const Route$4 = createFileRoute("/contact")({
   head: () => ({
     meta: [{
-      title: "Contact — The Talk Nook"
+      title: "Contact — Talk Nook"
     }, {
       name: "description",
-      content: "Get in touch with The Talk Nook."
+      content: "Get in touch with Talk Nook."
     }]
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./book-CCHl88uG.mjs");
+const $$splitComponentImporter$3 = () => import("./book-C47n_tzJ.mjs");
 const Route$3 = createFileRoute("/book")({
   validateSearch: (s) => ({
     s: s.s || void 0
@@ -210,17 +210,17 @@ const Route$3 = createFileRoute("/book")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const $$splitComponentImporter$2 = () => import("./about-Da-uwAic.mjs");
+const $$splitComponentImporter$2 = () => import("./about-CZVLg3v2.mjs");
 const Route$2 = createFileRoute("/about")({
   head: () => ({
     meta: [{
-      title: "About — The Talk Nook"
+      title: "About — Talk Nook"
     }, {
       name: "description",
       content: "Our mission to make emotional support accessible to everyone in Bangladesh — no appointments, no stigma."
     }, {
       property: "og:title",
-      content: "About The Talk Nook"
+      content: "About Talk Nook"
     }, {
       property: "og:description",
       content: "Making emotional support accessible to everyone in Bangladesh."
@@ -246,7 +246,7 @@ const supabase = new Proxy({}, {
     return Reflect.get(_supabase, prop, receiver);
   }
 });
-const $$splitComponentImporter$1 = () => import("./index-D4N-dQPZ.mjs");
+const $$splitComponentImporter$1 = () => import("./index-Dx7m3ewP.mjs");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{
@@ -264,7 +264,7 @@ const Route$1 = createFileRoute("/")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./chat._chatId-BIkHjgGU.mjs");
+const $$splitComponentImporter = () => import("./chat._chatId-DgzEIA46.mjs");
 const Route = createFileRoute("/chat/$chatId")({
   head: () => ({
     meta: [{
