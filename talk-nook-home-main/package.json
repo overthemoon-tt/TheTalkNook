@@ -6,8 +6,8 @@
   "scripts": {
     
     "dev": "vinxi dev",
-    "build": "cd talk-nook-home-main && npm install && chmod +x node_modules/.bin/* && npm run build",
-    "start": "cd talk-nook-home-main && node dist/server/index.mjs",
+    "build": "chmod +x node_modules/.bin/* && npx vinxi build",
+  "start": "node .output/server/index.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
