@@ -6,7 +6,7 @@
   "scripts": {
     
     "dev": "vinxi dev",
-    "build": "node node_modules/vinxi/bin/cli.mjs build",
+    "build": "npx vinxi build",
     "start": "node .output/server/index.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
