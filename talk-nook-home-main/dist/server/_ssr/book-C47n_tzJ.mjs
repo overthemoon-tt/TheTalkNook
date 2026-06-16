@@ -212,7 +212,7 @@ function Step3({
       status: "pending_verification"
     }).select("id, reference_code").maybeSingle();
     try {
-      await fetch("https://thetalknook-production.up.railway.app/api/notify-booking", {
+      await fetch("http://localhost:4000/api/notify-booking", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
