@@ -6,8 +6,8 @@
   "scripts": {
     
     "dev": "vinxi dev",
-    "build": "chmod +x node_modules/.bin/* && npx vinxi build",
-  "start": "node .output/server/index.mjs",
+    "build": "node node_modules/vinxi/bin/cli.mjs build",
+    "start": "node .output/server/index.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
