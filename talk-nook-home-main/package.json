@@ -4,12 +4,11 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev",
-    "prepare": "chmod +x node_modules/.bin/*",
-    "build": "npx vinxi build",
-    "start": "node .output/server/index.mjs",
+    "dev": "vite dev",
+    "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
+    "start": "node dist/server/server.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
