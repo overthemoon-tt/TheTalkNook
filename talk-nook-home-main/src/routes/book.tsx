@@ -213,6 +213,9 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
             ref: booking?.reference_code,
           }),
         });
+      } catch (e) {
+        console.error("Notification failed:", e);
+      }
 
     if (error || !booking) {
       setLoading(false);
