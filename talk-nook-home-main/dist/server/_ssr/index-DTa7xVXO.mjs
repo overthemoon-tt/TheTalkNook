@@ -1,7 +1,7 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { s as supabase } from "./router-CtjpRk7a.mjs";
+import { s as supabase } from "./router-FozfxTEg.mjs";
 import "../_libs/sonner.mjs";
 import { e as MessageCircle, o as Calendar, U as UserCheck, H as Heart, p as Users, A as ArrowRight } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";

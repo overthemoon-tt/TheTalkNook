@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
 import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { R as Route$3, s as supabase } from "./router-CtjpRk7a.mjs";
+import { R as Route$3, s as supabase } from "./router-FozfxTEg.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
 import { j as Check, P as Phone, e as MessageCircle, k as Copy, A as ArrowRight } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
@@ -28,7 +28,6 @@ import "../_libs/iceberg-js.mjs";
 import "../_libs/supabase__auth-js.mjs";
 import "tslib";
 import "../_libs/supabase__functions-js.mjs";
-const API_BASE = "http://localhost:4000";
 const SERVICES = {
   text_peer: {
     label: "Text Venting",
@@ -213,7 +212,7 @@ function Step3({
       status: "pending_verification"
     }).select("id, reference_code").maybeSingle();
     try {
-      await fetch(`${API_BASE}/api/notify-booking`, {
+      await fetch(`${"http://localhost:4000"}/api/notify-booking`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
