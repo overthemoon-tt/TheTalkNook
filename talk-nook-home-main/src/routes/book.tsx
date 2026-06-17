@@ -326,7 +326,7 @@ function Step4({ service, confirmation }: {
   }, [confirmation.bookingId]);
   
   useEffect(() => {
-    if (status === "completed") {
+    if (status === "completed" || status === "cancelled") {
       localStorage.removeItem('tn_confirmation');
       window.location.href = '/book';
     }
