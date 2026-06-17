@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { s as supabase } from "./router-6bQfbwFX.mjs";
+import { s as supabase } from "./router-CtjpRk7a.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
 import { i as Mail, F as Facebook } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__react-router.mjs";

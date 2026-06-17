@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
-import { s as supabase } from "./router-6bQfbwFX.mjs";
+import { s as supabase } from "./router-CtjpRk7a.mjs";
 import { c as cn } from "./utils-H80jjgLf.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
 import { L as LayoutDashboard, a as ListChecks, M as MessageSquare, b as LogOut, C as ChevronLeft, c as ChevronRight, S as Search, d as CircleAlert } from "../_libs/lucide-react.mjs";
