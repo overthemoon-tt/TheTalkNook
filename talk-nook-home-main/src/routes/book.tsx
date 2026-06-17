@@ -7,6 +7,7 @@ import { Check, MessageCircle, Phone, Stethoscope, Copy, ArrowRight } from "luci
 
 type ServiceKey = "text_peer" | "voice_peer" | "text_health";
 
+const API_BASE = import.meta.env.VITE_API_URL ?? "";
 const SERVICES: Record<ServiceKey, { label: string; mins: number; price: number; icon: any; desc: string }> = {
   text_peer:   { label: "Text Venting",     mins: 25, price: 29,  icon: MessageCircle, desc: "Real-time chat with a trained peer listener." },
   voice_peer:  { label: "Voice Venting",    mins: 30, price: 99, icon: Phone,         desc: "Google Meet call with a peer listener." },
@@ -203,7 +204,7 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
   
 
       try {
-        await fetch("/api/notify", {
+        await fetch(`${API_BASE}/api/notify-booking`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

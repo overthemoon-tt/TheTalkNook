@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const resend = new Resend('re_6rUsmzEr_NvsSvviRbEr6TyzUzt1yqvni');
+const resend = new Resend('re_gush4SL3_Ax3ApzFePNg9CtVfgPQRZrKH');
 
 app.post('/api/notify-booking', async (req, res) => {
     const { userName, service, txid, ref } = req.body;
