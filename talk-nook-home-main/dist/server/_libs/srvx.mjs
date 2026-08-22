@@ -1,8 +1,9 @@
-import nodeHTTP from "node:http";
-import { Readable, PassThrough } from "node:stream";
-import { pipeline } from "node:stream/promises";
-import nodeHTTPS from "node:https";
-import nodeHTTP2 from "node:http2";
+"use strict";
+const nodeHTTP = require("node:http");
+const node_stream = require("node:stream");
+const promises = require("node:stream/promises");
+const nodeHTTPS = require("node:https");
+const nodeHTTP2 = require("node:http2");
 function lazyInherit(target, source, sourceKey) {
   for (const key of [...Object.getOwnPropertyNames(source), ...Object.getOwnPropertySymbols(source)]) {
     if (key === "constructor") continue;
@@ -190,16 +191,16 @@ function resolveCertOrKey(value) {
   return readFileSync(value, "utf8");
 }
 function createWaitUntil() {
-  const promises = /* @__PURE__ */ new Set();
+  const promises2 = /* @__PURE__ */ new Set();
   return {
     waitUntil: (promise) => {
       if (typeof promise?.then !== "function") return;
-      promises.add(Promise.resolve(promise).catch(console.error).finally(() => {
-        promises.delete(promise);
+      promises2.add(Promise.resolve(promise).catch(console.error).finally(() => {
+        promises2.delete(promise);
       }));
     },
     wait: () => {
-      return Promise.all(promises);
+      return Promise.all(promises2);
     }
   };
 }
@@ -324,7 +325,7 @@ function pipeBody(stream, nodeRes, status, statusText, headers) {
         return resolve();
       }
       writeHead(nodeRes, status, statusText, headers);
-      pipeline(stream, nodeRes).catch(() => {
+      promises.pipeline(stream, nodeRes).catch(() => {
       }).then(() => resolve());
     }
     stream.once("error", onEarlyError);
@@ -512,7 +513,7 @@ const NodeRequest = /* @__PURE__ */ (() => {
       if (this.#bodyStream === void 0) {
         const method = this.method;
         const hasBody = !(method === "GET" || method === "HEAD");
-        this.#bodyStream = hasBody ? Readable.toWeb(this.#req) : null;
+        this.#bodyStream = hasBody ? node_stream.Readable.toWeb(this.#req) : null;
       }
       return this.#bodyStream;
     }
@@ -598,8 +599,8 @@ const NodeResponse = /* @__PURE__ */ (() => {
     get _response() {
       if (this.#response) return this.#response;
       let body = this.#body;
-      if (body && typeof body.pipe === "function" && !(body instanceof Readable)) {
-        const stream = new PassThrough();
+      if (body && typeof body.pipe === "function" && !(body instanceof node_stream.Readable)) {
+        const stream = new node_stream.PassThrough();
         body.pipe(stream);
         const abort = body.abort;
         if (abort) stream.once("close", () => abort());
@@ -787,8 +788,6 @@ var NodeServer = class {
     })]);
   }
 };
-export {
-  FastURL as F,
-  NodeResponse as N,
-  serve as s
-};
+exports.FastURL = FastURL;
+exports.NodeResponse = NodeResponse;
+exports.serve = serve;

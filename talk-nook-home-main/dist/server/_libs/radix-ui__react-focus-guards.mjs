@@ -1,7 +1,8 @@
-import { r as reactExports } from "./react.mjs";
+"use strict";
+const _libs_react = require("./react.mjs");
 var count = 0;
 function useFocusGuards() {
-  reactExports.useEffect(() => {
+  _libs_react.reactExports.useEffect(() => {
     const edgeGuards = document.querySelectorAll("[data-radix-focus-guard]");
     document.body.insertAdjacentElement("afterbegin", edgeGuards[0] ?? createFocusGuard());
     document.body.insertAdjacentElement("beforeend", edgeGuards[1] ?? createFocusGuard());
@@ -24,6 +25,4 @@ function createFocusGuard() {
   element.style.pointerEvents = "none";
   return element;
 }
-export {
-  useFocusGuards as u
-};
+exports.useFocusGuards = useFocusGuards;

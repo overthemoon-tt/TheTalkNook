@@ -1,5 +1,6 @@
-import { r as reactExports } from "./react.mjs";
-import { __assign, __rest } from "tslib";
+"use strict";
+const _libs_react = require("./react.mjs");
+const tslib = require("tslib");
 function ItoI(a) {
   return a;
 }
@@ -81,11 +82,11 @@ function createSidecarMedium(options) {
     options = {};
   }
   var medium = innerCreateMedium(null);
-  medium.options = __assign({ async: true, ssr: false }, options);
+  medium.options = tslib.__assign({ async: true, ssr: false }, options);
   return medium;
 }
 var SideCar = function(_a) {
-  var sideCar = _a.sideCar, rest = __rest(_a, ["sideCar"]);
+  var sideCar = _a.sideCar, rest = tslib.__rest(_a, ["sideCar"]);
   if (!sideCar) {
     throw new Error("Sidecar: please provide `sideCar` property to import the right car");
   }
@@ -93,14 +94,12 @@ var SideCar = function(_a) {
   if (!Target) {
     throw new Error("Sidecar medium not found");
   }
-  return reactExports.createElement(Target, __assign({}, rest));
+  return _libs_react.reactExports.createElement(Target, tslib.__assign({}, rest));
 };
 SideCar.isSideCarExport = true;
 function exportSidecar(medium, exported) {
   medium.useMedium(exported);
   return SideCar;
 }
-export {
-  createSidecarMedium as c,
-  exportSidecar as e
-};
+exports.createSidecarMedium = createSidecarMedium;
+exports.exportSidecar = exportSidecar;

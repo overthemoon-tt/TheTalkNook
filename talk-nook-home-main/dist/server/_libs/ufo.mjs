@@ -1,3 +1,4 @@
+"use strict";
 const ENC_SLASH_RE = /%2f/gi;
 function decode(text = "") {
   try {
@@ -46,9 +47,7 @@ function joinURL(base, ...input) {
   }
   return url;
 }
-export {
-  withoutTrailingSlash as a,
-  decodePath as d,
-  joinURL as j,
-  withLeadingSlash as w
-};
+exports.decodePath = decodePath;
+exports.joinURL = joinURL;
+exports.withLeadingSlash = withLeadingSlash;
+exports.withoutTrailingSlash = withoutTrailingSlash;

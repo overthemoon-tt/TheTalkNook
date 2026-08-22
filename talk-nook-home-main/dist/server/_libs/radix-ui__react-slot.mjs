@@ -1,49 +1,50 @@
-import { r as reactExports, j as jsxRuntimeExports, b as React } from "./react.mjs";
-import { c as composeRefs } from "./radix-ui__react-compose-refs.mjs";
+"use strict";
+const _libs_react = require("./react.mjs");
+const _libs__radixUi_reactComposeRefs = require("./radix-ui__react-compose-refs.mjs");
 // @__NO_SIDE_EFFECTS__
 function createSlot$3(ownerName) {
   const SlotClone = /* @__PURE__ */ createSlotClone$3(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+  const Slot2 = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
+    const childrenArray = _libs_react.reactExports.Children.toArray(children);
     const slottable = childrenArray.find(isSlottable$3);
     if (slottable) {
       const newElement = slottable.props.children;
       const newChildren = childrenArray.map((child) => {
         if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+          if (_libs_react.reactExports.Children.count(newElement) > 1) return _libs_react.reactExports.Children.only(null);
+          return _libs_react.reactExports.isValidElement(newElement) ? newElement.props.children : null;
         } else {
           return child;
         }
       });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: _libs_react.reactExports.isValidElement(newElement) ? _libs_react.reactExports.cloneElement(newElement, void 0, newChildren) : null });
     }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
   });
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
 }
 // @__NO_SIDE_EFFECTS__
 function createSlotClone$3(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+  const SlotClone = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
+    if (_libs_react.reactExports.isValidElement(children)) {
       const childrenRef = getElementRef$3(children);
       const props2 = mergeProps$3(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      if (children.type !== _libs_react.reactExports.Fragment) {
+        props2.ref = forwardedRef ? _libs__radixUi_reactComposeRefs.composeRefs(forwardedRef, childrenRef) : childrenRef;
       }
-      return reactExports.cloneElement(children, props2);
+      return _libs_react.reactExports.cloneElement(children, props2);
     }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+    return _libs_react.reactExports.Children.count(children) > 1 ? _libs_react.reactExports.Children.only(null) : null;
   });
   SlotClone.displayName = `${ownerName}.SlotClone`;
   return SlotClone;
 }
 var SLOTTABLE_IDENTIFIER$4 = /* @__PURE__ */ Symbol("radix.slottable");
 function isSlottable$3(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$4;
+  return _libs_react.reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$4;
 }
 function mergeProps$3(slotProps, childProps) {
   const overrideProps = { ...childProps };
@@ -85,47 +86,47 @@ function getElementRef$3(element) {
 // @__NO_SIDE_EFFECTS__
 function createSlot$2(ownerName) {
   const SlotClone = /* @__PURE__ */ createSlotClone$2(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+  const Slot2 = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
+    const childrenArray = _libs_react.reactExports.Children.toArray(children);
     const slottable = childrenArray.find(isSlottable$2);
     if (slottable) {
       const newElement = slottable.props.children;
       const newChildren = childrenArray.map((child) => {
         if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+          if (_libs_react.reactExports.Children.count(newElement) > 1) return _libs_react.reactExports.Children.only(null);
+          return _libs_react.reactExports.isValidElement(newElement) ? newElement.props.children : null;
         } else {
           return child;
         }
       });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: _libs_react.reactExports.isValidElement(newElement) ? _libs_react.reactExports.cloneElement(newElement, void 0, newChildren) : null });
     }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
   });
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
 }
 // @__NO_SIDE_EFFECTS__
 function createSlotClone$2(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+  const SlotClone = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
+    if (_libs_react.reactExports.isValidElement(children)) {
       const childrenRef = getElementRef$2(children);
       const props2 = mergeProps$2(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      if (children.type !== _libs_react.reactExports.Fragment) {
+        props2.ref = forwardedRef ? _libs__radixUi_reactComposeRefs.composeRefs(forwardedRef, childrenRef) : childrenRef;
       }
-      return reactExports.cloneElement(children, props2);
+      return _libs_react.reactExports.cloneElement(children, props2);
     }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+    return _libs_react.reactExports.Children.count(children) > 1 ? _libs_react.reactExports.Children.only(null) : null;
   });
   SlotClone.displayName = `${ownerName}.SlotClone`;
   return SlotClone;
 }
 var SLOTTABLE_IDENTIFIER$3 = /* @__PURE__ */ Symbol("radix.slottable");
 function isSlottable$2(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$3;
+  return _libs_react.reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$3;
 }
 function mergeProps$2(slotProps, childProps) {
   const overrideProps = { ...childProps };
@@ -167,47 +168,47 @@ function getElementRef$2(element) {
 // @__NO_SIDE_EFFECTS__
 function createSlot$1(ownerName) {
   const SlotClone = /* @__PURE__ */ createSlotClone$1(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+  const Slot2 = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
+    const childrenArray = _libs_react.reactExports.Children.toArray(children);
     const slottable = childrenArray.find(isSlottable$1);
     if (slottable) {
       const newElement = slottable.props.children;
       const newChildren = childrenArray.map((child) => {
         if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+          if (_libs_react.reactExports.Children.count(newElement) > 1) return _libs_react.reactExports.Children.only(null);
+          return _libs_react.reactExports.isValidElement(newElement) ? newElement.props.children : null;
         } else {
           return child;
         }
       });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: _libs_react.reactExports.isValidElement(newElement) ? _libs_react.reactExports.cloneElement(newElement, void 0, newChildren) : null });
     }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
   });
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
 }
 // @__NO_SIDE_EFFECTS__
 function createSlotClone$1(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+  const SlotClone = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
+    if (_libs_react.reactExports.isValidElement(children)) {
       const childrenRef = getElementRef$1(children);
       const props2 = mergeProps$1(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      if (children.type !== _libs_react.reactExports.Fragment) {
+        props2.ref = forwardedRef ? _libs__radixUi_reactComposeRefs.composeRefs(forwardedRef, childrenRef) : childrenRef;
       }
-      return reactExports.cloneElement(children, props2);
+      return _libs_react.reactExports.cloneElement(children, props2);
     }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+    return _libs_react.reactExports.Children.count(children) > 1 ? _libs_react.reactExports.Children.only(null) : null;
   });
   SlotClone.displayName = `${ownerName}.SlotClone`;
   return SlotClone;
 }
 var SLOTTABLE_IDENTIFIER$2 = /* @__PURE__ */ Symbol("radix.slottable");
 function isSlottable$1(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$2;
+  return _libs_react.reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$2;
 }
 function mergeProps$1(slotProps, childProps) {
   const overrideProps = { ...childProps };
@@ -250,14 +251,14 @@ var SLOTTABLE_IDENTIFIER$1 = /* @__PURE__ */ Symbol("radix.slottable");
 // @__NO_SIDE_EFFECTS__
 function createSlottable(ownerName) {
   const Slottable2 = ({ children }) => {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_react.jsxRuntimeExports.Fragment, { children });
   };
   Slottable2.displayName = `${ownerName}.Slottable`;
   Slottable2.__radixId = SLOTTABLE_IDENTIFIER$1;
   return Slottable2;
 }
 var REACT_LAZY_TYPE = /* @__PURE__ */ Symbol.for("react.lazy");
-var use = React[" use ".trim().toString()];
+var use = _libs_react.React$1[" use ".trim().toString()];
 function isPromiseLike(value) {
   return typeof value === "object" && value !== null && "then" in value;
 }
@@ -267,26 +268,26 @@ function isLazyComponent(element) {
 // @__NO_SIDE_EFFECTS__
 function createSlot(ownerName) {
   const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
+  const Slot2 = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     let { children, ...slotProps } = props;
     if (isLazyComponent(children) && typeof use === "function") {
       children = use(children._payload);
     }
-    const childrenArray = reactExports.Children.toArray(children);
+    const childrenArray = _libs_react.reactExports.Children.toArray(children);
     const slottable = childrenArray.find(isSlottable);
     if (slottable) {
       const newElement = slottable.props.children;
       const newChildren = childrenArray.map((child) => {
         if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
+          if (_libs_react.reactExports.Children.count(newElement) > 1) return _libs_react.reactExports.Children.only(null);
+          return _libs_react.reactExports.isValidElement(newElement) ? newElement.props.children : null;
         } else {
           return child;
         }
       });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
+      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: _libs_react.reactExports.isValidElement(newElement) ? _libs_react.reactExports.cloneElement(newElement, void 0, newChildren) : null });
     }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
   });
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
@@ -294,27 +295,27 @@ function createSlot(ownerName) {
 var Slot = /* @__PURE__ */ createSlot("Slot");
 // @__NO_SIDE_EFFECTS__
 function createSlotClone(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
+  const SlotClone = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     let { children, ...slotProps } = props;
     if (isLazyComponent(children) && typeof use === "function") {
       children = use(children._payload);
     }
-    if (reactExports.isValidElement(children)) {
+    if (_libs_react.reactExports.isValidElement(children)) {
       const childrenRef = getElementRef(children);
       const props2 = mergeProps(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
+      if (children.type !== _libs_react.reactExports.Fragment) {
+        props2.ref = forwardedRef ? _libs__radixUi_reactComposeRefs.composeRefs(forwardedRef, childrenRef) : childrenRef;
       }
-      return reactExports.cloneElement(children, props2);
+      return _libs_react.reactExports.cloneElement(children, props2);
     }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
+    return _libs_react.reactExports.Children.count(children) > 1 ? _libs_react.reactExports.Children.only(null) : null;
   });
   SlotClone.displayName = `${ownerName}.SlotClone`;
   return SlotClone;
 }
 var SLOTTABLE_IDENTIFIER = /* @__PURE__ */ Symbol("radix.slottable");
 function isSlottable(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
+  return _libs_react.reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
 function mergeProps(slotProps, childProps) {
   const overrideProps = { ...childProps };
@@ -353,10 +354,8 @@ function getElementRef(element) {
   }
   return element.props.ref || element.ref;
 }
-export {
-  Slot as S,
-  createSlot$2 as a,
-  createSlot$1 as b,
-  createSlot$3 as c,
-  createSlottable as d
-};
+exports.Slot = Slot;
+exports.createSlot = createSlot$3;
+exports.createSlot$1 = createSlot$2;
+exports.createSlot$2 = createSlot$1;
+exports.createSlottable = createSlottable;

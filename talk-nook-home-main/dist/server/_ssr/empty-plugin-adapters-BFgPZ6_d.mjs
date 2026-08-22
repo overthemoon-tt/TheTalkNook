@@ -1,6 +1,5 @@
+"use strict";
 var pluginSerializationAdapters = [];
 var hasPluginAdapters = false;
-export {
-  hasPluginAdapters,
-  pluginSerializationAdapters
-};
+exports.hasPluginAdapters = hasPluginAdapters;
+exports.pluginSerializationAdapters = pluginSerializationAdapters;

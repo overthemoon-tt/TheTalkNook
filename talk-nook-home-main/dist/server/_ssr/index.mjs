@@ -1,3 +1,4 @@
+"use strict";
 let lastCapturedError;
 const TTL_MS = 5e3;
 function record(error) {
@@ -53,7 +54,9 @@ function renderErrorPage() {
 let serverEntryPromise;
 async function getServerEntry() {
   if (!serverEntryPromise) {
-    serverEntryPromise = import("./server-DZlzska-.mjs").then((n) => n.s).then(
+    serverEntryPromise = Promise.resolve().then(function() {
+      return require("./server-DZlzska-.mjs");
+    }).then((n) => n.s).then(
       (m) => m.default ?? m
     );
   }
@@ -88,7 +91,5 @@ const server = {
     }
   }
 };
-export {
-  server as default,
-  renderErrorPage as r
-};
+exports.default = server;
+exports.r = renderErrorPage;

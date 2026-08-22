@@ -1,5 +1,6 @@
-import { r as reactExports } from "./react.mjs";
-import { s as styleSingleton } from "./react-style-singleton.mjs";
+"use strict";
+const _libs_react = require("./react.mjs");
+const _libs_reactStyleSingleton = require("./react-style-singleton.mjs");
 var zeroRightClassName = "right-scroll-bar-position";
 var fullWidthClassName = "width-before-scroll-bar";
 var noScrollbarsClassName = "with-scroll-bars-hidden";
@@ -37,7 +38,7 @@ var getGapWidth = function(gapMode) {
     gap: Math.max(0, windowWidth - documentWidth + offsets[2] - offsets[0])
   };
 };
-var Style = styleSingleton();
+var Style = _libs_reactStyleSingleton.styleSingleton();
 var lockAttribute = "data-scroll-locked";
 var getStyles = function(_a, allowRelative, gapMode, important) {
   var left = _a.left, top = _a.top, right = _a.right, gap = _a.gap;
@@ -55,7 +56,7 @@ var getCurrentUseCounter = function() {
   return isFinite(counter) ? counter : 0;
 };
 var useLockAttribute = function() {
-  reactExports.useEffect(function() {
+  _libs_react.reactExports.useEffect(function() {
     document.body.setAttribute(lockAttribute, (getCurrentUseCounter() + 1).toString());
     return function() {
       var newCounter = getCurrentUseCounter() - 1;
@@ -70,13 +71,11 @@ var useLockAttribute = function() {
 var RemoveScrollBar = function(_a) {
   var noRelative = _a.noRelative, noImportant = _a.noImportant, _b = _a.gapMode, gapMode = _b === void 0 ? "margin" : _b;
   useLockAttribute();
-  var gap = reactExports.useMemo(function() {
+  var gap = _libs_react.reactExports.useMemo(function() {
     return getGapWidth(gapMode);
   }, [gapMode]);
-  return reactExports.createElement(Style, { styles: getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : "") });
+  return _libs_react.reactExports.createElement(Style, { styles: getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : "") });
 };
-export {
-  RemoveScrollBar as R,
-  fullWidthClassName as f,
-  zeroRightClassName as z
-};
+exports.RemoveScrollBar = RemoveScrollBar;
+exports.fullWidthClassName = fullWidthClassName;
+exports.zeroRightClassName = zeroRightClassName;

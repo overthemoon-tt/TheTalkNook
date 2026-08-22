@@ -1,11 +1,10 @@
-import { r as reactExports } from "../react.mjs";
+"use strict";
+const _libs_react = require("../react.mjs");
 function useCallbackRef(callback) {
-  const callbackRef = reactExports.useRef(callback);
-  reactExports.useEffect(() => {
+  const callbackRef = _libs_react.reactExports.useRef(callback);
+  _libs_react.reactExports.useEffect(() => {
     callbackRef.current = callback;
   });
-  return reactExports.useMemo(() => (...args) => callbackRef.current?.(...args), []);
+  return _libs_react.reactExports.useMemo(() => (...args) => callbackRef.current?.(...args), []);
 }
-export {
-  useCallbackRef as u
-};
+exports.useCallbackRef = useCallbackRef;

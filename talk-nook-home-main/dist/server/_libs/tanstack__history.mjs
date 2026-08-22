@@ -1,3 +1,4 @@
+"use strict";
 var stateIndexKey = "__TSR_index";
 function createHistory(opts) {
   let location = opts.getLocation();
@@ -198,7 +199,5 @@ function parseHref(href, state) {
 function createRandomKey() {
   return (Math.random() + 1).toString(36).substring(7);
 }
-export {
-  createMemoryHistory as c,
-  parseHref as p
-};
+exports.createMemoryHistory = createMemoryHistory;
+exports.parseHref = parseHref;

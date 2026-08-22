@@ -1,14 +1,13 @@
-import { r as reactExports, b as React } from "./react.mjs";
-import { u as useLayoutEffect2 } from "./@radix-ui/react-use-layout-effect+[...].mjs";
-var useReactId = React[" useId ".trim().toString()] || (() => void 0);
+"use strict";
+const _libs_react = require("./react.mjs");
+const _libs__radixUi_reactUseLayoutEffect = require("./@radix-ui/react-use-layout-effect+[...].mjs");
+var useReactId = _libs_react.React$1[" useId ".trim().toString()] || (() => void 0);
 var count = 0;
 function useId(deterministicId) {
-  const [id, setId] = reactExports.useState(useReactId());
-  useLayoutEffect2(() => {
+  const [id, setId] = _libs_react.reactExports.useState(useReactId());
+  _libs__radixUi_reactUseLayoutEffect.useLayoutEffect2(() => {
     setId((reactId) => reactId ?? String(count++));
   }, [deterministicId]);
   return id ? `radix-${id}` : "";
 }
-export {
-  useId as u
-};
+exports.useId = useId;

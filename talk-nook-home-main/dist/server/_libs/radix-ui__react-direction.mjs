@@ -1,9 +1,8 @@
-import { r as reactExports } from "./react.mjs";
-var DirectionContext = reactExports.createContext(void 0);
+"use strict";
+const _libs_react = require("./react.mjs");
+var DirectionContext = _libs_react.reactExports.createContext(void 0);
 function useDirection(localDir) {
-  const globalDir = reactExports.useContext(DirectionContext);
+  const globalDir = _libs_react.reactExports.useContext(DirectionContext);
   return localDir || globalDir || "ltr";
 }
-export {
-  useDirection as u
-};
+exports.useDirection = useDirection;

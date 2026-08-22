@@ -1,26 +1,27 @@
-import { j as jsxRuntimeExports, r as reactExports } from "./react.mjs";
-import { c as createContextScope } from "./radix-ui__react-context.mjs";
-import { u as useComposedRefs } from "./radix-ui__react-compose-refs.mjs";
-import { R as Root, c as createDialogScope, P as Portal, W as WarningProvider, C as Content, T as Title, D as Description, a as Close, O as Overlay, b as Trigger } from "./radix-ui__react-dialog.mjs";
-import { c as composeEventHandlers } from "./radix-ui__primitive.mjs";
-import { d as createSlottable } from "./radix-ui__react-slot.mjs";
+"use strict";
+const _libs_react = require("./react.mjs");
+const _libs__radixUi_reactContext = require("./radix-ui__react-context.mjs");
+const _libs__radixUi_reactComposeRefs = require("./radix-ui__react-compose-refs.mjs");
+const _libs__radixUi_reactDialog = require("./radix-ui__react-dialog.mjs");
+const _libs__radixUi_primitive = require("./radix-ui__primitive.mjs");
+const _libs__radixUi_reactSlot = require("./radix-ui__react-slot.mjs");
 var ROOT_NAME = "AlertDialog";
-var [createAlertDialogContext] = createContextScope(ROOT_NAME, [
-  createDialogScope
+var [createAlertDialogContext] = _libs__radixUi_reactContext.createContextScope(ROOT_NAME, [
+  _libs__radixUi_reactDialog.createDialogScope
 ]);
-var useDialogScope = createDialogScope();
+var useDialogScope = _libs__radixUi_reactDialog.createDialogScope();
 var AlertDialog = (props) => {
   const { __scopeAlertDialog, ...alertDialogProps } = props;
   const dialogScope = useDialogScope(__scopeAlertDialog);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root, { ...dialogScope, ...alertDialogProps, modal: true });
+  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Root, { ...dialogScope, ...alertDialogProps, modal: true });
 };
 AlertDialog.displayName = ROOT_NAME;
 var TRIGGER_NAME = "AlertDialogTrigger";
-var AlertDialogTrigger = reactExports.forwardRef(
+var AlertDialogTrigger = _libs_react.reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAlertDialog, ...triggerProps } = props;
     const dialogScope = useDialogScope(__scopeAlertDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger, { ...dialogScope, ...triggerProps, ref: forwardedRef });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Trigger, { ...dialogScope, ...triggerProps, ref: forwardedRef });
   }
 );
 AlertDialogTrigger.displayName = TRIGGER_NAME;
@@ -28,50 +29,50 @@ var PORTAL_NAME = "AlertDialogPortal";
 var AlertDialogPortal = (props) => {
   const { __scopeAlertDialog, ...portalProps } = props;
   const dialogScope = useDialogScope(__scopeAlertDialog);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { ...dialogScope, ...portalProps });
+  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Portal, { ...dialogScope, ...portalProps });
 };
 AlertDialogPortal.displayName = PORTAL_NAME;
 var OVERLAY_NAME = "AlertDialogOverlay";
-var AlertDialogOverlay = reactExports.forwardRef(
+var AlertDialogOverlay = _libs_react.reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAlertDialog, ...overlayProps } = props;
     const dialogScope = useDialogScope(__scopeAlertDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Overlay, { ...dialogScope, ...overlayProps, ref: forwardedRef });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Overlay, { ...dialogScope, ...overlayProps, ref: forwardedRef });
   }
 );
 AlertDialogOverlay.displayName = OVERLAY_NAME;
 var CONTENT_NAME = "AlertDialogContent";
 var [AlertDialogContentProvider, useAlertDialogContentContext] = createAlertDialogContext(CONTENT_NAME);
-var Slottable = createSlottable("AlertDialogContent");
-var AlertDialogContent = reactExports.forwardRef(
+var Slottable = _libs__radixUi_reactSlot.createSlottable("AlertDialogContent");
+var AlertDialogContent = _libs_react.reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAlertDialog, children, ...contentProps } = props;
     const dialogScope = useDialogScope(__scopeAlertDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, contentRef);
-    const cancelRef = reactExports.useRef(null);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      WarningProvider,
+    const contentRef = _libs_react.reactExports.useRef(null);
+    const composedRefs = _libs__radixUi_reactComposeRefs.useComposedRefs(forwardedRef, contentRef);
+    const cancelRef = _libs_react.reactExports.useRef(null);
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+      _libs__radixUi_reactDialog.WarningProvider,
       {
         contentName: CONTENT_NAME,
         titleName: TITLE_NAME,
         docsSlug: "alert-dialog",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogContentProvider, { scope: __scopeAlertDialog, cancelRef, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          Content,
+        children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogContentProvider, { scope: __scopeAlertDialog, cancelRef, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(
+          _libs__radixUi_reactDialog.Content,
           {
             role: "alertdialog",
             ...dialogScope,
             ...contentProps,
             ref: composedRefs,
-            onOpenAutoFocus: composeEventHandlers(contentProps.onOpenAutoFocus, (event) => {
+            onOpenAutoFocus: _libs__radixUi_primitive.composeEventHandlers(contentProps.onOpenAutoFocus, (event) => {
               event.preventDefault();
               cancelRef.current?.focus({ preventScroll: true });
             }),
             onPointerDownOutside: (event) => event.preventDefault(),
             onInteractOutside: (event) => event.preventDefault(),
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Slottable, { children }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef })
+              /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Slottable, { children }),
+              /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(DescriptionWarning, { contentRef })
             ]
           }
         ) })
@@ -81,38 +82,38 @@ var AlertDialogContent = reactExports.forwardRef(
 );
 AlertDialogContent.displayName = CONTENT_NAME;
 var TITLE_NAME = "AlertDialogTitle";
-var AlertDialogTitle = reactExports.forwardRef(
+var AlertDialogTitle = _libs_react.reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAlertDialog, ...titleProps } = props;
     const dialogScope = useDialogScope(__scopeAlertDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Title, { ...dialogScope, ...titleProps, ref: forwardedRef });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Title, { ...dialogScope, ...titleProps, ref: forwardedRef });
   }
 );
 AlertDialogTitle.displayName = TITLE_NAME;
 var DESCRIPTION_NAME = "AlertDialogDescription";
-var AlertDialogDescription = reactExports.forwardRef((props, forwardedRef) => {
+var AlertDialogDescription = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
   const { __scopeAlertDialog, ...descriptionProps } = props;
   const dialogScope = useDialogScope(__scopeAlertDialog);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Description, { ...dialogScope, ...descriptionProps, ref: forwardedRef });
+  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Description, { ...dialogScope, ...descriptionProps, ref: forwardedRef });
 });
 AlertDialogDescription.displayName = DESCRIPTION_NAME;
 var ACTION_NAME = "AlertDialogAction";
-var AlertDialogAction = reactExports.forwardRef(
+var AlertDialogAction = _libs_react.reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAlertDialog, ...actionProps } = props;
     const dialogScope = useDialogScope(__scopeAlertDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Close, { ...dialogScope, ...actionProps, ref: forwardedRef });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Close, { ...dialogScope, ...actionProps, ref: forwardedRef });
   }
 );
 AlertDialogAction.displayName = ACTION_NAME;
 var CANCEL_NAME = "AlertDialogCancel";
-var AlertDialogCancel = reactExports.forwardRef(
+var AlertDialogCancel = _libs_react.reactExports.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAlertDialog, ...cancelProps } = props;
     const { cancelRef } = useAlertDialogContentContext(CANCEL_NAME, __scopeAlertDialog);
     const dialogScope = useDialogScope(__scopeAlertDialog);
-    const ref = useComposedRefs(forwardedRef, cancelRef);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Close, { ...dialogScope, ...cancelProps, ref });
+    const ref = _libs__radixUi_reactComposeRefs.useComposedRefs(forwardedRef, cancelRef);
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactDialog.Close, { ...dialogScope, ...cancelProps, ref });
   }
 );
 AlertDialogCancel.displayName = CANCEL_NAME;
@@ -124,7 +125,7 @@ You can add a description to the \`${CONTENT_NAME}\` by passing a \`${DESCRIPTIO
 Alternatively, you can use your own component as a description by assigning it an \`id\` and passing the same value to the \`aria-describedby\` prop in \`${CONTENT_NAME}\`. If the description is confusing or duplicative for sighted users, you can use the \`@radix-ui/react-visually-hidden\` primitive as a wrapper around your description component.
 
 For more information, see https://radix-ui.com/primitives/docs/components/alert-dialog`;
-  reactExports.useEffect(() => {
+  _libs_react.reactExports.useEffect(() => {
     const hasDescription = document.getElementById(
       contentRef.current?.getAttribute("aria-describedby")
     );
@@ -140,13 +141,11 @@ var Action = AlertDialogAction;
 var Cancel = AlertDialogCancel;
 var Title2 = AlertDialogTitle;
 var Description2 = AlertDialogDescription;
-export {
-  Action as A,
-  Content2 as C,
-  Description2 as D,
-  Overlay2 as O,
-  Portal2 as P,
-  Root2 as R,
-  Title2 as T,
-  Cancel as a
-};
+exports.Action = Action;
+exports.Cancel = Cancel;
+exports.Content2 = Content2;
+exports.Description2 = Description2;
+exports.Overlay2 = Overlay2;
+exports.Portal2 = Portal2;
+exports.Root2 = Root2;
+exports.Title2 = Title2;

@@ -1,11 +1,12 @@
-import { r as reactExports } from "./react.mjs";
-import { g as getNonce } from "./get-nonce.mjs";
+"use strict";
+const _libs_react = require("./react.mjs");
+const _libs_getNonce = require("./get-nonce.mjs");
 function makeStyleTag() {
   if (!document)
     return null;
   var tag = document.createElement("style");
   tag.type = "text/css";
-  var nonce = getNonce();
+  var nonce = _libs_getNonce.getNonce();
   if (nonce) {
     tag.setAttribute("nonce", nonce);
   }
@@ -47,7 +48,7 @@ var stylesheetSingleton = function() {
 var styleHookSingleton = function() {
   var sheet = stylesheetSingleton();
   return function(styles, isDynamic) {
-    reactExports.useEffect(function() {
+    _libs_react.reactExports.useEffect(function() {
       sheet.add(styles);
       return function() {
         sheet.remove();
@@ -64,6 +65,4 @@ var styleSingleton = function() {
   };
   return Sheet;
 };
-export {
-  styleSingleton as s
-};
+exports.styleSingleton = styleSingleton;

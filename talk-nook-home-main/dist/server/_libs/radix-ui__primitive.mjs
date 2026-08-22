@@ -1,3 +1,4 @@
+"use strict";
 function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
   return function handleEvent(event) {
     originalEventHandler?.(event);
@@ -6,6 +7,4 @@ function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForD
     }
   };
 }
-export {
-  composeEventHandlers as c
-};
+exports.composeEventHandlers = composeEventHandlers;

@@ -1,3 +1,4 @@
+"use strict";
 function splitSetCookieString(cookiesString) {
   if (Array.isArray(cookiesString)) return cookiesString.flatMap((c) => splitSetCookieString(c));
   if (typeof cookiesString !== "string") return [];
@@ -39,6 +40,4 @@ function splitSetCookieString(cookiesString) {
   }
   return cookiesStrings;
 }
-export {
-  splitSetCookieString as s
-};
+exports.splitSetCookieString = splitSetCookieString;

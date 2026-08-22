@@ -1,29 +1,30 @@
-import { __rest, __assign, __spreadArray } from "tslib";
-import { r as reactExports } from "./react.mjs";
-import { z as zeroRightClassName, f as fullWidthClassName, R as RemoveScrollBar } from "./react-remove-scroll-bar.mjs";
-import { c as createSidecarMedium, e as exportSidecar } from "./use-sidecar.mjs";
-import { u as useMergeRefs } from "./use-callback-ref.mjs";
-import { s as styleSingleton } from "./react-style-singleton.mjs";
-var effectCar = createSidecarMedium();
+"use strict";
+const tslib = require("tslib");
+const _libs_react = require("./react.mjs");
+const _libs_reactRemoveScrollBar = require("./react-remove-scroll-bar.mjs");
+const _libs_useSidecar = require("./use-sidecar.mjs");
+const _libs_useCallbackRef = require("./use-callback-ref.mjs");
+const _libs_reactStyleSingleton = require("./react-style-singleton.mjs");
+var effectCar = _libs_useSidecar.createSidecarMedium();
 var nothing = function() {
   return;
 };
-var RemoveScroll = reactExports.forwardRef(function(props, parentRef) {
-  var ref = reactExports.useRef(null);
-  var _a = reactExports.useState({
+var RemoveScroll = _libs_react.reactExports.forwardRef(function(props, parentRef) {
+  var ref = _libs_react.reactExports.useRef(null);
+  var _a = _libs_react.reactExports.useState({
     onScrollCapture: nothing,
     onWheelCapture: nothing,
     onTouchMoveCapture: nothing
   }), callbacks = _a[0], setCallbacks = _a[1];
-  var forwardProps = props.forwardProps, children = props.children, className = props.className, removeScrollBar = props.removeScrollBar, enabled = props.enabled, shards = props.shards, sideCar = props.sideCar, noRelative = props.noRelative, noIsolation = props.noIsolation, inert = props.inert, allowPinchZoom = props.allowPinchZoom, _b = props.as, Container = _b === void 0 ? "div" : _b, gapMode = props.gapMode, rest = __rest(props, ["forwardProps", "children", "className", "removeScrollBar", "enabled", "shards", "sideCar", "noRelative", "noIsolation", "inert", "allowPinchZoom", "as", "gapMode"]);
+  var forwardProps = props.forwardProps, children = props.children, className = props.className, removeScrollBar = props.removeScrollBar, enabled = props.enabled, shards = props.shards, sideCar = props.sideCar, noRelative = props.noRelative, noIsolation = props.noIsolation, inert = props.inert, allowPinchZoom = props.allowPinchZoom, _b = props.as, Container = _b === void 0 ? "div" : _b, gapMode = props.gapMode, rest = tslib.__rest(props, ["forwardProps", "children", "className", "removeScrollBar", "enabled", "shards", "sideCar", "noRelative", "noIsolation", "inert", "allowPinchZoom", "as", "gapMode"]);
   var SideCar2 = sideCar;
-  var containerRef = useMergeRefs([ref, parentRef]);
-  var containerProps = __assign(__assign({}, rest), callbacks);
-  return reactExports.createElement(
-    reactExports.Fragment,
+  var containerRef = _libs_useCallbackRef.useMergeRefs([ref, parentRef]);
+  var containerProps = tslib.__assign(tslib.__assign({}, rest), callbacks);
+  return _libs_react.reactExports.createElement(
+    _libs_react.reactExports.Fragment,
     null,
-    enabled && reactExports.createElement(SideCar2, { sideCar: effectCar, removeScrollBar, shards, noRelative, noIsolation, inert, setCallbacks, allowPinchZoom: !!allowPinchZoom, lockRef: ref, gapMode }),
-    forwardProps ? reactExports.cloneElement(reactExports.Children.only(children), __assign(__assign({}, containerProps), { ref: containerRef })) : reactExports.createElement(Container, __assign({}, containerProps, { className, ref: containerRef }), children)
+    enabled && _libs_react.reactExports.createElement(SideCar2, { sideCar: effectCar, removeScrollBar, shards, noRelative, noIsolation, inert, setCallbacks, allowPinchZoom: !!allowPinchZoom, lockRef: ref, gapMode }),
+    forwardProps ? _libs_react.reactExports.cloneElement(_libs_react.reactExports.Children.only(children), tslib.__assign(tslib.__assign({}, containerProps), { ref: containerRef })) : _libs_react.reactExports.createElement(Container, tslib.__assign({}, containerProps, { className, ref: containerRef }), children)
   );
 });
 RemoveScroll.defaultProps = {
@@ -32,8 +33,8 @@ RemoveScroll.defaultProps = {
   inert: false
 };
 RemoveScroll.classNames = {
-  fullWidth: fullWidthClassName,
-  zeroRight: zeroRightClassName
+  fullWidth: _libs_reactRemoveScrollBar.fullWidthClassName,
+  zeroRight: _libs_reactRemoveScrollBar.zeroRightClassName
 };
 var passiveSupported = false;
 if (typeof window !== "undefined") {
@@ -167,19 +168,19 @@ var generateStyle = function(id) {
 var idCounter = 0;
 var lockStack = [];
 function RemoveScrollSideCar(props) {
-  var shouldPreventQueue = reactExports.useRef([]);
-  var touchStartRef = reactExports.useRef([0, 0]);
-  var activeAxis = reactExports.useRef();
-  var id = reactExports.useState(idCounter++)[0];
-  var Style = reactExports.useState(styleSingleton)[0];
-  var lastProps = reactExports.useRef(props);
-  reactExports.useEffect(function() {
+  var shouldPreventQueue = _libs_react.reactExports.useRef([]);
+  var touchStartRef = _libs_react.reactExports.useRef([0, 0]);
+  var activeAxis = _libs_react.reactExports.useRef();
+  var id = _libs_react.reactExports.useState(idCounter++)[0];
+  var Style = _libs_react.reactExports.useState(_libs_reactStyleSingleton.styleSingleton)[0];
+  var lastProps = _libs_react.reactExports.useRef(props);
+  _libs_react.reactExports.useEffect(function() {
     lastProps.current = props;
   }, [props]);
-  reactExports.useEffect(function() {
+  _libs_react.reactExports.useEffect(function() {
     if (props.inert) {
       document.body.classList.add("block-interactivity-".concat(id));
-      var allow_1 = __spreadArray([props.lockRef.current], (props.shards || []).map(extractRef), true).filter(Boolean);
+      var allow_1 = tslib.__spreadArray([props.lockRef.current], (props.shards || []).map(extractRef), true).filter(Boolean);
       allow_1.forEach(function(el) {
         return el.classList.add("allow-interactivity-".concat(id));
       });
@@ -192,7 +193,7 @@ function RemoveScrollSideCar(props) {
     }
     return;
   }, [props.inert, props.lockRef.current, props.shards]);
-  var shouldCancelEvent = reactExports.useCallback(function(event, parent) {
+  var shouldCancelEvent = _libs_react.reactExports.useCallback(function(event, parent) {
     if ("touches" in event && event.touches.length === 2 || event.type === "wheel" && event.ctrlKey) {
       return !lastProps.current.allowPinchZoom;
     }
@@ -234,7 +235,7 @@ function RemoveScrollSideCar(props) {
     var cancelingAxis = activeAxis.current || currentAxis;
     return handleScroll(cancelingAxis, parent, event, cancelingAxis === "h" ? deltaX : deltaY);
   }, []);
-  var shouldPrevent = reactExports.useCallback(function(_event) {
+  var shouldPrevent = _libs_react.reactExports.useCallback(function(_event) {
     var event = _event;
     if (!lockStack.length || lockStack[lockStack.length - 1] !== Style) {
       return;
@@ -261,7 +262,7 @@ function RemoveScrollSideCar(props) {
       }
     }
   }, []);
-  var shouldCancel = reactExports.useCallback(function(name, delta, target, should) {
+  var shouldCancel = _libs_react.reactExports.useCallback(function(name, delta, target, should) {
     var event = { name, delta, target, should, shadowParent: getOutermostShadowParent(target) };
     shouldPreventQueue.current.push(event);
     setTimeout(function() {
@@ -270,17 +271,17 @@ function RemoveScrollSideCar(props) {
       });
     }, 1);
   }, []);
-  var scrollTouchStart = reactExports.useCallback(function(event) {
+  var scrollTouchStart = _libs_react.reactExports.useCallback(function(event) {
     touchStartRef.current = getTouchXY(event);
     activeAxis.current = void 0;
   }, []);
-  var scrollWheel = reactExports.useCallback(function(event) {
+  var scrollWheel = _libs_react.reactExports.useCallback(function(event) {
     shouldCancel(event.type, getDeltaXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
   }, []);
-  var scrollTouchMove = reactExports.useCallback(function(event) {
+  var scrollTouchMove = _libs_react.reactExports.useCallback(function(event) {
     shouldCancel(event.type, getTouchXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
   }, []);
-  reactExports.useEffect(function() {
+  _libs_react.reactExports.useEffect(function() {
     lockStack.push(Style);
     props.setCallbacks({
       onScrollCapture: scrollWheel,
@@ -300,11 +301,11 @@ function RemoveScrollSideCar(props) {
     };
   }, []);
   var removeScrollBar = props.removeScrollBar, inert = props.inert;
-  return reactExports.createElement(
-    reactExports.Fragment,
+  return _libs_react.reactExports.createElement(
+    _libs_react.reactExports.Fragment,
     null,
-    inert ? reactExports.createElement(Style, { styles: generateStyle(id) }) : null,
-    removeScrollBar ? reactExports.createElement(RemoveScrollBar, { noRelative: props.noRelative, gapMode: props.gapMode }) : null
+    inert ? _libs_react.reactExports.createElement(Style, { styles: generateStyle(id) }) : null,
+    removeScrollBar ? _libs_react.reactExports.createElement(_libs_reactRemoveScrollBar.RemoveScrollBar, { noRelative: props.noRelative, gapMode: props.gapMode }) : null
   );
 }
 function getOutermostShadowParent(node) {
@@ -318,11 +319,9 @@ function getOutermostShadowParent(node) {
   }
   return shadowParent;
 }
-const SideCar = exportSidecar(effectCar, RemoveScrollSideCar);
-var ReactRemoveScroll = reactExports.forwardRef(function(props, ref) {
-  return reactExports.createElement(RemoveScroll, __assign({}, props, { ref, sideCar: SideCar }));
+const SideCar = _libs_useSidecar.exportSidecar(effectCar, RemoveScrollSideCar);
+var ReactRemoveScroll = _libs_react.reactExports.forwardRef(function(props, ref) {
+  return _libs_react.reactExports.createElement(RemoveScroll, tslib.__assign({}, props, { ref, sideCar: SideCar }));
 });
 ReactRemoveScroll.classNames = RemoveScroll.classNames;
-export {
-  ReactRemoveScroll as R
-};
+exports.ReactRemoveScroll = ReactRemoveScroll;

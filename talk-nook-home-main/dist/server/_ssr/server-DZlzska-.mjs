@@ -1,38 +1,39 @@
-import { AsyncLocalStorage } from "node:async_hooks";
-import { H as H3Event, t as toResponse } from "../_libs/h3-v2.mjs";
-import { y as defineHandlerCallback, z as resolveManifestAssetLink, u as resolveManifestCssLink, k as rootRouteId, A as getNormalizedURL, C as getOrigin, D as normalizeSsrResponse, E as attachRouterServerSsrUtils, F as createSerializationAdapter, G as createRawStreamRPCPlugin, i as invariant, g as isNotFound, m as isRedirect, H as isResolvedRedirect, I as replaceSsrResponse, J as mergeHeaders, K as executeRewriteInput, L as stripSsrResponseBody, M as defaultSerovalPlugins, N as makeSerovalPlugin, s as getScriptPreloadAttrs, O as getStylesheetHref, P as isSsrResponse } from "../_libs/tanstack__router-core.mjs";
-import { i as iu, P as Pu, s as su } from "../_libs/seroval.mjs";
-import { c as createMemoryHistory } from "../_libs/tanstack__history.mjs";
-import { j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { r as renderRouterToStream, R as RouterProvider } from "../_libs/tanstack__react-router.mjs";
-import "../_libs/rou3.mjs";
-import "../_libs/srvx.mjs";
-import "node:http";
-import "node:stream";
-import "node:stream/promises";
-import "node:https";
-import "node:http2";
-import "../_libs/cookie-es.mjs";
-import "../_libs/seroval-plugins.mjs";
-import "node:stream/web";
-import "../_libs/react-dom.mjs";
-import "util";
-import "crypto";
-import "async_hooks";
-import "stream";
-import "../_libs/isbot.mjs";
+"use strict";
+const node_async_hooks = require("node:async_hooks");
+const _libs_h3V2 = require("../_libs/h3-v2.mjs");
+const _libs__tanstack_routerCore = require("../_libs/tanstack__router-core.mjs");
+const _libs_seroval = require("../_libs/seroval.mjs");
+const _libs__tanstack_history = require("../_libs/tanstack__history.mjs");
+const _libs_react = require("../_libs/react.mjs");
+const _libs__tanstack_reactRouter = require("../_libs/tanstack__react-router.mjs");
+require("../_libs/rou3.mjs");
+require("../_libs/srvx.mjs");
+require("node:http");
+require("node:stream");
+require("node:stream/promises");
+require("node:https");
+require("node:http2");
+require("../_libs/cookie-es.mjs");
+require("../_libs/seroval-plugins.mjs");
+require("node:stream/web");
+require("../_libs/react-dom.mjs");
+require("util");
+require("crypto");
+require("async_hooks");
+require("stream");
+require("../_libs/isbot.mjs");
 function StartServer(props) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterProvider, { router: props.router });
+  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__tanstack_reactRouter.RouterProvider, { router: props.router });
 }
-var defaultStreamHandler = defineHandlerCallback(({ request, router, responseHeaders }) => renderRouterToStream({
+var defaultStreamHandler = _libs__tanstack_routerCore.defineHandlerCallback(({ request, router, responseHeaders }) => _libs__tanstack_reactRouter.renderRouterToStream({
   request,
   router,
   responseHeaders,
-  children: /* @__PURE__ */ jsxRuntimeExports.jsx(StartServer, { router })
+  children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(StartServer, { router })
 }));
 var GLOBAL_EVENT_STORAGE_KEY = /* @__PURE__ */ Symbol.for("tanstack-start:event-storage");
 var globalObj$1 = globalThis;
-if (!globalObj$1[GLOBAL_EVENT_STORAGE_KEY]) globalObj$1[GLOBAL_EVENT_STORAGE_KEY] = new AsyncLocalStorage();
+if (!globalObj$1[GLOBAL_EVENT_STORAGE_KEY]) globalObj$1[GLOBAL_EVENT_STORAGE_KEY] = new node_async_hooks.AsyncLocalStorage();
 var eventStorage = globalObj$1[GLOBAL_EVENT_STORAGE_KEY];
 function isPromiseLike(value) {
   return typeof value.then === "function";
@@ -64,7 +65,7 @@ function requestHandler(handler) {
   return (request, requestOpts) => {
     let h3Event;
     try {
-      h3Event = new H3Event(request);
+      h3Event = new _libs_h3V2.H3Event(request);
     } catch (error) {
       if (error instanceof URIError) return new Response(null, {
         status: 400,
@@ -72,7 +73,7 @@ function requestHandler(handler) {
       });
       throw error;
     }
-    return toResponse(attachResponseHeaders(eventStorage.run({ h3Event }, () => handler(request, requestOpts)), h3Event), h3Event);
+    return _libs_h3V2.toResponse(attachResponseHeaders(eventStorage.run({ h3Event }, () => handler(request, requestOpts)), h3Event), h3Event);
   };
 }
 function getH3Event() {
@@ -85,10 +86,12 @@ function getResponse() {
 }
 var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-DZzprDTp.mjs");
+  const { tsrStartManifest } = await Promise.resolve().then(function() {
+    return require("../_tanstack-start-manifest_v-DZzprDTp.mjs");
+  });
   const startManifest = tsrStartManifest();
   let routes = startManifest.routes;
-  routes[rootRouteId];
+  routes[_libs__tanstack_routerCore.rootRouteId];
   const manifestRoutes = {};
   for (const k in routes) {
     const v = routes[k];
@@ -158,7 +161,7 @@ function createNullProtoObject(source) {
 }
 var GLOBAL_STORAGE_KEY = /* @__PURE__ */ Symbol.for("tanstack-start:start-storage-context");
 var globalObj = globalThis;
-if (!globalObj[GLOBAL_STORAGE_KEY]) globalObj[GLOBAL_STORAGE_KEY] = new AsyncLocalStorage();
+if (!globalObj[GLOBAL_STORAGE_KEY]) globalObj[GLOBAL_STORAGE_KEY] = new node_async_hooks.AsyncLocalStorage();
 var startStorage = globalObj[GLOBAL_STORAGE_KEY];
 async function runWithStartContext(context, fn) {
   return startStorage.run(context, fn);
@@ -263,7 +266,7 @@ async function getFailureResponse(opts, ctx) {
   });
 }
 function getDefaultSerovalPlugins() {
-  return [...getStartOptions()?.serializationAdapters?.map(makeSerovalPlugin) ?? [], ...defaultSerovalPlugins];
+  return [...getStartOptions()?.serializationAdapters?.map(_libs__tanstack_routerCore.makeSerovalPlugin) ?? [], ..._libs__tanstack_routerCore.defaultSerovalPlugins];
 }
 var textEncoder = new TextEncoder();
 var EMPTY_PAYLOAD = new Uint8Array(0);
@@ -406,7 +409,7 @@ var handleServerAction = async ({ request, context, serverFnId }) => {
   if (!serovalPlugins) serovalPlugins = getDefaultSerovalPlugins();
   const contentType = request.headers.get("Content-Type");
   function parsePayload(payload) {
-    return Pu(payload, { plugins: serovalPlugins });
+    return _libs_seroval.Pu(payload, { plugins: serovalPlugins });
   }
   return await (async () => {
     try {
@@ -419,7 +422,7 @@ var handleServerAction = async ({ request, context, serverFnId }) => {
           let lateStreamWriter;
           let lateStreamReadable = void 0;
           const pendingLateStreams = [];
-          const plugins = [createRawStreamRPCPlugin((id, stream) => {
+          const plugins = [_libs__tanstack_routerCore.createRawStreamRPCPlugin((id, stream) => {
             if (initialPhase) {
               rawStreams.set(id, stream);
               return;
@@ -449,7 +452,7 @@ var handleServerAction = async ({ request, context, serverFnId }) => {
               throw error;
             }
           };
-          iu(res2, {
+          _libs_seroval.iu(res2, {
             refs: /* @__PURE__ */ new Map(),
             plugins,
             onParse(value) {
@@ -526,7 +529,7 @@ var handleServerAction = async ({ request, context, serverFnId }) => {
         if (FORM_DATA_CONTENT_TYPES.some((type) => contentType && contentType.includes(type))) {
           if (methodUpper === "GET") {
             if (false) ;
-            invariant();
+            _libs__tanstack_routerCore.invariant();
           }
           const formData = await request.formData();
           const serializedContext = formData.get(TSS_FORMDATA_CONTEXT);
@@ -537,7 +540,7 @@ var handleServerAction = async ({ request, context, serverFnId }) => {
             method: methodUpper
           };
           if (typeof serializedContext === "string") try {
-            const deserializedContext = Pu(JSON.parse(serializedContext), { plugins: serovalPlugins });
+            const deserializedContext = _libs_seroval.Pu(JSON.parse(serializedContext), { plugins: serovalPlugins });
             if (typeof deserializedContext === "object" && deserializedContext) params.context = safeObjectMerge(deserializedContext, context);
           } catch (e) {
             if (false) ;
@@ -560,23 +563,23 @@ var handleServerAction = async ({ request, context, serverFnId }) => {
         return await action(payload);
       })();
       const unwrapped = res.result || res.error;
-      if (isNotFound(res)) res = isNotFoundResponse(res);
+      if (_libs__tanstack_routerCore.isNotFound(res)) res = isNotFoundResponse(res);
       if (!isServerFn) return unwrapped;
       if (unwrapped instanceof Response) {
-        if (isRedirect(unwrapped)) return unwrapped;
+        if (_libs__tanstack_routerCore.isRedirect(unwrapped)) return unwrapped;
         unwrapped.headers.set(X_TSS_RAW_RESPONSE, "true");
         return unwrapped;
       }
       return serializeResult(res);
     } catch (error) {
       if (error instanceof Response) return error;
-      if (isNotFound(error)) return isNotFoundResponse(error);
+      if (_libs__tanstack_routerCore.isNotFound(error)) return isNotFoundResponse(error);
       console.info();
       console.info("Server Fn Error!");
       console.info();
       console.error(error);
       console.info();
-      const serializedError = JSON.stringify(await Promise.resolve(su(error, {
+      const serializedError = JSON.stringify(await Promise.resolve(_libs_seroval.su(error, {
         refs: /* @__PURE__ */ new Map(),
         plugins: serovalPlugins
       })));
@@ -685,7 +688,7 @@ function collectStaticHintsFromManifest(manifest2, matchedRoutes) {
     const routeManifest = manifest2.routes[route.id];
     if (!routeManifest) continue;
     for (const link of routeManifest.preloads ?? []) {
-      const attrs = getScriptPreloadAttrs(manifest2, link);
+      const attrs = _libs__tanstack_routerCore.getScriptPreloadAttrs(manifest2, link);
       const hint = {
         href: attrs.href,
         rel: attrs.rel,
@@ -695,9 +698,9 @@ function collectStaticHintsFromManifest(manifest2, matchedRoutes) {
       hints.push(hint);
     }
     for (const link of routeManifest.css ?? []) {
-      const stylesheetHref = getStylesheetHref(link);
+      const stylesheetHref = _libs__tanstack_routerCore.getStylesheetHref(link);
       if (manifest2.inlineCss?.styles[stylesheetHref] !== void 0) continue;
-      const resolvedLink = resolveManifestCssLink(link);
+      const resolvedLink = _libs__tanstack_routerCore.resolveManifestCssLink(link);
       const hint = {
         href: stylesheetHref,
         rel: "preload",
@@ -964,7 +967,7 @@ async function transformManifestAssets(source, transformFn, _opts) {
   else if (manifest2.inlineCss) manifest2.inlineCss = await transformInlineCssStyles(manifest2.inlineCss, transformFn);
   for (const route of Object.values(manifest2.routes)) {
     if (route.preloads?.length) route.preloads = await Promise.all(route.preloads.map(async (link) => {
-      const result = await transformScript(resolveManifestAssetLink(link).href);
+      const result = await transformScript(_libs__tanstack_routerCore.resolveManifestAssetLink(link).href);
       return assignManifestLink(link, {
         href: result.href,
         crossOrigin: result.crossOrigin
@@ -972,7 +975,7 @@ async function transformManifestAssets(source, transformFn, _opts) {
     }));
     if (route.css?.length && !manifest2.inlineCss) route.css = await Promise.all(route.css.map(async (link) => {
       const result = normalizeTransformAssetResult(await transformFn({
-        url: resolveManifestCssLink(link).href,
+        url: _libs__tanstack_routerCore.resolveManifestCssLink(link).href,
         kind: "stylesheet"
       }));
       return assignManifestLink(link, {
@@ -1129,7 +1132,7 @@ function warmupFinalManifest(opts) {
   if (opts.onError) warmupPromise.catch(opts.onError);
   return warmupPromise;
 }
-var ServerFunctionSerializationAdapter = createSerializationAdapter({
+var ServerFunctionSerializationAdapter = _libs__tanstack_routerCore.createSerializationAdapter({
   key: "$TSS/serverfn",
   test: (v) => {
     if (typeof v !== "function") return false;
@@ -1145,7 +1148,7 @@ var ServerFunctionSerializationAdapter = createSerializationAdapter({
   }
 });
 function getStartResponseHeaders(opts) {
-  return mergeHeaders({ "Content-Type": "text/html; charset=utf-8" }, ...opts.router.stores.matches.get().map((match) => {
+  return _libs__tanstack_routerCore.mergeHeaders({ "Content-Type": "text/html; charset=utf-8" }, ...opts.router.stores.matches.get().map((match) => {
     return match.headers;
   }));
 }
@@ -1157,9 +1160,15 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    import("./router-CzPlCdsN.mjs").then((n) => n.r),
-    import("./start-Crqb6GL6.mjs"),
-    import("./empty-plugin-adapters-BFgPZ6_d.mjs")
+    Promise.resolve().then(function() {
+      return require("./router-CzPlCdsN.mjs");
+    }).then((n) => n.r),
+    Promise.resolve().then(function() {
+      return require("./start-Crqb6GL6.mjs");
+    }),
+    Promise.resolve().then(function() {
+      return require("./empty-plugin-adapters-BFgPZ6_d.mjs");
+    })
   ]);
   return {
     routerEntry,
@@ -1184,17 +1193,17 @@ function throwIfMayNotDefer() {
   throw new Error(ERR_NO_DEFER);
 }
 function isSpecialResponse(value) {
-  return value instanceof Response || isRedirect(value);
+  return value instanceof Response || _libs__tanstack_routerCore.isRedirect(value);
 }
 function handleCtxResult(result) {
-  if (isSsrResponse(result) || isSpecialResponse(result)) return { response: result };
+  if (_libs__tanstack_routerCore.isSsrResponse(result) || isSpecialResponse(result)) return { response: result };
   return result;
 }
 async function executeMiddleware(middlewares, ctx) {
   let index = -1;
   let streamResponse;
   const setResponse = (response) => {
-    if (isSsrResponse(response)) {
+    if (_libs__tanstack_routerCore.isSsrResponse(response)) {
       if (response.serverSsrCleanup === "stream") streamResponse = response;
       ctx.response = response.response;
       return;
@@ -1280,9 +1289,9 @@ function createStartHandler(cbOrOptions) {
     let router = null;
     let responseOwnsCleanup = false;
     try {
-      const { url, handledProtocolRelativeURL } = getNormalizedURL(request.url);
+      const { url, handledProtocolRelativeURL } = _libs__tanstack_routerCore.getNormalizedURL(request.url);
       const href = url.pathname + url.search + url.hash;
-      const origin = getOrigin(request);
+      const origin = _libs__tanstack_routerCore.getOrigin(request);
       if (handledProtocolRelativeURL) return Response.redirect(url, 308);
       const entries = await getEntries();
       const hasStartInstance = !!entries.startEntry.startInstance;
@@ -1305,7 +1314,7 @@ function createStartHandler(cbOrOptions) {
         router = await entries.routerEntry.getRouter();
         let isShell = IS_SHELL_ENV;
         if (IS_PRERENDERING && !isShell) isShell = request.headers.get(HEADERS.TSS_SHELL) === "true";
-        const history = createMemoryHistory({ initialEntries: [href] });
+        const history = _libs__tanstack_history.createMemoryHistory({ initialEntries: [href] });
         router.update({
           history,
           isShell,
@@ -1347,7 +1356,7 @@ function createStartHandler(cbOrOptions) {
       }
       const executeRouter = async (serverContext, matchedRoutes) => {
         const acceptParts = (request.headers.get("Accept") || "*/*").split(",");
-        if (!["*/*", "text/html"].some((mimeType) => acceptParts.some((part) => part.trim().startsWith(mimeType)))) return normalizeSsrResponse(Response.json({ error: "Only HTML requests are supported here" }, { status: 500 }));
+        if (!["*/*", "text/html"].some((mimeType) => acceptParts.some((part) => part.trim().startsWith(mimeType)))) return _libs__tanstack_routerCore.normalizeSsrResponse(Response.json({ error: "Only HTML requests are supported here" }, { status: 500 }));
         const manifest2 = await resolveManifestForRequest({
           request,
           requestInlineCss: requestOpts?.inlineCss,
@@ -1362,20 +1371,20 @@ function createStartHandler(cbOrOptions) {
           matchedRoutes
         });
         const routerInstance = await getRouter();
-        attachRouterServerSsrUtils({
+        _libs__tanstack_routerCore.attachRouterServerSsrUtils({
           router: routerInstance,
           manifest: manifest2,
           getRequestAssets: () => getStartContext({ throwIfNotFound: false })?.requestAssets
         });
         routerInstance.update({ additionalContext: { serverContext } });
         await routerInstance.load();
-        if (routerInstance.state.redirect) return normalizeSsrResponse(routerInstance.state.redirect);
+        if (routerInstance.state.redirect) return _libs__tanstack_routerCore.normalizeSsrResponse(routerInstance.state.redirect);
         earlyHints?.collectDynamic(routerInstance.stores.matches.get());
         const ctx = getStartContext({ throwIfNotFound: false });
         await routerInstance.serverSsr.dehydrate({ requestAssets: ctx?.requestAssets });
         const responseHeaders = getStartResponseHeaders({ router: routerInstance });
         earlyHints?.appendResponseHeaders(responseHeaders);
-        return normalizeSsrResponse(await cb({
+        return _libs__tanstack_routerCore.normalizeSsrResponse(await cb({
           request,
           router: routerInstance,
           responseHeaders
@@ -1422,10 +1431,10 @@ function createStartHandler(cbOrOptions) {
   return requestHandler(startRequestResolver);
 }
 async function handleRedirectResponse(response, request, getRouter) {
-  const ssrResponse = normalizeSsrResponse(response);
-  if (!isRedirect(ssrResponse.response)) return ssrResponse;
-  if (isResolvedRedirect(ssrResponse.response)) {
-    if (request.headers.get("x-tsr-serverFn") === "true") return replaceSsrResponse(ssrResponse, Response.json({
+  const ssrResponse = _libs__tanstack_routerCore.normalizeSsrResponse(response);
+  if (!_libs__tanstack_routerCore.isRedirect(ssrResponse.response)) return ssrResponse;
+  if (_libs__tanstack_routerCore.isResolvedRedirect(ssrResponse.response)) {
+    if (request.headers.get("x-tsr-serverFn") === "true") return _libs__tanstack_routerCore.replaceSsrResponse(ssrResponse, Response.json({
       ...ssrResponse.response.options,
       isSerializedRedirect: true
     }, { headers: ssrResponse.response.headers }), "redirect response replaced");
@@ -1439,15 +1448,15 @@ async function handleRedirectResponse(response, request, getRouter) {
     "hash"
   ].some((d) => typeof opts[d] === "function")) throw new Error(`Server side redirects must use static search, params, and hash values and do not support functional values. Received functional values for: ${Object.keys(opts).filter((d) => typeof opts[d] === "function").map((d) => `"${d}"`).join(", ")}`);
   const redirect = (await getRouter()).resolveRedirect(ssrResponse.response);
-  if (request.headers.get("x-tsr-serverFn") === "true") return replaceSsrResponse(ssrResponse, Response.json({
+  if (request.headers.get("x-tsr-serverFn") === "true") return _libs__tanstack_routerCore.replaceSsrResponse(ssrResponse, Response.json({
     ...ssrResponse.response.options,
     isSerializedRedirect: true
   }, { headers: ssrResponse.response.headers }), "redirect response replaced");
-  return replaceSsrResponse(ssrResponse, redirect, "redirect response replaced");
+  return _libs__tanstack_routerCore.replaceSsrResponse(ssrResponse, redirect, "redirect response replaced");
 }
 async function handleServerRoutes({ getRouter, request, url, executeRouter, context, executedRequestMiddlewares }) {
   const router = await getRouter();
-  const pathname = executeRewriteInput(router.rewrite, url).pathname;
+  const pathname = _libs__tanstack_routerCore.executeRewriteInput(router.rewrite, url).pathname;
   const { matchedRoutes, foundRoute, routeParams } = router.getMatchedRoutes(pathname);
   const isExactMatch = foundRoute && routeParams["**"] === void 0;
   const routeMiddlewares = [];
@@ -1487,9 +1496,9 @@ async function handleServerRoutes({ getRouter, request, url, executeRouter, cont
   });
   if (isHeadFallback) {
     if (!ctx.response) throwRouteHandlerError();
-    return stripSsrResponseBody(await handleRedirectResponse(response, request, getRouter), "HEAD body stripped");
+    return _libs__tanstack_routerCore.stripSsrResponseBody(await handleRedirectResponse(response, request, getRouter), "HEAD body stripped");
   }
-  return normalizeSsrResponse(response);
+  return _libs__tanstack_routerCore.normalizeSsrResponse(response);
 }
 var fetch = createStartHandler(defaultStreamHandler);
 function createServerEntry(entry) {
@@ -1503,7 +1512,5 @@ const server = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   createServerEntry,
   default: server_default
 }, Symbol.toStringTag, { value: "Module" }));
-export {
-  createMiddleware as c,
-  server as s
-};
+exports.c = createMiddleware;
+exports.s = server;

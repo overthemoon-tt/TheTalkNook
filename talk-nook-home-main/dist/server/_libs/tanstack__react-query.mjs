@@ -1,19 +1,18 @@
-import { r as reactExports, j as jsxRuntimeExports } from "./react.mjs";
-var QueryClientContext = reactExports.createContext(
+"use strict";
+const _libs_react = require("./react.mjs");
+var QueryClientContext = _libs_react.reactExports.createContext(
   void 0
 );
 var QueryClientProvider = ({
   client,
   children
 }) => {
-  reactExports.useEffect(() => {
+  _libs_react.reactExports.useEffect(() => {
     client.mount();
     return () => {
       client.unmount();
     };
   }, [client]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientContext.Provider, { value: client, children });
+  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(QueryClientContext.Provider, { value: client, children });
 };
-export {
-  QueryClientProvider as Q
-};
+exports.QueryClientProvider = QueryClientProvider;

@@ -1,62 +1,63 @@
-import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
-import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { a as Route, s as supabase } from "./router-CzPlCdsN.mjs";
-import { R as Root2, P as Portal2, C as Content2, T as Title2, D as Description2, a as Cancel, A as Action, O as Overlay2 } from "../_libs/radix-ui__react-alert-dialog.mjs";
-import { c as cn } from "./utils-H80jjgLf.mjs";
-import { S as Slot } from "../_libs/radix-ui__react-slot.mjs";
-import { c as cva } from "../_libs/class-variance-authority.mjs";
-import "../_libs/sonner.mjs";
-import { q as ArrowLeft, r as Clock, d as CircleAlert, s as Send } from "../_libs/lucide-react.mjs";
-import "../_libs/tanstack__router-core.mjs";
-import "../_libs/tanstack__history.mjs";
-import "../_libs/cookie-es.mjs";
-import "../_libs/seroval.mjs";
-import "../_libs/seroval-plugins.mjs";
-import "node:stream/web";
-import "node:stream";
-import "../_libs/react-dom.mjs";
-import "util";
-import "crypto";
-import "async_hooks";
-import "stream";
-import "../_libs/isbot.mjs";
-import "../_libs/tanstack__query-core.mjs";
-import "../_libs/tanstack__react-query.mjs";
-import "../_libs/supabase__supabase-js.mjs";
-import "../_libs/supabase__postgrest-js.mjs";
-import "../_libs/supabase__realtime-js.mjs";
-import "../_libs/supabase__phoenix.mjs";
-import "../_libs/supabase__storage-js.mjs";
-import "../_libs/iceberg-js.mjs";
-import "../_libs/supabase__auth-js.mjs";
-import "tslib";
-import "../_libs/supabase__functions-js.mjs";
-import "../_libs/radix-ui__react-context.mjs";
-import "../_libs/radix-ui__react-compose-refs.mjs";
-import "../_libs/radix-ui__react-dialog.mjs";
-import "../_libs/radix-ui__primitive.mjs";
-import "../_libs/radix-ui__react-id.mjs";
-import "../_libs/@radix-ui/react-use-layout-effect+[...].mjs";
-import "../_libs/@radix-ui/react-use-controllable-state+[...].mjs";
-import "../_libs/@radix-ui/react-dismissable-layer+[...].mjs";
-import "../_libs/radix-ui__react-primitive.mjs";
-import "../_libs/@radix-ui/react-use-callback-ref+[...].mjs";
-import "../_libs/@radix-ui/react-use-escape-keydown+[...].mjs";
-import "../_libs/radix-ui__react-focus-scope.mjs";
-import "../_libs/radix-ui__react-portal.mjs";
-import "../_libs/radix-ui__react-presence.mjs";
-import "../_libs/radix-ui__react-focus-guards.mjs";
-import "../_libs/react-remove-scroll.mjs";
-import "../_libs/react-remove-scroll-bar.mjs";
-import "../_libs/react-style-singleton.mjs";
-import "../_libs/get-nonce.mjs";
-import "../_libs/use-sidecar.mjs";
-import "../_libs/use-callback-ref.mjs";
-import "../_libs/aria-hidden.mjs";
-import "../_libs/clsx.mjs";
-import "../_libs/tailwind-merge.mjs";
-const buttonVariants = cva(
+"use strict";
+const _libs_react = require("../_libs/react.mjs");
+const _libs__tanstack_reactRouter = require("../_libs/tanstack__react-router.mjs");
+const SiteShellCxrl0jzj = require("./SiteShell-Cxrl0jzj.mjs");
+const routerCzPlCdsN = require("./router-CzPlCdsN.mjs");
+const _libs__radixUi_reactAlertDialog = require("../_libs/radix-ui__react-alert-dialog.mjs");
+const utilsH80jjgLf = require("./utils-H80jjgLf.mjs");
+const _libs__radixUi_reactSlot = require("../_libs/radix-ui__react-slot.mjs");
+const _libs_classVarianceAuthority = require("../_libs/class-variance-authority.mjs");
+require("../_libs/sonner.mjs");
+const _libs_lucideReact = require("../_libs/lucide-react.mjs");
+require("../_libs/tanstack__router-core.mjs");
+require("../_libs/tanstack__history.mjs");
+require("../_libs/cookie-es.mjs");
+require("../_libs/seroval.mjs");
+require("../_libs/seroval-plugins.mjs");
+require("node:stream/web");
+require("node:stream");
+require("../_libs/react-dom.mjs");
+require("util");
+require("crypto");
+require("async_hooks");
+require("stream");
+require("../_libs/isbot.mjs");
+require("../_libs/tanstack__query-core.mjs");
+require("../_libs/tanstack__react-query.mjs");
+require("../_libs/supabase__supabase-js.mjs");
+require("../_libs/supabase__postgrest-js.mjs");
+require("../_libs/supabase__realtime-js.mjs");
+require("../_libs/supabase__phoenix.mjs");
+require("../_libs/supabase__storage-js.mjs");
+require("../_libs/iceberg-js.mjs");
+require("../_libs/supabase__auth-js.mjs");
+require("tslib");
+require("../_libs/supabase__functions-js.mjs");
+require("../_libs/radix-ui__react-context.mjs");
+require("../_libs/radix-ui__react-compose-refs.mjs");
+require("../_libs/radix-ui__react-dialog.mjs");
+require("../_libs/radix-ui__primitive.mjs");
+require("../_libs/radix-ui__react-id.mjs");
+require("../_libs/@radix-ui/react-use-layout-effect+[...].mjs");
+require("../_libs/@radix-ui/react-use-controllable-state+[...].mjs");
+require("../_libs/@radix-ui/react-dismissable-layer+[...].mjs");
+require("../_libs/radix-ui__react-primitive.mjs");
+require("../_libs/@radix-ui/react-use-callback-ref+[...].mjs");
+require("../_libs/@radix-ui/react-use-escape-keydown+[...].mjs");
+require("../_libs/radix-ui__react-focus-scope.mjs");
+require("../_libs/radix-ui__react-portal.mjs");
+require("../_libs/radix-ui__react-presence.mjs");
+require("../_libs/radix-ui__react-focus-guards.mjs");
+require("../_libs/react-remove-scroll.mjs");
+require("../_libs/react-remove-scroll-bar.mjs");
+require("../_libs/react-style-singleton.mjs");
+require("../_libs/get-nonce.mjs");
+require("../_libs/use-sidecar.mjs");
+require("../_libs/use-callback-ref.mjs");
+require("../_libs/aria-hidden.mjs");
+require("../_libs/clsx.mjs");
+require("../_libs/tailwind-merge.mjs");
+const buttonVariants = _libs_classVarianceAuthority.cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
@@ -81,19 +82,19 @@ const buttonVariants = cva(
     }
   }
 );
-const Button = reactExports.forwardRef(
+const Button = _libs_react.reactExports.forwardRef(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { className: cn(buttonVariants({ variant, size, className })), ref, ...props });
+    const Comp = asChild ? _libs__radixUi_reactSlot.Slot : "button";
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Comp, { className: utilsH80jjgLf.cn(buttonVariants({ variant, size, className })), ref, ...props });
   }
 );
 Button.displayName = "Button";
-const AlertDialog = Root2;
-const AlertDialogPortal = Portal2;
-const AlertDialogOverlay = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  Overlay2,
+const AlertDialog = _libs__radixUi_reactAlertDialog.Root2;
+const AlertDialogPortal = _libs__radixUi_reactAlertDialog.Portal2;
+const AlertDialogOverlay = _libs_react.reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+  _libs__radixUi_reactAlertDialog.Overlay2,
   {
-    className: cn(
+    className: utilsH80jjgLf.cn(
       "fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
       className
     ),
@@ -101,14 +102,14 @@ const AlertDialogOverlay = reactExports.forwardRef(({ className, ...props }, ref
     ref
   }
 ));
-AlertDialogOverlay.displayName = Overlay2.displayName;
-const AlertDialogContent = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDialogPortal, { children: [
-  /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogOverlay, {}),
-  /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Content2,
+AlertDialogOverlay.displayName = _libs__radixUi_reactAlertDialog.Overlay2.displayName;
+const AlertDialogContent = _libs_react.reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(AlertDialogPortal, { children: [
+  /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogOverlay, {}),
+  /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+    _libs__radixUi_reactAlertDialog.Content2,
     {
       ref,
-      className: cn(
+      className: utilsH80jjgLf.cn(
         "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 sm:rounded-lg",
         className
       ),
@@ -116,71 +117,71 @@ const AlertDialogContent = reactExports.forwardRef(({ className, ...props }, ref
     }
   )
 ] }));
-AlertDialogContent.displayName = Content2.displayName;
-const AlertDialogHeader = ({ className, ...props }) => /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: cn("flex flex-col space-y-2 text-center sm:text-left", className), ...props });
+AlertDialogContent.displayName = _libs__radixUi_reactAlertDialog.Content2.displayName;
+const AlertDialogHeader = ({ className, ...props }) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: utilsH80jjgLf.cn("flex flex-col space-y-2 text-center sm:text-left", className), ...props });
 AlertDialogHeader.displayName = "AlertDialogHeader";
-const AlertDialogFooter = ({ className, ...props }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+const AlertDialogFooter = ({ className, ...props }) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
   "div",
   {
-    className: cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
+    className: utilsH80jjgLf.cn("flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2", className),
     ...props
   }
 );
 AlertDialogFooter.displayName = "AlertDialogFooter";
-const AlertDialogTitle = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  Title2,
+const AlertDialogTitle = _libs_react.reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+  _libs__radixUi_reactAlertDialog.Title2,
   {
     ref,
-    className: cn("text-lg font-semibold", className),
+    className: utilsH80jjgLf.cn("text-lg font-semibold", className),
     ...props
   }
 ));
-AlertDialogTitle.displayName = Title2.displayName;
-const AlertDialogDescription = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  Description2,
+AlertDialogTitle.displayName = _libs__radixUi_reactAlertDialog.Title2.displayName;
+const AlertDialogDescription = _libs_react.reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+  _libs__radixUi_reactAlertDialog.Description2,
   {
     ref,
-    className: cn("text-sm text-muted-foreground", className),
+    className: utilsH80jjgLf.cn("text-sm text-muted-foreground", className),
     ...props
   }
 ));
-AlertDialogDescription.displayName = Description2.displayName;
-const AlertDialogAction = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(Action, { ref, className: cn(buttonVariants(), className), ...props }));
-AlertDialogAction.displayName = Action.displayName;
-const AlertDialogCancel = reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-  Cancel,
+AlertDialogDescription.displayName = _libs__radixUi_reactAlertDialog.Description2.displayName;
+const AlertDialogAction = _libs_react.reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactAlertDialog.Action, { ref, className: utilsH80jjgLf.cn(buttonVariants(), className), ...props }));
+AlertDialogAction.displayName = _libs__radixUi_reactAlertDialog.Action.displayName;
+const AlertDialogCancel = _libs_react.reactExports.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+  _libs__radixUi_reactAlertDialog.Cancel,
   {
     ref,
-    className: cn(buttonVariants({ variant: "outline" }), "mt-2 sm:mt-0", className),
+    className: utilsH80jjgLf.cn(buttonVariants({ variant: "outline" }), "mt-2 sm:mt-0", className),
     ...props
   }
 ));
-AlertDialogCancel.displayName = Cancel.displayName;
+AlertDialogCancel.displayName = _libs__radixUi_reactAlertDialog.Cancel.displayName;
 const SESSION_MS = 25 * 60 * 1e3;
 function ChatPage() {
   const {
     chatId
-  } = Route.useParams();
+  } = routerCzPlCdsN.a.useParams();
   const search = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
   const asListener = search.get("as") === "listener";
-  const [session, setSession] = reactExports.useState(null);
-  const [messages, setMessages] = reactExports.useState([]);
-  const [text, setText] = reactExports.useState("");
-  const [booking, setBooking] = reactExports.useState(null);
-  const [remaining, setRemaining] = reactExports.useState(SESSION_MS);
-  const [ended, setEnded] = reactExports.useState(false);
-  const [showEndDialog, setShowEndDialog] = reactExports.useState(false);
-  const [showEndedAlert, setShowEndedAlert] = reactExports.useState(false);
-  const [showFeedback, setShowFeedback] = reactExports.useState(false);
-  const [feedbackRating, setFeedbackRating] = reactExports.useState(0);
-  const [feedbackComment, setFeedbackComment] = reactExports.useState("");
-  const [feedbackSubmitting, setFeedbackSubmitting] = reactExports.useState(false);
-  const [loading, setLoading] = reactExports.useState(true);
-  const scrollRef = reactExports.useRef(null);
-  const messagesEndRef = reactExports.useRef(null);
-  const endedRef = reactExports.useRef(false);
-  const [timerActive, setTimerActive] = reactExports.useState(false);
-  const localStartTimeRef = reactExports.useRef(null);
+  const [session, setSession] = _libs_react.reactExports.useState(null);
+  const [messages, setMessages] = _libs_react.reactExports.useState([]);
+  const [text, setText] = _libs_react.reactExports.useState("");
+  const [booking, setBooking] = _libs_react.reactExports.useState(null);
+  const [remaining, setRemaining] = _libs_react.reactExports.useState(SESSION_MS);
+  const [ended, setEnded] = _libs_react.reactExports.useState(false);
+  const [showEndDialog, setShowEndDialog] = _libs_react.reactExports.useState(false);
+  const [showEndedAlert, setShowEndedAlert] = _libs_react.reactExports.useState(false);
+  const [showFeedback, setShowFeedback] = _libs_react.reactExports.useState(false);
+  const [feedbackRating, setFeedbackRating] = _libs_react.reactExports.useState(0);
+  const [feedbackComment, setFeedbackComment] = _libs_react.reactExports.useState("");
+  const [feedbackSubmitting, setFeedbackSubmitting] = _libs_react.reactExports.useState(false);
+  const [loading, setLoading] = _libs_react.reactExports.useState(true);
+  const scrollRef = _libs_react.reactExports.useRef(null);
+  const messagesEndRef = _libs_react.reactExports.useRef(null);
+  const endedRef = _libs_react.reactExports.useRef(false);
+  const [timerActive, setTimerActive] = _libs_react.reactExports.useState(false);
+  const localStartTimeRef = _libs_react.reactExports.useRef(null);
   const scrollToBottom = (behavior = "smooth") => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({
@@ -188,25 +189,25 @@ function ChatPage() {
       });
     }
   };
-  reactExports.useEffect(() => {
+  _libs_react.reactExports.useEffect(() => {
     if (messages.length > 0) {
       const timeoutId = setTimeout(() => scrollToBottom("smooth"), 100);
       return () => clearTimeout(timeoutId);
     }
   }, [messages]);
-  reactExports.useEffect(() => {
+  _libs_react.reactExports.useEffect(() => {
     let mounted = true;
     (async () => {
       const {
         data: s
-      } = await supabase.from("chat_sessions").select("*").eq("id", chatId).maybeSingle();
+      } = await routerCzPlCdsN.s.from("chat_sessions").select("*").eq("id", chatId).maybeSingle();
       if (!mounted) return;
       setSession(s);
       setLoading(false);
       if (s) {
         const {
           data: b
-        } = await supabase.from("bookings").select("*").eq("id", s.booking_id).maybeSingle();
+        } = await routerCzPlCdsN.s.from("bookings").select("*").eq("id", s.booking_id).maybeSingle();
         if (mounted) setBooking(b);
         if (s.session_ended_at) {
           endedRef.current = true;
@@ -218,7 +219,7 @@ function ChatPage() {
       }
       const {
         data: msgs
-      } = await supabase.from("chat_messages").select("*").eq("chat_id", chatId).order("created_at");
+      } = await routerCzPlCdsN.s.from("chat_messages").select("*").eq("chat_id", chatId).order("created_at");
       if (mounted) {
         setMessages(msgs || []);
         setTimeout(() => scrollToBottom("auto"), 200);
@@ -228,8 +229,8 @@ function ChatPage() {
       mounted = false;
     };
   }, [chatId]);
-  reactExports.useEffect(() => {
-    const ch = supabase.channel(`chat_${chatId}`).on("postgres_changes", {
+  _libs_react.reactExports.useEffect(() => {
+    const ch = routerCzPlCdsN.s.channel(`chat_${chatId}`).on("postgres_changes", {
       event: "INSERT",
       schema: "public",
       table: "chat_messages",
@@ -260,19 +261,19 @@ function ChatPage() {
       }
     }).subscribe();
     return () => {
-      supabase.removeChannel(ch);
+      routerCzPlCdsN.s.removeChannel(ch);
     };
   }, [chatId, asListener, timerActive]);
-  const listenerJoinedHandled = reactExports.useRef(false);
-  reactExports.useEffect(() => {
+  const listenerJoinedHandled = _libs_react.reactExports.useRef(false);
+  _libs_react.reactExports.useEffect(() => {
     if (!asListener || !session || ended || listenerJoinedHandled.current) return;
     if (!session.listener_joined_at) {
       listenerJoinedHandled.current = true;
-      supabase.from("chat_sessions").update({
+      routerCzPlCdsN.s.from("chat_sessions").update({
         listener_joined_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).eq("id", chatId).then(() => {
-        supabase.from("chat_messages").insert({
+        routerCzPlCdsN.s.from("chat_messages").insert({
           chat_id: chatId,
           sender_role: "system",
           sender_display_name: "System",
@@ -281,7 +282,7 @@ function ChatPage() {
       });
     }
   }, [asListener, session?.id, chatId, ended]);
-  reactExports.useEffect(() => {
+  _libs_react.reactExports.useEffect(() => {
     if (!timerActive || endedRef.current) return;
     if (localStartTimeRef.current === null) {
       if (session?.session_started_at) {
@@ -312,11 +313,11 @@ function ChatPage() {
         setTimerActive(false);
         if (!asListener) setShowFeedback(true);
         if (asListener) setShowEndedAlert(true);
-        supabase.from("chat_sessions").update({
+        routerCzPlCdsN.s.from("chat_sessions").update({
           session_ended_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "ended"
         }).eq("id", chatId).is("session_ended_at", null).then(() => {
-          supabase.from("chat_messages").insert({
+          routerCzPlCdsN.s.from("chat_messages").insert({
             chat_id: chatId,
             sender_role: "system",
             sender_display_name: "System",
@@ -335,14 +336,14 @@ function ChatPage() {
     setText("");
     const role = asListener ? "listener" : "user";
     const name = asListener ? "Listener" : booking?.is_anonymous ? "Friend" : booking?.user_name || "You";
-    await supabase.from("chat_messages").insert({
+    await routerCzPlCdsN.s.from("chat_messages").insert({
       chat_id: chatId,
       sender_role: role,
       sender_display_name: name,
       content: msg
     });
     if (asListener && session && !session.session_started_at) {
-      await supabase.from("chat_sessions").update({
+      await routerCzPlCdsN.s.from("chat_sessions").update({
         session_started_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).eq("id", chatId);
@@ -353,11 +354,11 @@ function ChatPage() {
     endedRef.current = true;
     setEnded(true);
     setTimerActive(false);
-    await supabase.from("chat_sessions").update({
+    await routerCzPlCdsN.s.from("chat_sessions").update({
       session_ended_at: (/* @__PURE__ */ new Date()).toISOString(),
       status: "ended"
     }).eq("id", chatId).is("session_ended_at", null);
-    await supabase.from("chat_messages").insert({
+    await routerCzPlCdsN.s.from("chat_messages").insert({
       chat_id: chatId,
       sender_role: "system",
       sender_display_name: "System",
@@ -370,7 +371,7 @@ function ChatPage() {
     setFeedbackSubmitting(true);
     const {
       error
-    } = await supabase.from("session_feedback").insert({
+    } = await routerCzPlCdsN.s.from("session_feedback").insert({
       chat_id: chatId,
       rating: feedbackRating,
       comment: feedbackComment.trim() || null
@@ -383,51 +384,51 @@ function ChatPage() {
   };
   booking?.session_type === "text_health" ? "Health Navigation — Text" : "Peer Support — Text";
   if (loading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-muted-foreground text-sm", children: "Loading your session…" }) });
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "flex items-center justify-center h-screen", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-muted-foreground text-sm", children: "Loading your session…" }) });
   }
   if (!session) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SiteShell, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-md px-5 py-20 text-center", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-serif text-2xl", children: "Chat not found" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-muted-foreground", children: "This chat link is invalid or has expired." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "mt-6 inline-block rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm", children: "Back home" })
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(SiteShellCxrl0jzj.SiteShell, { children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "mx-auto max-w-md px-5 py-20 text-center", children: [
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("h2", { className: "font-serif text-2xl", children: "Chat not found" }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("p", { className: "mt-2 text-muted-foreground", children: "This chat link is invalid or has expired." }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__tanstack_reactRouter.Link, { to: "/", className: "mt-6 inline-block rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm", children: "Back home" })
     ] }) });
   }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-background overflow-hidden", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "border-b border-border bg-card px-4 py-3 flex items-center gap-2 flex-wrap z-10", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "text-muted-foreground hover:text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowLeft, { className: "h-4 w-4" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-serif text-lg flex-1 truncate", children: "The Talk Nook" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-mono ${timerActive && !ended ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"}`, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "h-4 w-4" }),
+  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-background overflow-hidden", children: [
+    /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("header", { className: "border-b border-border bg-card px-4 py-3 flex items-center gap-2 flex-wrap z-10", children: [
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__tanstack_reactRouter.Link, { to: "/", className: "text-muted-foreground hover:text-foreground", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.ArrowLeft, { className: "h-4 w-4" }) }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("span", { className: "font-serif text-lg flex-1 truncate", children: "The Talk Nook" }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: `flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-mono ${timerActive && !ended ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"}`, children: [
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.Clock, { className: "h-4 w-4" }),
         " ",
         formatMs(remaining)
       ] }),
-      !ended && session.status !== "ended" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setShowEndDialog(true), className: "flex-shrink-0 text-xs px-3 py-1.5 rounded-full border border-destructive/30 text-destructive hover:bg-destructive/10 transition font-medium", children: "End Chat" }),
-      ended && /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 text-xs px-3 py-1.5 rounded-full bg-destructive/10 text-destructive font-medium animate-pulse", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { className: "h-3 w-3" }),
+      !ended && session.status !== "ended" && /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("button", { onClick: () => setShowEndDialog(true), className: "flex-shrink-0 text-xs px-3 py-1.5 rounded-full border border-destructive/30 text-destructive hover:bg-destructive/10 transition font-medium", children: "End Chat" }),
+      ended && /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 text-xs px-3 py-1.5 rounded-full bg-destructive/10 text-destructive font-medium animate-pulse", children: [
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.CircleAlert, { className: "h-3 w-3" }),
         " Session Ended"
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: scrollRef, className: "flex-1 overflow-y-auto px-4 py-6 space-y-4 max-w-2xl w-full mx-auto scroll-smooth", style: {
+    /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { ref: scrollRef, className: "flex-1 overflow-y-auto px-4 py-6 space-y-4 max-w-2xl w-full mx-auto scroll-smooth", style: {
       scrollbarWidth: "thin"
     }, children: [
-      !session.listener_joined_at && !ended && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center text-sm text-muted-foreground py-12 animate-pulse", children: "Waiting for your listener to join…" }),
+      !session.listener_joined_at && !ended && /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-center text-sm text-muted-foreground py-12 animate-pulse", children: "Waiting for your listener to join…" }),
       messages.map((m, idx) => {
-        if (m.sender_role === "system") return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center text-[11px] text-muted-foreground py-4 uppercase tracking-widest opacity-60", children: [
+        if (m.sender_role === "system") return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "text-center text-[11px] text-muted-foreground py-4 uppercase tracking-widest opacity-60", children: [
           "— ",
           m.content,
           " —"
         ] }, m.id || idx);
         const mine = asListener ? m.sender_role === "listener" : m.sender_role === "user";
-        return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `flex ${mine ? "justify-end" : "justify-start"} animate-in fade-in slide-in-from-bottom-2 duration-300`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `max-w-[85%] rounded-2xl px-4 py-3 shadow-sm ${mine ? "bg-primary text-primary-foreground rounded-tr-none" : "bg-secondary text-secondary-foreground rounded-tl-none"}`, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[10px] font-bold uppercase tracking-tighter opacity-50 mb-1", children: m.sender_display_name }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-[15px] whitespace-pre-wrap leading-relaxed", children: m.content })
+        return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: `flex ${mine ? "justify-end" : "justify-start"} animate-in fade-in slide-in-from-bottom-2 duration-300`, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: `max-w-[85%] rounded-2xl px-4 py-3 shadow-sm ${mine ? "bg-primary text-primary-foreground rounded-tr-none" : "bg-secondary text-secondary-foreground rounded-tl-none"}`, children: [
+          /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-[10px] font-bold uppercase tracking-tighter opacity-50 mb-1", children: m.sender_display_name }),
+          /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-[15px] whitespace-pre-wrap leading-relaxed", children: m.content })
         ] }) }, m.id || idx);
       }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { ref: messagesEndRef, className: "h-4 w-full" }),
-      ended && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "inline-block px-6 py-3 rounded-xl bg-muted text-muted-foreground text-sm border border-border font-medium", children: "This session has ended." }) })
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { ref: messagesEndRef, className: "h-4 w-full" }),
+      ended && /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-center py-8", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "inline-block px-6 py-3 rounded-xl bg-muted text-muted-foreground text-sm border border-border font-medium", children: "This session has ended." }) })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-t border-border bg-card pb-safe shadow-lg z-10", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-2xl mx-auto px-4 py-4 flex items-end gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { rows: 1, value: text, onChange: (e) => {
+    /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "border-t border-border bg-card pb-safe shadow-lg z-10", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "max-w-2xl mx-auto px-4 py-4 flex items-end gap-3", children: [
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("textarea", { rows: 1, value: text, onChange: (e) => {
         setText(e.target.value);
         e.target.style.height = "inherit";
         e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
@@ -440,43 +441,43 @@ function ChatPage() {
       }, placeholder: ended ? "Session has ended" : asListener && !session.listener_joined_at ? "Type to greet…" : "Say what's on your mind…", disabled: ended, className: "flex-1 rounded-2xl border border-input bg-background px-4 py-3 text-sm resize-none disabled:opacity-60 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none", style: {
         minHeight: "44px"
       } }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => {
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("button", { onClick: () => {
         send();
         const textarea = document.querySelector("textarea");
         if (textarea) textarea.style.height = "inherit";
-      }, disabled: ended || !text.trim(), className: "h-11 w-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 hover:scale-105 active:scale-95 transition-all shadow-md", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Send, { className: "h-5 w-5" }) })
+      }, disabled: ended || !text.trim(), className: "h-11 w-11 rounded-full bg-primary text-primary-foreground flex items-center justify-center disabled:opacity-40 hover:scale-105 active:scale-95 transition-all shadow-md", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.Send, { className: "h-5 w-5" }) })
     ] }) }),
-    showFeedback && !asListener && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm transition-all", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "w-full max-w-md bg-card rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom duration-500", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-serif text-3xl text-center mb-2", children: "How was it?" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-center text-sm text-muted-foreground mb-8", children: "Your feedback helps us make The Talk Nook better." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center gap-4 mb-8", children: [1, 2, 3, 4, 5].map((star) => /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setFeedbackRating(star), className: `text-4xl transition-all hover:scale-125 ${feedbackRating >= star ? "text-yellow-400 drop-shadow-md" : "text-muted-foreground/20"}`, children: "★" }, star)) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("textarea", { value: feedbackComment, onChange: (e) => setFeedbackComment(e.target.value.slice(0, 200)), placeholder: "Anything else you'd like to share?", rows: 3, className: "w-full rounded-2xl border border-input bg-background px-5 py-4 text-sm resize-none mb-2 outline-none focus:ring-2 focus:ring-primary/20" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-right text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-6", children: [
+    showFeedback && !asListener && /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm transition-all", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "w-full max-w-md bg-card rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom duration-500", children: [
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("h2", { className: "font-serif text-3xl text-center mb-2", children: "How was it?" }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("p", { className: "text-center text-sm text-muted-foreground mb-8", children: "Your feedback helps us make The Talk Nook better." }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "flex justify-center gap-4 mb-8", children: [1, 2, 3, 4, 5].map((star) => /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("button", { onClick: () => setFeedbackRating(star), className: `text-4xl transition-all hover:scale-125 ${feedbackRating >= star ? "text-yellow-400 drop-shadow-md" : "text-muted-foreground/20"}`, children: "★" }, star)) }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("textarea", { value: feedbackComment, onChange: (e) => setFeedbackComment(e.target.value.slice(0, 200)), placeholder: "Anything else you'd like to share?", rows: 3, className: "w-full rounded-2xl border border-input bg-background px-5 py-4 text-sm resize-none mb-2 outline-none focus:ring-2 focus:ring-primary/20" }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "text-right text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-6", children: [
         feedbackComment.length,
         " / 200"
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: handleFeedbackSubmit, disabled: feedbackRating === 0 || feedbackSubmitting, className: "w-full rounded-full bg-primary text-primary-foreground py-4 text-sm font-bold shadow-lg hover:shadow-xl disabled:opacity-40 transition-all", children: feedbackSubmitting ? "Sending..." : "Submit Feedback" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => setShowFeedback(false), className: "w-full text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mt-5 hover:text-foreground transition-colors", children: "Maybe later" })
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("button", { onClick: handleFeedbackSubmit, disabled: feedbackRating === 0 || feedbackSubmitting, className: "w-full rounded-full bg-primary text-primary-foreground py-4 text-sm font-bold shadow-lg hover:shadow-xl disabled:opacity-40 transition-all", children: feedbackSubmitting ? "Sending..." : "Submit Feedback" }),
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("button", { onClick: () => setShowFeedback(false), className: "w-full text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mt-5 hover:text-foreground transition-colors", children: "Maybe later" })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialog, { open: showEndDialog, onOpenChange: setShowEndDialog, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDialogContent, { className: "rounded-2xl", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDialogHeader, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogTitle, { className: "font-serif text-2xl", children: "End this session?" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogDescription, { className: "text-base", children: "Are you sure? You won't be able to send more messages in this quiet corner." })
+    /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialog, { open: showEndDialog, onOpenChange: setShowEndDialog, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(AlertDialogContent, { className: "rounded-2xl", children: [
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(AlertDialogHeader, { children: [
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogTitle, { className: "font-serif text-2xl", children: "End this session?" }),
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogDescription, { className: "text-base", children: "Are you sure? You won't be able to send more messages in this quiet corner." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDialogFooter, { className: "mt-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogCancel, { className: "rounded-full border-none bg-muted text-foreground font-bold uppercase tracking-widest text-[10px]", children: "Stay" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogAction, { onClick: handleEndSession, className: "rounded-full bg-destructive text-destructive-foreground font-bold uppercase tracking-widest text-[10px] hover:bg-destructive/90", children: "End Session" })
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(AlertDialogFooter, { className: "mt-4", children: [
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogCancel, { className: "rounded-full border-none bg-muted text-foreground font-bold uppercase tracking-widest text-[10px]", children: "Stay" }),
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogAction, { onClick: handleEndSession, className: "rounded-full bg-destructive text-destructive-foreground font-bold uppercase tracking-widest text-[10px] hover:bg-destructive/90", children: "End Session" })
       ] })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialog, { open: showEndedAlert, onOpenChange: setShowEndedAlert, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDialogContent, { className: "rounded-2xl", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDialogHeader, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(AlertDialogTitle, { className: "flex items-center gap-2 text-destructive font-serif text-2xl", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { className: "h-6 w-6" }),
+    /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialog, { open: showEndedAlert, onOpenChange: setShowEndedAlert, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(AlertDialogContent, { className: "rounded-2xl", children: [
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(AlertDialogHeader, { children: [
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(AlertDialogTitle, { className: "flex items-center gap-2 text-destructive font-serif text-2xl", children: [
+          /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.CircleAlert, { className: "h-6 w-6" }),
           "Session Finished"
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogDescription, { className: "text-base", children: "The 25-minute timer has completed. Thank you for your time." })
+        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogDescription, { className: "text-base", children: "The 25-minute timer has completed. Thank you for your time." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogFooter, { className: "mt-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(AlertDialogAction, { onClick: () => setShowEndedAlert(false), className: "rounded-full bg-primary font-bold uppercase tracking-widest text-[10px]", children: "Understood" }) })
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogFooter, { className: "mt-4", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AlertDialogAction, { onClick: () => setShowEndedAlert(false), className: "rounded-full bg-primary font-bold uppercase tracking-widest text-[10px]", children: "Understood" }) })
     ] }) })
   ] });
 }
@@ -486,6 +487,4 @@ function formatMs(ms) {
   const r = (s % 60).toString().padStart(2, "0");
   return `${m}:${r}`;
 }
-export {
-  ChatPage as component
-};
+exports.component = ChatPage;

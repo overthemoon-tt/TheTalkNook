@@ -1,14 +1,15 @@
-import { r as reactExports, j as jsxRuntimeExports } from "./react.mjs";
+"use strict";
+const _libs_react = require("./react.mjs");
 function createContext2(rootComponentName, defaultContext) {
-  const Context = reactExports.createContext(defaultContext);
+  const Context = _libs_react.reactExports.createContext(defaultContext);
   const Provider = (props) => {
     const { children, ...context } = props;
-    const value = reactExports.useMemo(() => context, Object.values(context));
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
+    const value = _libs_react.reactExports.useMemo(() => context, Object.values(context));
+    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Context.Provider, { value, children });
   };
   Provider.displayName = rootComponentName + "Provider";
   function useContext2(consumerName) {
-    const context = reactExports.useContext(Context);
+    const context = _libs_react.reactExports.useContext(Context);
     if (context) return context;
     if (defaultContext !== void 0) return defaultContext;
     throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
@@ -18,19 +19,19 @@ function createContext2(rootComponentName, defaultContext) {
 function createContextScope(scopeName, createContextScopeDeps = []) {
   let defaultContexts = [];
   function createContext3(rootComponentName, defaultContext) {
-    const BaseContext = reactExports.createContext(defaultContext);
+    const BaseContext = _libs_react.reactExports.createContext(defaultContext);
     const index = defaultContexts.length;
     defaultContexts = [...defaultContexts, defaultContext];
     const Provider = (props) => {
       const { scope, children, ...context } = props;
       const Context = scope?.[scopeName]?.[index] || BaseContext;
-      const value = reactExports.useMemo(() => context, Object.values(context));
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
+      const value = _libs_react.reactExports.useMemo(() => context, Object.values(context));
+      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Context.Provider, { value, children });
     };
     Provider.displayName = rootComponentName + "Provider";
     function useContext2(consumerName, scope) {
       const Context = scope?.[scopeName]?.[index] || BaseContext;
-      const context = reactExports.useContext(Context);
+      const context = _libs_react.reactExports.useContext(Context);
       if (context) return context;
       if (defaultContext !== void 0) return defaultContext;
       throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
@@ -39,11 +40,11 @@ function createContextScope(scopeName, createContextScopeDeps = []) {
   }
   const createScope = () => {
     const scopeContexts = defaultContexts.map((defaultContext) => {
-      return reactExports.createContext(defaultContext);
+      return _libs_react.reactExports.createContext(defaultContext);
     });
     return function useScope(scope) {
       const contexts = scope?.[scopeName] || scopeContexts;
-      return reactExports.useMemo(
+      return _libs_react.reactExports.useMemo(
         () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
         [scope, contexts]
       );
@@ -66,13 +67,11 @@ function composeContextScopes(...scopes) {
         const currentScope = scopeProps[`__scope${scopeName}`];
         return { ...nextScopes2, ...currentScope };
       }, {});
-      return reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+      return _libs_react.reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
     };
   };
   createScope.scopeName = baseScope.scopeName;
   return createScope;
 }
-export {
-  createContext2 as a,
-  createContextScope as c
-};
+exports.createContext2 = createContext2;
+exports.createContextScope = createContextScope;

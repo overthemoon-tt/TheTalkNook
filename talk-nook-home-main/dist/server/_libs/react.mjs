@@ -1,3 +1,4 @@
+"use strict";
 function _mergeNamespaces(n, m) {
   for (var i = 0; i < m.length; i++) {
     const e = m[i];
@@ -503,11 +504,9 @@ function requireJsxRuntime() {
   return jsxRuntime.exports;
 }
 var jsxRuntimeExports = requireJsxRuntime();
-export {
-  React as R,
-  requireReact as a,
-  React$1 as b,
-  getDefaultExportFromCjs as g,
-  jsxRuntimeExports as j,
-  reactExports as r
-};
+exports.React = React;
+exports.React$1 = React$1;
+exports.getDefaultExportFromCjs = getDefaultExportFromCjs;
+exports.jsxRuntimeExports = jsxRuntimeExports;
+exports.reactExports = reactExports;
+exports.requireReact = requireReact;

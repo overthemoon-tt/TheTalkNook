@@ -1,8 +1,9 @@
-import { P as PostgrestClient } from "./supabase__postgrest-js.mjs";
-import { R as RealtimeClient } from "./supabase__realtime-js.mjs";
-import { S as StorageClient } from "./supabase__storage-js.mjs";
-import { A as AuthClient } from "./supabase__auth-js.mjs";
-import { F as FunctionsClient } from "./supabase__functions-js.mjs";
+"use strict";
+const _libs__supabase_postgrestJs = require("./supabase__postgrest-js.mjs");
+const _libs__supabase_realtimeJs = require("./supabase__realtime-js.mjs");
+const _libs__supabase_storageJs = require("./supabase__storage-js.mjs");
+const _libs__supabase_authJs = require("./supabase__auth-js.mjs");
+const _libs__supabase_functionsJs = require("./supabase__functions-js.mjs");
 const version = "2.106.2";
 let JS_ENV = "";
 if (typeof Deno !== "undefined") JS_ENV = "deno";
@@ -269,7 +270,7 @@ function validateSupabaseUrl(supabaseUrl) {
     throw Error("Invalid supabaseUrl: Provided URL is malformed.");
   }
 }
-var SupabaseAuthClient = class extends AuthClient {
+var SupabaseAuthClient = class extends _libs__supabase_authJs.AuthClient {
   constructor(options) {
     super(options);
   }
@@ -525,21 +526,21 @@ var SupabaseClient = class {
       fetch: this.fetch
     }, settings.realtime));
     if (this.accessToken) Promise.resolve(this.accessToken()).then((token) => this.realtime.setAuth(token)).catch((e) => console.warn("Failed to set initial Realtime auth token:", e));
-    this.rest = new PostgrestClient(new URL("rest/v1", baseUrl).href, {
+    this.rest = new _libs__supabase_postgrestJs.PostgrestClient(new URL("rest/v1", baseUrl).href, {
       headers: this.headers,
       schema: settings.db.schema,
       fetch: this.fetch,
       timeout: settings.db.timeout,
       urlLengthLimit: settings.db.urlLengthLimit
     });
-    this.storage = new StorageClient(this.storageUrl.href, this.headers, this.fetch, options === null || options === void 0 ? void 0 : options.storage);
+    this.storage = new _libs__supabase_storageJs.StorageClient(this.storageUrl.href, this.headers, this.fetch, options === null || options === void 0 ? void 0 : options.storage);
     if (!settings.accessToken) this._listenForAuthEvents();
   }
   /**
   * Supabase Functions allows you to deploy and invoke edge functions.
   */
   get functions() {
-    return new FunctionsClient(this.functionsUrl.href, {
+    return new _libs__supabase_functionsJs.FunctionsClient(this.functionsUrl.href, {
       headers: this.headers,
       customFetch: this.fetch
     });
@@ -684,7 +685,7 @@ var SupabaseClient = class {
     });
   }
   _initRealtimeClient(options) {
-    return new RealtimeClient(this.realtimeUrl.href, _objectSpread2(_objectSpread2({}, options), {}, { params: _objectSpread2(_objectSpread2({}, { apikey: this.supabaseKey }), options === null || options === void 0 ? void 0 : options.params) }));
+    return new _libs__supabase_realtimeJs.RealtimeClient(this.realtimeUrl.href, _objectSpread2(_objectSpread2({}, options), {}, { params: _objectSpread2(_objectSpread2({}, { apikey: this.supabaseKey }), options === null || options === void 0 ? void 0 : options.params) }));
   }
   _listenForAuthEvents() {
     return this.auth.onAuthStateChange((event, session) => {
@@ -716,6 +717,4 @@ function shouldShowDeprecationWarning() {
   return parseInt(versionMatch[1], 10) <= 18;
 }
 if (shouldShowDeprecationWarning()) console.warn("⚠️  Node.js 18 and below are deprecated and will no longer be supported in future versions of @supabase/supabase-js. Please upgrade to Node.js 20 or later. For more information, visit: https://github.com/orgs/supabase/discussions/37217");
-export {
-  createClient as c
-};
+exports.createClient = createClient;

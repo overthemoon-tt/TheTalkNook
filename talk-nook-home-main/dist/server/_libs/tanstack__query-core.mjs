@@ -1,3 +1,4 @@
+"use strict";
 var Subscribable = class {
   constructor() {
     this.listeners = /* @__PURE__ */ new Set();
@@ -1942,6 +1943,4 @@ var QueryClient = class {
     this.#mutationCache.clear();
   }
 };
-export {
-  QueryClient as Q
-};
+exports.QueryClient = QueryClient;

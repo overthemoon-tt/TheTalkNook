@@ -1,6 +1,5 @@
-import { r as reactExports } from "../react.mjs";
-var useLayoutEffect2 = globalThis?.document ? reactExports.useLayoutEffect : () => {
+"use strict";
+const _libs_react = require("../react.mjs");
+var useLayoutEffect2 = globalThis?.document ? _libs_react.reactExports.useLayoutEffect : () => {
 };
-export {
-  useLayoutEffect2 as u
-};
+exports.useLayoutEffect2 = useLayoutEffect2;

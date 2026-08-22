@@ -1,3 +1,4 @@
+"use strict";
 const DEFAULT_MAX_RETRIES = 3;
 const getRetryDelay = (attemptIndex) => Math.min(1e3 * 2 ** attemptIndex, 3e4);
 const RETRYABLE_STATUS_CODES = [520, 503];
@@ -4933,6 +4934,4 @@ var PostgrestClient = class PostgrestClient2 {
     });
   }
 };
-export {
-  PostgrestClient as P
-};
+exports.PostgrestClient = PostgrestClient;

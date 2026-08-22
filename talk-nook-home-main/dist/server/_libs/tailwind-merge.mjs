@@ -1,3 +1,4 @@
+"use strict";
 const concatArrays = (array1, array2) => {
   const combinedArray = new Array(array1.length + array2.length);
   for (let i = 0; i < array1.length; i++) {
@@ -3250,6 +3251,4 @@ const getDefaultConfig = () => {
   };
 };
 const twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
-export {
-  twMerge as t
-};
+exports.twMerge = twMerge;

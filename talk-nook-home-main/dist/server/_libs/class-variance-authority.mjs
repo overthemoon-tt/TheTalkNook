@@ -1,6 +1,7 @@
-import { c as clsx } from "./clsx.mjs";
+"use strict";
+const _libs_clsx = require("./clsx.mjs");
 const falsyToString = (value) => typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
-const cx = clsx;
+const cx = _libs_clsx.clsx;
 const cva = (base, config) => (props) => {
   var _config_compoundVariants;
   if ((config === null || config === void 0 ? void 0 : config.variants) == null) return cx(base, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
@@ -39,6 +40,4 @@ const cva = (base, config) => (props) => {
   }, []);
   return cx(base, getVariantClassNames, getCompoundVariantClassNames, props === null || props === void 0 ? void 0 : props.class, props === null || props === void 0 ? void 0 : props.className);
 };
-export {
-  cva as c
-};
+exports.cva = cva;

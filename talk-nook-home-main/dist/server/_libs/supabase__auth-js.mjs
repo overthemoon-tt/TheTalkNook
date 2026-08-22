@@ -1,4 +1,5 @@
-import { __rest } from "tslib";
+"use strict";
+const tslib = require("tslib");
 const version = "2.106.2";
 const AUTO_REFRESH_TICK_DURATION_MS = 30 * 1e3;
 const AUTO_REFRESH_TICK_THRESHOLD = 3;
@@ -695,7 +696,7 @@ function _ssoResponse(data) {
   return { data, error: null };
 }
 function _generateLinkResponse(data) {
-  const { action_link, email_otp, hashed_token, redirect_to, verification_type } = data, rest = __rest(data, ["action_link", "email_otp", "hashed_token", "redirect_to", "verification_type"]);
+  const { action_link, email_otp, hashed_token, redirect_to, verification_type } = data, rest = tslib.__rest(data, ["action_link", "email_otp", "hashed_token", "redirect_to", "verification_type"]);
   const properties = {
     action_link,
     email_otp,
@@ -1000,7 +1001,7 @@ class GoTrueAdminApi {
    */
   async generateLink(params) {
     try {
-      const { options } = params, rest = __rest(params, ["options"]);
+      const { options } = params, rest = tslib.__rest(params, ["options"]);
       const body = Object.assign(Object.assign({}, rest), options);
       if ("newEmail" in rest) {
         body.new_email = rest === null || rest === void 0 ? void 0 : rest.newEmail;
@@ -2231,7 +2232,7 @@ function deserializeCredentialCreationOptions(options) {
       options
     );
   }
-  const { challenge: challengeStr, user: userOpts, excludeCredentials } = options, restOptions = __rest(
+  const { challenge: challengeStr, user: userOpts, excludeCredentials } = options, restOptions = tslib.__rest(
     options,
     ["challenge", "user", "excludeCredentials"]
   );
@@ -2262,7 +2263,7 @@ function deserializeCredentialRequestOptions(options) {
   if (typeof PublicKeyCredential !== "undefined" && "parseRequestOptionsFromJSON" in PublicKeyCredential && typeof PublicKeyCredential.parseRequestOptionsFromJSON === "function") {
     return PublicKeyCredential.parseRequestOptionsFromJSON(options);
   }
-  const { challenge: challengeStr, allowCredentials } = options, restOptions = __rest(
+  const { challenge: challengeStr, allowCredentials } = options, restOptions = tslib.__rest(
     options,
     ["challenge", "allowCredentials"]
   );
@@ -7597,6 +7598,4 @@ class GoTrueClient {
 }
 GoTrueClient.nextInstanceID = {};
 const AuthClient = GoTrueClient;
-export {
-  AuthClient as A
-};
+exports.AuthClient = AuthClient;

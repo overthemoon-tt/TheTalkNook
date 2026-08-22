@@ -1,4 +1,5 @@
-import { r as reactExports } from "./react.mjs";
+"use strict";
+const _libs_react = require("./react.mjs");
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -31,9 +32,7 @@ function composeRefs(...refs) {
   };
 }
 function useComposedRefs(...refs) {
-  return reactExports.useCallback(composeRefs(...refs), refs);
+  return _libs_react.reactExports.useCallback(composeRefs(...refs), refs);
 }
-export {
-  composeRefs as c,
-  useComposedRefs as u
-};
+exports.composeRefs = composeRefs;
+exports.useComposedRefs = useComposedRefs;
