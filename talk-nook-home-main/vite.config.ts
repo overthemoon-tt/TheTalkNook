@@ -9,6 +9,11 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 export default defineConfig({
   nitro: {
     preset: "node-server",
+    rollupConfig: {
+      output: {
+        format: "cjs"
+      }
+    }
   },
   tanstackStart: {
     server: { entry: "server" },

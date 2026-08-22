@@ -135,7 +135,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster, {})
   ] });
 }
-const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-D53LBWUx.mjs");
+const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-DdZ8Ejdn.mjs");
 const Route$7 = createFileRoute("/talknook-admin-panel")({
   head: () => ({
     meta: [{
@@ -183,7 +183,7 @@ const Route$5 = createFileRoute("/health-navigation")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-const $$splitComponentImporter$4 = () => import("./contact-clUB2Aqf.mjs");
+const $$splitComponentImporter$4 = () => import("./contact-BanQKGQr.mjs");
 const Route$4 = createFileRoute("/contact")({
   head: () => ({
     meta: [{
@@ -195,7 +195,7 @@ const Route$4 = createFileRoute("/contact")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./book-a7MqBggg.mjs");
+const $$splitComponentImporter$3 = () => import("./book-B8EpOnYn.mjs");
 const Route$3 = createFileRoute("/book")({
   validateSearch: (s) => ({
     s: s.s || void 0
@@ -246,7 +246,7 @@ const supabase = new Proxy({}, {
     return Reflect.get(_supabase, prop, receiver);
   }
 });
-const $$splitComponentImporter$1 = () => import("./index-DTa7xVXO.mjs");
+const $$splitComponentImporter$1 = () => import("./index-RyOBDDSB.mjs");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{
@@ -264,7 +264,7 @@ const Route$1 = createFileRoute("/")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./chat._chatId-YNUfJXUk.mjs");
+const $$splitComponentImporter = () => import("./chat._chatId-CmgOztNF.mjs");
 const Route = createFileRoute("/chat/$chatId")({
   head: () => ({
     meta: [{
