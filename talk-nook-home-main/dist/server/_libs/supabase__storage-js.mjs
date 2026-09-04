@@ -1,5 +1,4 @@
-"use strict";
-const _libs_icebergJs = require("./iceberg-js.mjs");
+import { I as IcebergRestCatalog } from "./iceberg-js.mjs";
 function _typeof(o) {
   "@babel/helpers - typeof";
   return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
@@ -1934,7 +1933,7 @@ var StorageAnalyticsClient = class extends BaseApiClient {
   from(bucketName) {
     var _this4 = this;
     if (!isValidBucketName(bucketName)) throw new StorageError("Invalid bucket name: File, folder, and bucket names must follow AWS object key naming guidelines and should avoid the use of any other characters.");
-    const catalog = new _libs_icebergJs.IcebergRestCatalog({
+    const catalog = new IcebergRestCatalog({
       baseUrl: this.url,
       catalogName: bucketName,
       auth: {
@@ -2675,4 +2674,6 @@ var StorageClient = class extends StorageBucketApi {
     return new StorageAnalyticsClient(this.url + "/iceberg", this.headers, this.fetch);
   }
 };
-exports.StorageClient = StorageClient;
+export {
+  StorageClient as S
+};

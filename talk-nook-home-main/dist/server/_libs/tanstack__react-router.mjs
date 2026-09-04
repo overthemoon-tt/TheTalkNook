@@ -1,22 +1,21 @@
-"use strict";
-const _libs_react = require("./react.mjs");
-const _libs__tanstack_routerCore = require("./tanstack__router-core.mjs");
-const _libs_reactDom = require("./react-dom.mjs");
-const node_stream = require("node:stream");
-const _libs_isbot = require("./isbot.mjs");
-var reactUse = _libs_react.reactExports.use;
+import { r as reactExports, j as jsxRuntimeExports, R as React } from "./react.mjs";
+import { i as invariant, a as isDangerousProtocol, e as exactPathTest, r as removeTrailingSlash, h as hasKeys, d as deepEqual, f as functionalUpdate, B as BaseRootRoute, b as BaseRoute, c as isModuleNotFoundError, g as isNotFound, j as getScrollRestorationScriptForRouter, k as rootRouteId, l as isServer, m as isRedirect, n as createNonReactiveReadonlyStore, o as createNonReactiveMutableStore, R as RouterCore, p as escapeHtml, q as getAssetCrossOrigin, s as getScriptPreloadAttrs, t as appendUniqueUserTags, u as resolveManifestCssLink, v as transformReadableStreamWithRouter, w as createSsrStreamResponse, x as transformPipeableStreamWithRouter } from "./tanstack__router-core.mjs";
+import { R as ReactDOMServer } from "./react-dom.mjs";
+import { PassThrough } from "node:stream";
+import { i as isbot } from "./isbot.mjs";
+var reactUse = reactExports.use;
 function useForwardedRef(ref) {
-  const innerRef = _libs_react.reactExports.useRef(null);
-  _libs_react.reactExports.useImperativeHandle(ref, () => innerRef.current, []);
+  const innerRef = reactExports.useRef(null);
+  reactExports.useImperativeHandle(ref, () => innerRef.current, []);
   return innerRef;
 }
 function CatchBoundary(props) {
   const errorComponent = props.errorComponent ?? ErrorComponent;
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(CatchBoundaryImpl, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(CatchBoundaryImpl, {
     getResetKey: props.getResetKey,
     onCatch: props.onCatch,
     children: ({ error, reset }) => {
-      if (error) return _libs_react.reactExports.createElement(errorComponent, {
+      if (error) return reactExports.createElement(errorComponent, {
         error,
         reset
       });
@@ -24,7 +23,7 @@ function CatchBoundary(props) {
     }
   });
 }
-var CatchBoundaryImpl = class extends _libs_react.reactExports.Component {
+var CatchBoundaryImpl = class extends reactExports.Component {
   constructor(..._args) {
     super(..._args);
     this.state = { error: null };
@@ -56,23 +55,23 @@ var CatchBoundaryImpl = class extends _libs_react.reactExports.Component {
   }
 };
 function ErrorComponent({ error }) {
-  const [show, setShow] = _libs_react.reactExports.useState(false);
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", {
+  const [show, setShow] = reactExports.useState(false);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
     style: {
       padding: ".5rem",
       maxWidth: "100%"
     },
     children: [
-      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", {
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", {
         style: {
           display: "flex",
           alignItems: "center",
           gap: ".5rem"
         },
-        children: [/* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("strong", {
+        children: [/* @__PURE__ */ jsxRuntimeExports.jsx("strong", {
           style: { fontSize: "1rem" },
           children: "Something went wrong!"
-        }), /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("button", {
+        }), /* @__PURE__ */ jsxRuntimeExports.jsx("button", {
           style: {
             appearance: "none",
             fontSize: ".6em",
@@ -85,8 +84,8 @@ function ErrorComponent({ error }) {
           children: show ? "Hide Error" : "Show Error"
         })]
       }),
-      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { style: { height: ".25rem" } }),
-      show ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("pre", {
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { height: ".25rem" } }),
+      show ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("pre", {
         style: {
           fontSize: ".7em",
           border: "1px solid red",
@@ -95,37 +94,37 @@ function ErrorComponent({ error }) {
           color: "red",
           overflow: "auto"
         },
-        children: error.message ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("code", { children: error.message }) : null
+        children: error.message ? /* @__PURE__ */ jsxRuntimeExports.jsx("code", { children: error.message }) : null
       }) }) : null
     ]
   });
 }
 function ClientOnly({ children, fallback = null }) {
-  return useHydrated() ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_react.React.Fragment, { children }) : /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_react.React.Fragment, { children: fallback });
+  return useHydrated() ? /* @__PURE__ */ jsxRuntimeExports.jsx(React.Fragment, { children }) : /* @__PURE__ */ jsxRuntimeExports.jsx(React.Fragment, { children: fallback });
 }
 function useHydrated() {
-  return _libs_react.React.useSyncExternalStore(subscribe, () => true, () => false);
+  return React.useSyncExternalStore(subscribe, () => true, () => false);
 }
 function subscribe() {
   return () => {
   };
 }
-var routerContext = _libs_react.reactExports.createContext(null);
+var routerContext = reactExports.createContext(null);
 function useRouter(opts) {
-  const value = _libs_react.reactExports.useContext(routerContext);
+  const value = reactExports.useContext(routerContext);
   return value;
 }
-var matchContext = _libs_react.reactExports.createContext(void 0);
-var dummyMatchContext = _libs_react.reactExports.createContext(void 0);
+var matchContext = reactExports.createContext(void 0);
+var dummyMatchContext = reactExports.createContext(void 0);
 function useMatch(opts) {
   const router = useRouter();
-  const nearestMatchId = _libs_react.reactExports.useContext(opts.from ? dummyMatchContext : matchContext);
+  const nearestMatchId = reactExports.useContext(opts.from ? dummyMatchContext : matchContext);
   const key = opts.from ?? nearestMatchId;
   const matchStore = key ? opts.from ? router.stores.getRouteMatchStore(key) : router.stores.matchStores.get(key) : void 0;
   {
     const match = matchStore?.get();
     if ((opts.shouldThrow ?? true) && !match) {
-      _libs__tanstack_routerCore.invariant();
+      invariant();
     }
     if (match === void 0) return;
     return opts.select ? opts.select(match) : match;
@@ -175,7 +174,7 @@ function useSearch(opts) {
 }
 function useNavigate(_defaultOpts) {
   const router = useRouter();
-  return _libs_react.reactExports.useCallback((options) => {
+  return reactExports.useCallback((options) => {
     return router.navigate({
       ...options,
       from: options.from ?? _defaultOpts?.from
@@ -196,7 +195,7 @@ function useLinkProps(options, forwardedRef) {
     const safeInternal = isSafeInternal(to);
     if (typeof to === "string" && !safeInternal && to.indexOf(":") > -1) try {
       new URL(to);
-      if (_libs__tanstack_routerCore.isDangerousProtocol(to, router.protocolAllowlist)) {
+      if (isDangerousProtocol(to, router.protocolAllowlist)) {
         if (false) ;
         return {
           ...propsSafeToSpread,
@@ -228,7 +227,7 @@ function useLinkProps(options, forwardedRef) {
     const hrefOption2 = getHrefOption(next2.maskedLocation ? next2.maskedLocation.publicHref : next2.publicHref, next2.maskedLocation ? next2.maskedLocation.external : next2.external, router.history, disabled);
     const externalLink2 = (() => {
       if (hrefOption2?.external) {
-        if (_libs__tanstack_routerCore.isDangerousProtocol(hrefOption2.href, router.protocolAllowlist)) {
+        if (isDangerousProtocol(hrefOption2.href, router.protocolAllowlist)) {
           return;
         }
         return hrefOption2.href;
@@ -236,7 +235,7 @@ function useLinkProps(options, forwardedRef) {
       if (safeInternal) return void 0;
       if (typeof to === "string" && to.indexOf(":") > -1) try {
         new URL(to);
-        if (_libs__tanstack_routerCore.isDangerousProtocol(to, router.protocolAllowlist)) {
+        if (isDangerousProtocol(to, router.protocolAllowlist)) {
           if (false) ;
           return;
         }
@@ -249,18 +248,18 @@ function useLinkProps(options, forwardedRef) {
       const currentLocation2 = router.stores.location.get();
       const exact = activeOptions?.exact ?? false;
       if (exact) {
-        if (!_libs__tanstack_routerCore.exactPathTest(currentLocation2.pathname, next2.pathname, router.basepath)) return false;
+        if (!exactPathTest(currentLocation2.pathname, next2.pathname, router.basepath)) return false;
       } else {
-        const currentPathSplit = _libs__tanstack_routerCore.removeTrailingSlash(currentLocation2.pathname, router.basepath);
-        const nextPathSplit = _libs__tanstack_routerCore.removeTrailingSlash(next2.pathname, router.basepath);
+        const currentPathSplit = removeTrailingSlash(currentLocation2.pathname, router.basepath);
+        const nextPathSplit = removeTrailingSlash(next2.pathname, router.basepath);
         if (!(currentPathSplit.startsWith(nextPathSplit) && (currentPathSplit.length === nextPathSplit.length || currentPathSplit[nextPathSplit.length] === "/"))) return false;
       }
       if (activeOptions?.includeSearch ?? true) {
         if (currentLocation2.search !== next2.search) {
-          const currentSearchEmpty = !currentLocation2.search || typeof currentLocation2.search === "object" && !_libs__tanstack_routerCore.hasKeys(currentLocation2.search);
-          const nextSearchEmpty = !next2.search || typeof next2.search === "object" && !_libs__tanstack_routerCore.hasKeys(next2.search);
+          const currentSearchEmpty = !currentLocation2.search || typeof currentLocation2.search === "object" && !hasKeys(currentLocation2.search);
+          const nextSearchEmpty = !next2.search || typeof next2.search === "object" && !hasKeys(next2.search);
           if (!(currentSearchEmpty && nextSearchEmpty)) {
-            if (!_libs__tanstack_routerCore.deepEqual(currentLocation2.search, next2.search, {
+            if (!deepEqual(currentLocation2.search, next2.search, {
               partial: !exact,
               ignoreUndefined: !activeOptions?.explicitUndefined
             })) return false;
@@ -280,8 +279,8 @@ function useLinkProps(options, forwardedRef) {
       ...style && { style },
       ...className && { className }
     };
-    const resolvedActiveProps2 = isActive2 ? _libs__tanstack_routerCore.functionalUpdate(activeProps, {}) ?? STATIC_ACTIVE_OBJECT : STATIC_EMPTY_OBJECT;
-    const resolvedInactiveProps2 = isActive2 ? STATIC_EMPTY_OBJECT : _libs__tanstack_routerCore.functionalUpdate(inactiveProps, {}) ?? STATIC_EMPTY_OBJECT;
+    const resolvedActiveProps2 = isActive2 ? functionalUpdate(activeProps, {}) ?? STATIC_ACTIVE_OBJECT : STATIC_EMPTY_OBJECT;
+    const resolvedInactiveProps2 = isActive2 ? STATIC_EMPTY_OBJECT : functionalUpdate(inactiveProps, {}) ?? STATIC_EMPTY_OBJECT;
     const resolvedStyle2 = (() => {
       const baseStyle = style;
       const activeStyle = resolvedActiveProps2.style;
@@ -349,17 +348,17 @@ function isSafeInternal(to) {
   if (zero === 47) return to.charCodeAt(1) !== 47;
   return zero === 46;
 }
-var Link = _libs_react.reactExports.forwardRef((props, ref) => {
+var Link = reactExports.forwardRef((props, ref) => {
   const { _asChild, ...rest } = props;
   const { type: _type, ...linkProps } = useLinkProps(rest, ref);
   const children = typeof rest.children === "function" ? rest.children({ isActive: linkProps["data-status"] === "active" }) : rest.children;
   if (!_asChild) {
     const { disabled: _, ...rest2 } = linkProps;
-    return _libs_react.reactExports.createElement("a", rest2, children);
+    return reactExports.createElement("a", rest2, children);
   }
-  return _libs_react.reactExports.createElement(_asChild, linkProps, children);
+  return reactExports.createElement(_asChild, linkProps, children);
 });
-var Route = class extends _libs__tanstack_routerCore.BaseRoute {
+var Route = class extends BaseRoute {
   /**
   * @deprecated Use the `createRoute` function instead.
   */
@@ -407,8 +406,8 @@ var Route = class extends _libs__tanstack_routerCore.BaseRoute {
     this.useNavigate = () => {
       return useNavigate({ from: this.fullPath });
     };
-    this.Link = _libs_react.React.forwardRef((props, ref) => {
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Link, {
+    this.Link = React.forwardRef((props, ref) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, {
         ref,
         from: this.fullPath,
         ...props
@@ -424,7 +423,7 @@ function createRootRouteWithContext() {
     return createRootRoute(options);
   };
 }
-var RootRoute = class extends _libs__tanstack_routerCore.BaseRootRoute {
+var RootRoute = class extends BaseRootRoute {
   /**
   * @deprecated `RootRoute` is now an internal implementation detail. Use `createRootRoute()` instead.
   */
@@ -472,8 +471,8 @@ var RootRoute = class extends _libs__tanstack_routerCore.BaseRootRoute {
     this.useNavigate = () => {
       return useNavigate({ from: this.fullPath });
     };
-    this.Link = _libs_react.React.forwardRef((props, ref) => {
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Link, {
+    this.Link = React.forwardRef((props, ref) => {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Link, {
         ref,
         from: this.fullPath,
         ...props
@@ -509,7 +508,7 @@ function lazyRouteComponent(importer, exportName) {
       comp = res[exportName];
     }).catch((err) => {
       error = err;
-      if (_libs__tanstack_routerCore.isModuleNotFoundError(error)) {
+      if (isModuleNotFoundError(error)) {
         if (error instanceof Error && typeof window !== "undefined" && typeof sessionStorage !== "undefined") {
           const storageKey = `tanstack_router_reload:${error.message}`;
           if (!sessionStorage.getItem(storageKey)) {
@@ -530,7 +529,7 @@ function lazyRouteComponent(importer, exportName) {
     if (error) throw error;
     if (!comp) if (reactUse) reactUse(load());
     else throw load();
-    return _libs_react.reactExports.createElement(comp, props);
+    return reactExports.createElement(comp, props);
   };
   lazyComp.preload = load;
   return lazyComp;
@@ -539,14 +538,14 @@ function CatchNotFound(props) {
   const router = useRouter();
   {
     const resetKey = `not-found-${router.stores.location.get().pathname}-${router.stores.status.get()}`;
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(CatchBoundary, {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(CatchBoundary, {
       getResetKey: () => resetKey,
       onCatch: (error, errorInfo) => {
-        if (_libs__tanstack_routerCore.isNotFound(error)) props.onCatch?.(error, errorInfo);
+        if (isNotFound(error)) props.onCatch?.(error, errorInfo);
         else throw error;
       },
       errorComponent: ({ error }) => {
-        if (_libs__tanstack_routerCore.isNotFound(error)) return props.fallback?.(error);
+        if (isNotFound(error)) return props.fallback?.(error);
         else throw error;
       },
       children: props.children
@@ -554,40 +553,40 @@ function CatchNotFound(props) {
   }
 }
 function DefaultGlobalNotFound() {
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("p", { children: "Not Found" });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Not Found" });
 }
 function ScriptOnce({ children }) {
   const router = useRouter();
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("script", {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("script", {
     nonce: router.options.ssr?.nonce,
     dangerouslySetInnerHTML: { __html: children + ";document.currentScript.remove()" }
   });
 }
 function SafeFragment(props) {
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_react.jsxRuntimeExports.Fragment, { children: props.children });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: props.children });
 }
 function renderRouteNotFound(router, route, data) {
   if (!route.options.notFoundComponent) {
-    if (router.options.defaultNotFoundComponent) return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(router.options.defaultNotFoundComponent, { ...data });
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(DefaultGlobalNotFound, {});
+    if (router.options.defaultNotFoundComponent) return /* @__PURE__ */ jsxRuntimeExports.jsx(router.options.defaultNotFoundComponent, { ...data });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(DefaultGlobalNotFound, {});
   }
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(route.options.notFoundComponent, { ...data });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(route.options.notFoundComponent, { ...data });
 }
 function ScrollRestoration() {
-  const script = _libs__tanstack_routerCore.getScrollRestorationScriptForRouter(useRouter());
+  const script = getScrollRestorationScriptForRouter(useRouter());
   if (!script) return null;
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(ScriptOnce, { children: script });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(ScriptOnce, { children: script });
 }
-var Match = _libs_react.reactExports.memo(function MatchImpl({ matchId }) {
+var Match = reactExports.memo(function MatchImpl({ matchId }) {
   const router = useRouter();
   {
     const match2 = router.stores.matchStores.get(matchId)?.get();
     if (!match2) {
-      _libs__tanstack_routerCore.invariant();
+      invariant();
     }
     const routeId = match2.routeId;
     const parentRouteId = router.routesById[routeId].parentRoute?.id;
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(MatchView, {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(MatchView, {
       router,
       matchId,
       resetKey: router.stores.loadedAt.get(),
@@ -603,48 +602,48 @@ var Match = _libs_react.reactExports.memo(function MatchImpl({ matchId }) {
 function MatchView({ router, matchId, resetKey, matchState }) {
   const route = router.routesById[matchState.routeId];
   const PendingComponent = route.options.pendingComponent ?? router.options.defaultPendingComponent;
-  const pendingElement = PendingComponent ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(PendingComponent, {}) : null;
+  const pendingElement = PendingComponent ? /* @__PURE__ */ jsxRuntimeExports.jsx(PendingComponent, {}) : null;
   const routeErrorComponent = route.options.errorComponent ?? router.options.defaultErrorComponent;
   const routeOnCatch = route.options.onCatch ?? router.options.defaultOnCatch;
   const routeNotFoundComponent = route.isRoot ? route.options.notFoundComponent ?? router.options.notFoundRoute?.options.component : route.options.notFoundComponent;
   const resolvedNoSsr = matchState.ssr === false || matchState.ssr === "data-only";
-  const ResolvedSuspenseBoundary = (!route.isRoot || route.options.wrapInSuspense || resolvedNoSsr) && (route.options.wrapInSuspense ?? PendingComponent ?? (route.options.errorComponent?.preload || resolvedNoSsr)) ? _libs_react.reactExports.Suspense : SafeFragment;
+  const ResolvedSuspenseBoundary = (!route.isRoot || route.options.wrapInSuspense || resolvedNoSsr) && (route.options.wrapInSuspense ?? PendingComponent ?? (route.options.errorComponent?.preload || resolvedNoSsr)) ? reactExports.Suspense : SafeFragment;
   const ResolvedCatchBoundary = routeErrorComponent ? CatchBoundary : SafeFragment;
   const ResolvedNotFoundBoundary = routeNotFoundComponent ? CatchNotFound : SafeFragment;
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(route.isRoot ? route.options.shellComponent ?? SafeFragment : SafeFragment, { children: [/* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(matchContext.Provider, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(route.isRoot ? route.options.shellComponent ?? SafeFragment : SafeFragment, { children: [/* @__PURE__ */ jsxRuntimeExports.jsx(matchContext.Provider, {
     value: matchId,
-    children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(ResolvedSuspenseBoundary, {
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx(ResolvedSuspenseBoundary, {
       fallback: pendingElement,
-      children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(ResolvedCatchBoundary, {
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(ResolvedCatchBoundary, {
         getResetKey: () => resetKey,
         errorComponent: routeErrorComponent || ErrorComponent,
         onCatch: (error, errorInfo) => {
-          if (_libs__tanstack_routerCore.isNotFound(error)) {
+          if (isNotFound(error)) {
             error.routeId ??= matchState.routeId;
             throw error;
           }
           routeOnCatch?.(error, errorInfo);
         },
-        children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(ResolvedNotFoundBoundary, {
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(ResolvedNotFoundBoundary, {
           fallback: (error) => {
             error.routeId ??= matchState.routeId;
             if (!routeNotFoundComponent || error.routeId && error.routeId !== matchState.routeId || !error.routeId && !route.isRoot) throw error;
-            return _libs_react.reactExports.createElement(routeNotFoundComponent, error);
+            return reactExports.createElement(routeNotFoundComponent, error);
           },
-          children: resolvedNoSsr || matchState._displayPending ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(ClientOnly, {
+          children: resolvedNoSsr || matchState._displayPending ? /* @__PURE__ */ jsxRuntimeExports.jsx(ClientOnly, {
             fallback: pendingElement,
-            children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(MatchInner, { matchId })
-          }) : /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(MatchInner, { matchId })
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx(MatchInner, { matchId })
+          }) : /* @__PURE__ */ jsxRuntimeExports.jsx(MatchInner, { matchId })
         })
       })
     })
-  }), matchState.parentRouteId === _libs__tanstack_routerCore.rootRouteId ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(_libs_react.jsxRuntimeExports.Fragment, { children: [/* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(OnRendered, { resetKey }), router.options.scrollRestoration && _libs__tanstack_routerCore.isServer ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(ScrollRestoration, {}) : null] }) : null] });
+  }), matchState.parentRouteId === rootRouteId ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [/* @__PURE__ */ jsxRuntimeExports.jsx(OnRendered, { resetKey }), router.options.scrollRestoration && isServer ? /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollRestoration, {}) : null] }) : null] });
 }
 function OnRendered({ resetKey }) {
   useRouter();
   return null;
 }
-var MatchInner = _libs_react.reactExports.memo(function MatchInnerImpl({ matchId }) {
+var MatchInner = reactExports.memo(function MatchInnerImpl({ matchId }) {
   const router = useRouter();
   const getMatchPromise = (match2, key2) => {
     return router.getMatch(match2.id)?._nonReactive[key2] ?? match2._nonReactive[key2];
@@ -652,7 +651,7 @@ var MatchInner = _libs_react.reactExports.memo(function MatchInnerImpl({ matchId
   {
     const match2 = router.stores.matchStores.get(matchId)?.get();
     if (!match2) {
-      _libs__tanstack_routerCore.invariant();
+      invariant();
     }
     const routeId2 = match2.routeId;
     const route2 = router.routesById[routeId2];
@@ -664,23 +663,23 @@ var MatchInner = _libs_react.reactExports.memo(function MatchInnerImpl({ matchId
     });
     const key2 = remountDeps ? JSON.stringify(remountDeps) : void 0;
     const Comp = route2.options.component ?? router.options.defaultComponent;
-    const out2 = Comp ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Comp, {}, key2) : /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Outlet, {});
+    const out2 = Comp ? /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, {}, key2) : /* @__PURE__ */ jsxRuntimeExports.jsx(Outlet, {});
     if (match2._displayPending) throw getMatchPromise(match2, "displayPendingPromise");
     if (match2._forcePending) throw getMatchPromise(match2, "minPendingPromise");
     if (match2.status === "pending") throw getMatchPromise(match2, "loadPromise");
     if (match2.status === "notFound") {
-      if (!_libs__tanstack_routerCore.isNotFound(match2.error)) {
-        _libs__tanstack_routerCore.invariant();
+      if (!isNotFound(match2.error)) {
+        invariant();
       }
       return renderRouteNotFound(router, route2, match2.error);
     }
     if (match2.status === "redirected") {
-      if (!_libs__tanstack_routerCore.isRedirect(match2.error)) {
-        _libs__tanstack_routerCore.invariant();
+      if (!isRedirect(match2.error)) {
+        invariant();
       }
       throw getMatchPromise(match2, "loadPromise");
     }
-    if (match2.status === "error") return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx((route2.options.errorComponent ?? router.options.defaultErrorComponent) || ErrorComponent, {
+    if (match2.status === "error") return /* @__PURE__ */ jsxRuntimeExports.jsx((route2.options.errorComponent ?? router.options.defaultErrorComponent) || ErrorComponent, {
       error: match2.error,
       reset: void 0,
       info: { componentStack: "" }
@@ -688,9 +687,9 @@ var MatchInner = _libs_react.reactExports.memo(function MatchInnerImpl({ matchId
     return out2;
   }
 });
-var Outlet = _libs_react.reactExports.memo(function OutletImpl() {
+var Outlet = reactExports.memo(function OutletImpl() {
   const router = useRouter();
-  const matchId = _libs_react.reactExports.useContext(matchContext);
+  const matchId = reactExports.useContext(matchContext);
   let routeId;
   let parentGlobalNotFound = false;
   let childMatchId;
@@ -703,16 +702,16 @@ var Outlet = _libs_react.reactExports.memo(function OutletImpl() {
     childMatchId = parentIndex >= 0 ? matches[parentIndex + 1]?.id : void 0;
   }
   const route = routeId ? router.routesById[routeId] : void 0;
-  const pendingElement = router.options.defaultPendingComponent ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(router.options.defaultPendingComponent, {}) : null;
+  const pendingElement = router.options.defaultPendingComponent ? /* @__PURE__ */ jsxRuntimeExports.jsx(router.options.defaultPendingComponent, {}) : null;
   if (parentGlobalNotFound) {
     if (!route) {
-      _libs__tanstack_routerCore.invariant();
+      invariant();
     }
     return renderRouteNotFound(router, route, void 0);
   }
   if (!childMatchId) return null;
-  const nextMatch = /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Match, { matchId: childMatchId });
-  if (routeId === _libs__tanstack_routerCore.rootRouteId) return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_react.reactExports.Suspense, {
+  const nextMatch = /* @__PURE__ */ jsxRuntimeExports.jsx(Match, { matchId: childMatchId });
+  if (routeId === rootRouteId) return /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, {
     fallback: pendingElement,
     children: nextMatch
   });
@@ -720,22 +719,22 @@ var Outlet = _libs_react.reactExports.memo(function OutletImpl() {
 });
 function Matches() {
   const router = useRouter();
-  const PendingComponent = router.routesById[_libs__tanstack_routerCore.rootRouteId].options.pendingComponent ?? router.options.defaultPendingComponent;
-  const pendingElement = PendingComponent ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(PendingComponent, {}) : null;
-  const inner = /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs(SafeFragment, {
+  const PendingComponent = router.routesById[rootRouteId].options.pendingComponent ?? router.options.defaultPendingComponent;
+  const pendingElement = PendingComponent ? /* @__PURE__ */ jsxRuntimeExports.jsx(PendingComponent, {}) : null;
+  const inner = /* @__PURE__ */ jsxRuntimeExports.jsxs(SafeFragment, {
     fallback: pendingElement,
-    children: [false, /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(MatchesInner, {})]
+    children: [false, /* @__PURE__ */ jsxRuntimeExports.jsx(MatchesInner, {})]
   });
-  return router.options.InnerWrap ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(router.options.InnerWrap, { children: inner }) : inner;
+  return router.options.InnerWrap ? /* @__PURE__ */ jsxRuntimeExports.jsx(router.options.InnerWrap, { children: inner }) : inner;
 }
 function MatchesInner() {
   const router = useRouter();
   const matchId = router.stores.firstId.get();
   const resetKey = router.stores.loadedAt.get();
-  const matchComponent = matchId ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Match, { matchId }) : null;
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(matchContext.Provider, {
+  const matchComponent = matchId ? /* @__PURE__ */ jsxRuntimeExports.jsx(Match, { matchId }) : null;
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(matchContext.Provider, {
     value: matchId,
-    children: router.options.disableGlobalCatchBoundary ? matchComponent : /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(CatchBoundary, {
+    children: router.options.disableGlobalCatchBoundary ? matchComponent : /* @__PURE__ */ jsxRuntimeExports.jsx(CatchBoundary, {
       getResetKey: () => resetKey,
       errorComponent: ErrorComponent,
       onCatch: void 0,
@@ -745,21 +744,21 @@ function MatchesInner() {
 }
 var getStoreFactory = (opts) => {
   return {
-    createMutableStore: _libs__tanstack_routerCore.createNonReactiveMutableStore,
-    createReadonlyStore: _libs__tanstack_routerCore.createNonReactiveReadonlyStore,
+    createMutableStore: createNonReactiveMutableStore,
+    createReadonlyStore: createNonReactiveReadonlyStore,
     batch: (fn) => fn()
   };
 };
 var createRouter = (options) => {
   return new Router(options);
 };
-var Router = class extends _libs__tanstack_routerCore.RouterCore {
+var Router = class extends RouterCore {
   constructor(options) {
     super(options, getStoreFactory);
   }
 };
 function RouterContextProvider({ router, children, ...rest }) {
-  if (_libs__tanstack_routerCore.hasKeys(rest)) router.update({
+  if (hasKeys(rest)) router.update({
     ...router.options,
     ...rest,
     context: {
@@ -767,18 +766,18 @@ function RouterContextProvider({ router, children, ...rest }) {
       ...rest.context
     }
   });
-  const provider = /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(routerContext.Provider, {
+  const provider = /* @__PURE__ */ jsxRuntimeExports.jsx(routerContext.Provider, {
     value: router,
     children
   });
-  if (router.options.Wrap) return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(router.options.Wrap, { children: provider });
+  if (router.options.Wrap) return /* @__PURE__ */ jsxRuntimeExports.jsx(router.options.Wrap, { children: provider });
   return provider;
 }
 function RouterProvider({ router, ...rest }) {
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(RouterContextProvider, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(RouterContextProvider, {
     router,
     ...rest,
-    children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Matches, {})
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx(Matches, {})
   });
 }
 function useRouterState(opts) {
@@ -799,18 +798,18 @@ function Asset(asset) {
   const { attrs, children, nonce, preventScriptHoist } = asset;
   switch (asset.tag) {
     case "title":
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("title", {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("title", {
         ...attrs,
         suppressHydrationWarning: true,
         children
       });
     case "meta":
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("meta", {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("meta", {
         ...attrs,
         suppressHydrationWarning: true
       });
     case "link":
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("link", {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("link", {
         ...attrs,
         precedence: attrs?.precedence ?? (attrs?.rel === "stylesheet" ? "default" : void 0),
         nonce,
@@ -818,13 +817,13 @@ function Asset(asset) {
       });
     case "style":
       if (asset.inlineCss && false) ;
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("style", {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("style", {
         ...attrs,
         dangerouslySetInnerHTML: { __html: children },
         nonce
       });
     case "script":
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Script, {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx(Script, {
         attrs,
         preventScriptHoist,
         children
@@ -837,7 +836,7 @@ function Script({ attrs, children, preventScriptHoist }) {
   useRouter();
   useHydrated();
   const dataScript = typeof attrs?.type === "string" && attrs.type !== "" && attrs.type !== "text/javascript" && attrs.type !== "module";
-  _libs_react.reactExports.useEffect(() => {
+  reactExports.useEffect(() => {
     if (dataScript) return;
     if (attrs?.src) {
       const normSrc = (() => {
@@ -876,17 +875,17 @@ function Script({ attrs, children, preventScriptHoist }) {
   ]);
   {
     if (attrs?.src) {
-      if (!preventScriptHoist) return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("script", {
+      if (!preventScriptHoist) return /* @__PURE__ */ jsxRuntimeExports.jsx("script", {
         ...attrs,
         suppressHydrationWarning: true
       });
-      return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("script", {
+      return /* @__PURE__ */ jsxRuntimeExports.jsx("script", {
         ...attrs,
         onLoad: noopScriptHandler,
         suppressHydrationWarning: true
       });
     }
-    if (typeof children === "string") return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("script", {
+    if (typeof children === "string") return /* @__PURE__ */ jsxRuntimeExports.jsx("script", {
       ...attrs,
       dangerouslySetInnerHTML: { __html: children },
       suppressHydrationWarning: true
@@ -914,7 +913,7 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
         resultMeta.push({
           tag: "script",
           attrs: { type: "application/ld+json" },
-          children: _libs__tanstack_routerCore.escapeHtml(json)
+          children: escapeHtml(json)
         });
       } catch {
       }
@@ -953,13 +952,13 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
   if (manifest) {
     matches.forEach((match) => {
       manifest.routes[match.routeId]?.css?.forEach((link) => {
-        const resolvedLink = _libs__tanstack_routerCore.resolveManifestCssLink(link);
+        const resolvedLink = resolveManifestCssLink(link);
         manifestCssTags.push({
           tag: "link",
           attrs: {
             rel: "stylesheet",
             ...resolvedLink,
-            crossOrigin: _libs__tanstack_routerCore.getAssetCrossOrigin(assetCrossOrigin, "stylesheet") ?? resolvedLink.crossOrigin,
+            crossOrigin: getAssetCrossOrigin(assetCrossOrigin, "stylesheet") ?? resolvedLink.crossOrigin,
             suppressHydrationWarning: true,
             nonce
           }
@@ -982,7 +981,7 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
       preloadLinks.push({
         tag: "link",
         attrs: {
-          ..._libs__tanstack_routerCore.getScriptPreloadAttrs(manifest, preload, assetCrossOrigin),
+          ...getScriptPreloadAttrs(manifest, preload, assetCrossOrigin),
           nonce
         }
       });
@@ -1005,12 +1004,12 @@ function buildTagsFromMatches(router, nonce, matches, assetCrossOrigin) {
     children
   }));
   const tags = [];
-  _libs__tanstack_routerCore.appendUniqueUserTags(tags, resultMeta);
+  appendUniqueUserTags(tags, resultMeta);
   tags.push(...preloadLinks);
-  _libs__tanstack_routerCore.appendUniqueUserTags(tags, constructedLinks);
+  appendUniqueUserTags(tags, constructedLinks);
   tags.push(...manifestCssTags);
-  _libs__tanstack_routerCore.appendUniqueUserTags(tags, styles);
-  _libs__tanstack_routerCore.appendUniqueUserTags(tags, headScripts);
+  appendUniqueUserTags(tags, styles);
+  appendUniqueUserTags(tags, headScripts);
   return tags;
 }
 var useTags = (assetCrossOrigin) => {
@@ -1021,7 +1020,7 @@ var useTags = (assetCrossOrigin) => {
 function HeadContent(props) {
   const tags = useTags(props.assetCrossOrigin);
   const nonce = useRouter().options.ssr?.nonce;
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_react.jsxRuntimeExports.Fragment, { children: tags.map((tag) => /* @__PURE__ */ _libs_react.reactExports.createElement(Asset, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: tags.map((tag) => /* @__PURE__ */ reactExports.createElement(Asset, {
     ...tag,
     key: `tsr-meta-${JSON.stringify(tag)}`,
     nonce
@@ -1070,7 +1069,7 @@ function renderScripts(router, scripts, assetScripts) {
     const serverBufferedScript = router.serverSsr.takeBufferedScripts();
     if (serverBufferedScript) allScripts.unshift(serverBufferedScript);
   }
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_react.jsxRuntimeExports.Fragment, { children: allScripts.map((asset, i) => /* @__PURE__ */ _libs_react.reactExports.createElement(Asset, {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: allScripts.map((asset, i) => /* @__PURE__ */ reactExports.createElement(Asset, {
     ...asset,
     key: `tsr-scripts-${asset.tag}-${i}`
   })) });
@@ -1091,22 +1090,22 @@ async function waitForReadyOrAbort(ready, signal) {
   }
 }
 var renderRouterToStream = async ({ request, router, responseHeaders, children }) => {
-  if (typeof _libs_reactDom.ReactDOMServer.renderToReadableStream === "function") {
-    const stream = await _libs_reactDom.ReactDOMServer.renderToReadableStream(children, {
+  if (typeof ReactDOMServer.renderToReadableStream === "function") {
+    const stream = await ReactDOMServer.renderToReadableStream(children, {
       signal: request.signal,
       nonce: router.options.ssr?.nonce,
       progressiveChunkSize: Number.POSITIVE_INFINITY
     });
-    if (_libs_isbot.isbot(request.headers.get("User-Agent"))) await waitForReadyOrAbort(stream.allReady, request.signal);
-    const responseStream = _libs__tanstack_routerCore.transformReadableStreamWithRouter(router, stream, { onAbort: () => stream.cancel().catch(() => {
+    if (isbot(request.headers.get("User-Agent"))) await waitForReadyOrAbort(stream.allReady, request.signal);
+    const responseStream = transformReadableStreamWithRouter(router, stream, { onAbort: () => stream.cancel().catch(() => {
     }) });
-    return _libs__tanstack_routerCore.createSsrStreamResponse(router, new Response(responseStream, {
+    return createSsrStreamResponse(router, new Response(responseStream, {
       status: router.stores.statusCode.get(),
       headers: responseHeaders
     }));
   }
-  if (typeof _libs_reactDom.ReactDOMServer.renderToPipeableStream === "function") {
-    const reactAppPassthrough = new node_stream.PassThrough();
+  if (typeof ReactDOMServer.renderToPipeableStream === "function") {
+    const reactAppPassthrough = new PassThrough();
     let pipeable;
     let responseAttached = false;
     let aborted = false;
@@ -1140,10 +1139,10 @@ var renderRouterToStream = async ({ request, router, responseHeaders, children }
       });
     }
     try {
-      pipeable = _libs_reactDom.ReactDOMServer.renderToPipeableStream(children, {
+      pipeable = ReactDOMServer.renderToPipeableStream(children, {
         nonce: router.options.ssr?.nonce,
         progressiveChunkSize: Number.POSITIVE_INFINITY,
-        ..._libs_isbot.isbot(request.headers.get("User-Agent")) ? { onAllReady() {
+        ...isbot(request.headers.get("User-Agent")) ? { onAllReady() {
           pipeable.pipe(reactAppPassthrough);
         } } : { onShellReady() {
           pipeable.pipe(reactAppPassthrough);
@@ -1158,30 +1157,32 @@ var renderRouterToStream = async ({ request, router, responseHeaders, children }
       router.serverSsr?.cleanup();
       throw e;
     }
-    const responseStream = _libs__tanstack_routerCore.transformPipeableStreamWithRouter(router, reactAppPassthrough, { onAbort: abortPipeable });
+    const responseStream = transformPipeableStreamWithRouter(router, reactAppPassthrough, { onAbort: abortPipeable });
     responseAttached = true;
     if (endedBeforeAttach) reactAppPassthrough.destroy(pendingDestroyError());
     if (aborted && pipeable) try {
       pipeable.abort(toError(pendingAbortReason));
     } catch {
     }
-    return _libs__tanstack_routerCore.createSsrStreamResponse(router, new Response(responseStream, {
+    return createSsrStreamResponse(router, new Response(responseStream, {
       status: router.stores.statusCode.get(),
       headers: responseHeaders
     }));
   }
   throw new Error("No renderToReadableStream or renderToPipeableStream found in react-dom/server. Ensure you are using a version of react-dom that supports streaming.");
 };
-exports.HeadContent = HeadContent;
-exports.Link = Link;
-exports.Outlet = Outlet;
-exports.RouterProvider = RouterProvider;
-exports.Scripts = Scripts;
-exports.createFileRoute = createFileRoute;
-exports.createRootRouteWithContext = createRootRouteWithContext;
-exports.createRouter = createRouter;
-exports.lazyRouteComponent = lazyRouteComponent;
-exports.renderRouterToStream = renderRouterToStream;
-exports.useNavigate = useNavigate;
-exports.useRouter = useRouter;
-exports.useRouterState = useRouterState;
+export {
+  HeadContent as H,
+  Link as L,
+  Outlet as O,
+  RouterProvider as R,
+  Scripts as S,
+  createRootRouteWithContext as a,
+  createFileRoute as b,
+  createRouter as c,
+  useNavigate as d,
+  useRouterState as e,
+  lazyRouteComponent as l,
+  renderRouterToStream as r,
+  useRouter as u
+};

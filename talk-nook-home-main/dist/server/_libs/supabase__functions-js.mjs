@@ -1,5 +1,4 @@
-"use strict";
-const tslib = require("tslib");
+import { __awaiter } from "tslib";
 const resolveFetch = (customFetch) => {
   if (customFetch) {
     return (...args) => customFetch(...args);
@@ -223,7 +222,7 @@ class FunctionsClient {
    * ```
    */
   invoke(functionName_1) {
-    return tslib.__awaiter(this, arguments, void 0, function* (functionName, options = {}) {
+    return __awaiter(this, arguments, void 0, function* (functionName, options = {}) {
       var _a;
       let timeoutId;
       let timeoutController;
@@ -318,4 +317,6 @@ class FunctionsClient {
     });
   }
 }
-exports.FunctionsClient = FunctionsClient;
+export {
+  FunctionsClient as F
+};

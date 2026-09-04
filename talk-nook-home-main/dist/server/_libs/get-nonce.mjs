@@ -1,8 +1,9 @@
-"use strict";
 var getNonce = function() {
   if (typeof __webpack_nonce__ !== "undefined") {
     return __webpack_nonce__;
   }
   return void 0;
 };
-exports.getNonce = getNonce;
+export {
+  getNonce as g
+};

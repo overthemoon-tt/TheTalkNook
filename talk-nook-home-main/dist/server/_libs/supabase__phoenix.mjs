@@ -1,4 +1,3 @@
-"use strict";
 var closure = (value) => {
   if (typeof value === "function") {
     return (
@@ -1772,5 +1771,7 @@ var Socket = class {
     }
   }
 };
-exports.Presence = Presence;
-exports.Socket = Socket;
+export {
+  Presence as P,
+  Socket as S
+};

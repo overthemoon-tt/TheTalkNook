@@ -1,5 +1,4 @@
-"use strict";
-const _libs__supabase_phoenix = require("./supabase__phoenix.mjs");
+import { P as Presence, S as Socket } from "./supabase__phoenix.mjs";
 class WebSocketFactory {
   /**
    * Static-only utility – prevent instantiation.
@@ -440,7 +439,7 @@ const httpEndpointURL = (socketUrl) => {
 class PresenceAdapter {
   constructor(channel, opts) {
     const phoenixOptions = phoenixPresenceOptions(opts);
-    this.presence = new _libs__supabase_phoenix.Presence(channel.getChannel(), phoenixOptions);
+    this.presence = new Presence(channel.getChannel(), phoenixOptions);
     this.presence.onJoin((key, currentPresence, newPresence) => {
       const onJoinPayload = PresenceAdapter.onJoinPayload(key, currentPresence, newPresence);
       channel.getChannel().trigger("presence", onJoinPayload);
@@ -1351,7 +1350,7 @@ class RealtimeChannel {
 }
 class SocketAdapter {
   constructor(endPoint, options) {
-    this.socket = new _libs__supabase_phoenix.Socket(endPoint, options);
+    this.socket = new Socket(endPoint, options);
   }
   get timeout() {
     return this.socket.timeout;
@@ -2107,4 +2106,6 @@ Option 2: Install and provide the "ws" package:
     }
   }
 }
-exports.RealtimeClient = RealtimeClient;
+export {
+  RealtimeClient as R
+};

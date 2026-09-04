@@ -1,5 +1,4 @@
-"use strict";
-const _libs_seroval = require("./seroval.mjs");
+import { a as ai, r as re } from "./seroval.mjs";
 var n = {}, P = (e) => new ReadableStream({ start: (r) => {
   e.on({ next: (a) => {
     try {
@@ -14,7 +13,7 @@ var n = {}, P = (e) => new ReadableStream({ start: (r) => {
     } catch (a) {
     }
   } });
-} }), x = _libs_seroval.ai({ tag: "seroval-plugins/web/ReadableStreamFactory", test(e) {
+} }), x = ai({ tag: "seroval-plugins/web/ReadableStreamFactory", test(e) {
   return e === n;
 }, parse: { sync() {
   return n;
@@ -28,7 +27,7 @@ var n = {}, P = (e) => new ReadableStream({ start: (r) => {
   return n;
 } });
 function w(e) {
-  let r = _libs_seroval.re(), a = e.getReader();
+  let r = re(), a = e.getReader();
   async function t() {
     try {
       let s = await a.read();
@@ -40,10 +39,10 @@ function w(e) {
   return t().catch(() => {
   }), r;
 }
-var ee = _libs_seroval.ai({ tag: "seroval/plugins/web/ReadableStream", extends: [x], test(e) {
+var ee = ai({ tag: "seroval/plugins/web/ReadableStream", extends: [x], test(e) {
   return typeof ReadableStream == "undefined" ? false : e instanceof ReadableStream;
 }, parse: { sync(e, r) {
-  return { factory: r.parse(n), stream: r.parse(_libs_seroval.re()) };
+  return { factory: r.parse(n), stream: r.parse(re()) };
 }, async async(e, r) {
   return { factory: await r.parse(n), stream: await r.parse(w(e)) };
 }, stream(e, r) {
@@ -54,4 +53,6 @@ var ee = _libs_seroval.ai({ tag: "seroval/plugins/web/ReadableStream", extends: 
   let a = r.deserialize(e.stream);
   return P(a);
 } }), p = ee;
-exports.p = p;
+export {
+  p
+};

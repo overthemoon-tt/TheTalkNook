@@ -1,9 +1,8 @@
-"use strict";
-const _libs_react = require("./react.mjs");
-const _libs__radixUi_reactComposeRefs = require("./radix-ui__react-compose-refs.mjs");
-const _libs__radixUi_reactUseLayoutEffect = require("./@radix-ui/react-use-layout-effect+[...].mjs");
+import { r as reactExports } from "./react.mjs";
+import { u as useComposedRefs } from "./radix-ui__react-compose-refs.mjs";
+import { u as useLayoutEffect2 } from "./@radix-ui/react-use-layout-effect+[...].mjs";
 function useStateMachine(initialState, machine) {
-  return _libs_react.reactExports.useReducer((state, event) => {
+  return reactExports.useReducer((state, event) => {
     const nextState = machine[state][event];
     return nextState ?? state;
   }, initialState);
@@ -11,17 +10,17 @@ function useStateMachine(initialState, machine) {
 var Presence = (props) => {
   const { present, children } = props;
   const presence = usePresence(present);
-  const child = typeof children === "function" ? children({ present: presence.isPresent }) : _libs_react.reactExports.Children.only(children);
-  const ref = _libs__radixUi_reactComposeRefs.useComposedRefs(presence.ref, getElementRef(child));
+  const child = typeof children === "function" ? children({ present: presence.isPresent }) : reactExports.Children.only(children);
+  const ref = useComposedRefs(presence.ref, getElementRef(child));
   const forceMount = typeof children === "function";
-  return forceMount || presence.isPresent ? _libs_react.reactExports.cloneElement(child, { ref }) : null;
+  return forceMount || presence.isPresent ? reactExports.cloneElement(child, { ref }) : null;
 };
 Presence.displayName = "Presence";
 function usePresence(present) {
-  const [node, setNode] = _libs_react.reactExports.useState();
-  const stylesRef = _libs_react.reactExports.useRef(null);
-  const prevPresentRef = _libs_react.reactExports.useRef(present);
-  const prevAnimationNameRef = _libs_react.reactExports.useRef("none");
+  const [node, setNode] = reactExports.useState();
+  const stylesRef = reactExports.useRef(null);
+  const prevPresentRef = reactExports.useRef(present);
+  const prevAnimationNameRef = reactExports.useRef("none");
   const initialState = present ? "mounted" : "unmounted";
   const [state, send] = useStateMachine(initialState, {
     mounted: {
@@ -36,11 +35,11 @@ function usePresence(present) {
       MOUNT: "mounted"
     }
   });
-  _libs_react.reactExports.useEffect(() => {
+  reactExports.useEffect(() => {
     const currentAnimationName = getAnimationName(stylesRef.current);
     prevAnimationNameRef.current = state === "mounted" ? currentAnimationName : "none";
   }, [state]);
-  _libs__radixUi_reactUseLayoutEffect.useLayoutEffect2(() => {
+  useLayoutEffect2(() => {
     const styles = stylesRef.current;
     const wasPresent = prevPresentRef.current;
     const hasPresentChanged = wasPresent !== present;
@@ -62,7 +61,7 @@ function usePresence(present) {
       prevPresentRef.current = present;
     }
   }, [present, send]);
-  _libs__radixUi_reactUseLayoutEffect.useLayoutEffect2(() => {
+  useLayoutEffect2(() => {
     if (node) {
       let timeoutId;
       const ownerWindow = node.ownerDocument.defaultView ?? window;
@@ -102,7 +101,7 @@ function usePresence(present) {
   }, [node, send]);
   return {
     isPresent: ["mounted", "unmountSuspended"].includes(state),
-    ref: _libs_react.reactExports.useCallback((node2) => {
+    ref: reactExports.useCallback((node2) => {
       stylesRef.current = node2 ? getComputedStyle(node2) : null;
       setNode(node2);
     }, [])
@@ -124,4 +123,6 @@ function getElementRef(element) {
   }
   return element.props.ref || element.ref;
 }
-exports.Presence = Presence;
+export {
+  Presence as P
+};

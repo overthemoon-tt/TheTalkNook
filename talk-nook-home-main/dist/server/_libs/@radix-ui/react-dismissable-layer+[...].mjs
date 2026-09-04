@@ -1,21 +1,20 @@
-"use strict";
-const _libs_react = require("../react.mjs");
-const _libs__radixUi_primitive = require("../radix-ui__primitive.mjs");
-const _libs__radixUi_reactPrimitive = require("../radix-ui__react-primitive.mjs");
-const _libs__radixUi_reactComposeRefs = require("../radix-ui__react-compose-refs.mjs");
-const _libs__radixUi_reactUseCallbackRef = require("./react-use-callback-ref+[...].mjs");
-const _libs__radixUi_reactUseEscapeKeydown = require("./react-use-escape-keydown+[...].mjs");
+import { r as reactExports, j as jsxRuntimeExports } from "../react.mjs";
+import { c as composeEventHandlers } from "../radix-ui__primitive.mjs";
+import { P as Primitive, d as dispatchDiscreteCustomEvent } from "../radix-ui__react-primitive.mjs";
+import { u as useComposedRefs } from "../radix-ui__react-compose-refs.mjs";
+import { u as useCallbackRef } from "./react-use-callback-ref+[...].mjs";
+import { u as useEscapeKeydown } from "./react-use-escape-keydown+[...].mjs";
 var DISMISSABLE_LAYER_NAME = "DismissableLayer";
 var CONTEXT_UPDATE = "dismissableLayer.update";
 var POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside";
 var FOCUS_OUTSIDE = "dismissableLayer.focusOutside";
 var originalBodyPointerEvents;
-var DismissableLayerContext = _libs_react.reactExports.createContext({
+var DismissableLayerContext = reactExports.createContext({
   layers: /* @__PURE__ */ new Set(),
   layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
   branches: /* @__PURE__ */ new Set()
 });
-var DismissableLayer = _libs_react.reactExports.forwardRef(
+var DismissableLayer = reactExports.forwardRef(
   (props, forwardedRef) => {
     const {
       disableOutsidePointerEvents = false,
@@ -26,11 +25,11 @@ var DismissableLayer = _libs_react.reactExports.forwardRef(
       onDismiss,
       ...layerProps
     } = props;
-    const context = _libs_react.reactExports.useContext(DismissableLayerContext);
-    const [node, setNode] = _libs_react.reactExports.useState(null);
+    const context = reactExports.useContext(DismissableLayerContext);
+    const [node, setNode] = reactExports.useState(null);
     const ownerDocument = node?.ownerDocument ?? globalThis?.document;
-    const [, force] = _libs_react.reactExports.useState({});
-    const composedRefs = _libs__radixUi_reactComposeRefs.useComposedRefs(forwardedRef, (node2) => setNode(node2));
+    const [, force] = reactExports.useState({});
+    const composedRefs = useComposedRefs(forwardedRef, (node2) => setNode(node2));
     const layers = Array.from(context.layers);
     const [highestLayerWithOutsidePointerEventsDisabled] = [...context.layersWithOutsidePointerEventsDisabled].slice(-1);
     const highestLayerWithOutsidePointerEventsDisabledIndex = layers.indexOf(highestLayerWithOutsidePointerEventsDisabled);
@@ -53,7 +52,7 @@ var DismissableLayer = _libs_react.reactExports.forwardRef(
       onInteractOutside?.(event);
       if (!event.defaultPrevented) onDismiss?.();
     }, ownerDocument);
-    _libs__radixUi_reactUseEscapeKeydown.useEscapeKeydown((event) => {
+    useEscapeKeydown((event) => {
       const isHighestLayer = index === context.layers.size - 1;
       if (!isHighestLayer) return;
       onEscapeKeyDown?.(event);
@@ -62,7 +61,7 @@ var DismissableLayer = _libs_react.reactExports.forwardRef(
         onDismiss();
       }
     }, ownerDocument);
-    _libs_react.reactExports.useEffect(() => {
+    reactExports.useEffect(() => {
       if (!node) return;
       if (disableOutsidePointerEvents) {
         if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
@@ -79,7 +78,7 @@ var DismissableLayer = _libs_react.reactExports.forwardRef(
         }
       };
     }, [node, ownerDocument, disableOutsidePointerEvents, context]);
-    _libs_react.reactExports.useEffect(() => {
+    reactExports.useEffect(() => {
       return () => {
         if (!node) return;
         context.layers.delete(node);
@@ -87,13 +86,13 @@ var DismissableLayer = _libs_react.reactExports.forwardRef(
         dispatchUpdate();
       };
     }, [node, context]);
-    _libs_react.reactExports.useEffect(() => {
+    reactExports.useEffect(() => {
       const handleUpdate = () => force({});
       document.addEventListener(CONTEXT_UPDATE, handleUpdate);
       return () => document.removeEventListener(CONTEXT_UPDATE, handleUpdate);
     }, []);
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
-      _libs__radixUi_reactPrimitive.Primitive.div,
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.div,
       {
         ...layerProps,
         ref: composedRefs,
@@ -101,9 +100,9 @@ var DismissableLayer = _libs_react.reactExports.forwardRef(
           pointerEvents: isBodyPointerEventsDisabled ? isPointerEventsEnabled ? "auto" : "none" : void 0,
           ...props.style
         },
-        onFocusCapture: _libs__radixUi_primitive.composeEventHandlers(props.onFocusCapture, focusOutside.onFocusCapture),
-        onBlurCapture: _libs__radixUi_primitive.composeEventHandlers(props.onBlurCapture, focusOutside.onBlurCapture),
-        onPointerDownCapture: _libs__radixUi_primitive.composeEventHandlers(
+        onFocusCapture: composeEventHandlers(props.onFocusCapture, focusOutside.onFocusCapture),
+        onBlurCapture: composeEventHandlers(props.onBlurCapture, focusOutside.onBlurCapture),
+        onPointerDownCapture: composeEventHandlers(
           props.onPointerDownCapture,
           pointerDownOutside.onPointerDownCapture
         )
@@ -113,11 +112,11 @@ var DismissableLayer = _libs_react.reactExports.forwardRef(
 );
 DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
 var BRANCH_NAME = "DismissableLayerBranch";
-var DismissableLayerBranch = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
-  const context = _libs_react.reactExports.useContext(DismissableLayerContext);
-  const ref = _libs_react.reactExports.useRef(null);
-  const composedRefs = _libs__radixUi_reactComposeRefs.useComposedRefs(forwardedRef, ref);
-  _libs_react.reactExports.useEffect(() => {
+var DismissableLayerBranch = reactExports.forwardRef((props, forwardedRef) => {
+  const context = reactExports.useContext(DismissableLayerContext);
+  const ref = reactExports.useRef(null);
+  const composedRefs = useComposedRefs(forwardedRef, ref);
+  reactExports.useEffect(() => {
     const node = ref.current;
     if (node) {
       context.branches.add(node);
@@ -126,15 +125,15 @@ var DismissableLayerBranch = _libs_react.reactExports.forwardRef((props, forward
       };
     }
   }, [context.branches]);
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactPrimitive.Primitive.div, { ...props, ref: composedRefs });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.div, { ...props, ref: composedRefs });
 });
 DismissableLayerBranch.displayName = BRANCH_NAME;
 function usePointerDownOutside(onPointerDownOutside, ownerDocument = globalThis?.document) {
-  const handlePointerDownOutside = _libs__radixUi_reactUseCallbackRef.useCallbackRef(onPointerDownOutside);
-  const isPointerInsideReactTreeRef = _libs_react.reactExports.useRef(false);
-  const handleClickRef = _libs_react.reactExports.useRef(() => {
+  const handlePointerDownOutside = useCallbackRef(onPointerDownOutside);
+  const isPointerInsideReactTreeRef = reactExports.useRef(false);
+  const handleClickRef = reactExports.useRef(() => {
   });
-  _libs_react.reactExports.useEffect(() => {
+  reactExports.useEffect(() => {
     const handlePointerDown = (event) => {
       if (event.target && !isPointerInsideReactTreeRef.current) {
         let handleAndDispatchPointerDownOutsideEvent2 = function() {
@@ -173,9 +172,9 @@ function usePointerDownOutside(onPointerDownOutside, ownerDocument = globalThis?
   };
 }
 function useFocusOutside(onFocusOutside, ownerDocument = globalThis?.document) {
-  const handleFocusOutside = _libs__radixUi_reactUseCallbackRef.useCallbackRef(onFocusOutside);
-  const isFocusInsideReactTreeRef = _libs_react.reactExports.useRef(false);
-  _libs_react.reactExports.useEffect(() => {
+  const handleFocusOutside = useCallbackRef(onFocusOutside);
+  const isFocusInsideReactTreeRef = reactExports.useRef(false);
+  reactExports.useEffect(() => {
     const handleFocus = (event) => {
       if (event.target && !isFocusInsideReactTreeRef.current) {
         const eventDetail = { originalEvent: event };
@@ -201,9 +200,11 @@ function handleAndDispatchCustomEvent(name, handler, detail, { discrete }) {
   const event = new CustomEvent(name, { bubbles: false, cancelable: true, detail });
   if (handler) target.addEventListener(name, handler, { once: true });
   if (discrete) {
-    _libs__radixUi_reactPrimitive.dispatchDiscreteCustomEvent(target, event);
+    dispatchDiscreteCustomEvent(target, event);
   } else {
     target.dispatchEvent(event);
   }
 }
-exports.DismissableLayer = DismissableLayer;
+export {
+  DismissableLayer as D
+};

@@ -1,6 +1,5 @@
-"use strict";
-const _libs_rou3 = require("./rou3.mjs");
-const _libs_srvx = require("./srvx.mjs");
+import { N as NullProtoObj } from "./rou3.mjs";
+import { F as FastURL, N as NodeResponse } from "./srvx.mjs";
 function decodePathname(pathname) {
   return decodeURI(pathname.includes("%25") ? pathname.replace(/%25/g, "%2525") : pathname);
 }
@@ -15,11 +14,11 @@ var H3Event = class {
   context;
   static __is_event__ = true;
   constructor(req, context, app) {
-    this.context = context || req.context || new _libs_rou3.NullProtoObj();
+    this.context = context || req.context || new NullProtoObj();
     this.req = req;
     this.app = app;
     const _url = req._url;
-    const url = _url && _url instanceof URL ? _url : new _libs_srvx.FastURL(req.url);
+    const url = _url && _url instanceof URL ? _url : new FastURL(req.url);
     if (url.pathname.includes("%")) url.pathname = decodePathname(url.pathname);
     this.url = url;
   }
@@ -140,7 +139,7 @@ function isJSONSerializable(value, _type) {
   if (typeof value.toJSON === "function") return true;
   if (Array.isArray(value)) return true;
   if (typeof value.pipe === "function" || typeof value.pipeTo === "function") return false;
-  if (value instanceof _libs_rou3.NullProtoObj) return true;
+  if (value instanceof NullProtoObj) return true;
   const proto = Object.getPrototypeOf(value);
   return proto === Object.prototype || proto === null;
 }
@@ -172,7 +171,7 @@ var HTTPResponse = class {
   }
 };
 function prepareResponse(val, event, config, nested) {
-  if (val === kHandled) return new _libs_srvx.NodeResponse(null);
+  if (val === kHandled) return new NodeResponse(null);
   if (val === kNotFound) val = new HTTPError({
     status: 404,
     message: `Cannot find any route matching [${event.req.method}] ${event.url}`
@@ -195,7 +194,7 @@ function prepareResponse(val, event, config, nested) {
   if (!(val instanceof Response)) {
     const res = prepareResponseBody(val, event, config);
     const status = res.status || preparedRes?.status;
-    return new _libs_srvx.NodeResponse(nullBody(event.req.method, status) ? null : res.body, {
+    return new NodeResponse(nullBody(event.req.method, status) ? null : res.body, {
       status,
       statusText: res.statusText || preparedRes?.statusText,
       headers: res.headers && preparedHeaders ? mergeHeaders$1(res.headers, preparedHeaders) : res.headers || preparedHeaders
@@ -206,7 +205,7 @@ function prepareResponse(val, event, config, nested) {
     mergeHeaders$1(val.headers, preparedHeaders, val.headers);
     return val;
   } catch {
-    return new _libs_srvx.NodeResponse(nullBody(event.req.method, val.status) ? null : val.body, {
+    return new NodeResponse(nullBody(event.req.method, val.status) ? null : val.body, {
       status: val.status,
       statusText: val.statusText,
       headers: mergeHeaders$1(val.headers, preparedHeaders)
@@ -273,7 +272,7 @@ function nullBody(method, status) {
 function errorResponse(error, debug, errHeaders) {
   let headers = error.headers ? mergeHeaders$1(jsonHeaders, error.headers) : new Headers(jsonHeaders);
   if (errHeaders) headers = mergeHeaders$1(headers, errHeaders);
-  return new _libs_srvx.NodeResponse(JSON.stringify({
+  return new NodeResponse(JSON.stringify({
     ...error.toJSON(),
     stack: debug && error.stack ? error.stack.split("\n").map((l) => l.trim()) : void 0
   }, void 0, debug ? 2 : void 0), {
@@ -282,5 +281,7 @@ function errorResponse(error, debug, errHeaders) {
     headers
   });
 }
-exports.H3Event = H3Event;
-exports.toResponse = toResponse;
+export {
+  H3Event as H,
+  toResponse as t
+};

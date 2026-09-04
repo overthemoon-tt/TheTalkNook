@@ -1,13 +1,12 @@
-"use strict";
-const _libs_react = require("./react.mjs");
-const _libs__radixUi_reactComposeRefs = require("./radix-ui__react-compose-refs.mjs");
-const _libs__radixUi_reactPrimitive = require("./radix-ui__react-primitive.mjs");
-const _libs__radixUi_reactUseCallbackRef = require("./@radix-ui/react-use-callback-ref+[...].mjs");
+import { r as reactExports, j as jsxRuntimeExports } from "./react.mjs";
+import { u as useComposedRefs } from "./radix-ui__react-compose-refs.mjs";
+import { P as Primitive } from "./radix-ui__react-primitive.mjs";
+import { u as useCallbackRef } from "./@radix-ui/react-use-callback-ref+[...].mjs";
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
 var EVENT_OPTIONS = { bubbles: false, cancelable: true };
 var FOCUS_SCOPE_NAME = "FocusScope";
-var FocusScope = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
+var FocusScope = reactExports.forwardRef((props, forwardedRef) => {
   const {
     loop = false,
     trapped = false,
@@ -15,12 +14,12 @@ var FocusScope = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     onUnmountAutoFocus: onUnmountAutoFocusProp,
     ...scopeProps
   } = props;
-  const [container, setContainer] = _libs_react.reactExports.useState(null);
-  const onMountAutoFocus = _libs__radixUi_reactUseCallbackRef.useCallbackRef(onMountAutoFocusProp);
-  const onUnmountAutoFocus = _libs__radixUi_reactUseCallbackRef.useCallbackRef(onUnmountAutoFocusProp);
-  const lastFocusedElementRef = _libs_react.reactExports.useRef(null);
-  const composedRefs = _libs__radixUi_reactComposeRefs.useComposedRefs(forwardedRef, (node) => setContainer(node));
-  const focusScope = _libs_react.reactExports.useRef({
+  const [container, setContainer] = reactExports.useState(null);
+  const onMountAutoFocus = useCallbackRef(onMountAutoFocusProp);
+  const onUnmountAutoFocus = useCallbackRef(onUnmountAutoFocusProp);
+  const lastFocusedElementRef = reactExports.useRef(null);
+  const composedRefs = useComposedRefs(forwardedRef, (node) => setContainer(node));
+  const focusScope = reactExports.useRef({
     paused: false,
     pause() {
       this.paused = true;
@@ -29,7 +28,7 @@ var FocusScope = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
       this.paused = false;
     }
   }).current;
-  _libs_react.reactExports.useEffect(() => {
+  reactExports.useEffect(() => {
     if (trapped) {
       let handleFocusIn2 = function(event) {
         if (focusScope.paused || !container) return;
@@ -64,7 +63,7 @@ var FocusScope = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
       };
     }
   }, [trapped, container, focusScope.paused]);
-  _libs_react.reactExports.useEffect(() => {
+  reactExports.useEffect(() => {
     if (container) {
       focusScopesStack.add(focusScope);
       const previouslyFocusedElement = document.activeElement;
@@ -95,7 +94,7 @@ var FocusScope = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
       };
     }
   }, [container, onMountAutoFocus, onUnmountAutoFocus, focusScope]);
-  const handleKeyDown = _libs_react.reactExports.useCallback(
+  const handleKeyDown = reactExports.useCallback(
     (event) => {
       if (!loop && !trapped) return;
       if (focusScope.paused) return;
@@ -120,7 +119,7 @@ var FocusScope = _libs_react.reactExports.forwardRef((props, forwardedRef) => {
     },
     [loop, trapped, focusScope.paused]
   );
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__radixUi_reactPrimitive.Primitive.div, { tabIndex: -1, ...scopeProps, ref: composedRefs, onKeyDown: handleKeyDown });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.div, { tabIndex: -1, ...scopeProps, ref: composedRefs, onKeyDown: handleKeyDown });
 });
 FocusScope.displayName = FOCUS_SCOPE_NAME;
 function focusFirst(candidates, { select = false } = {}) {
@@ -202,4 +201,6 @@ function arrayRemove(array, item) {
 function removeLinks(items) {
   return items.filter((item) => item.tagName !== "A");
 }
-exports.FocusScope = FocusScope;
+export {
+  FocusScope as F
+};

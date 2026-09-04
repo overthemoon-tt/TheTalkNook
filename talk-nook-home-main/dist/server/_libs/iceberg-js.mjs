@@ -1,4 +1,3 @@
-"use strict";
 var IcebergError = class extends Error {
   constructor(message, opts) {
     super(message);
@@ -530,4 +529,6 @@ var IcebergRestCatalog = class {
     return this.tableOps.createTableIfNotExists(namespace, request);
   }
 };
-exports.IcebergRestCatalog = IcebergRestCatalog;
+export {
+  IcebergRestCatalog as I
+};

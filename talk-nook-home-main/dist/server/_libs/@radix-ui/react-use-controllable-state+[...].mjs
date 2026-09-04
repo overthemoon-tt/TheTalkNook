@@ -1,7 +1,6 @@
-"use strict";
-const _libs_react = require("../react.mjs");
-const _libs__radixUi_reactUseLayoutEffect = require("./react-use-layout-effect+[...].mjs");
-var useInsertionEffect = _libs_react.React$1[" useInsertionEffect ".trim().toString()] || _libs__radixUi_reactUseLayoutEffect.useLayoutEffect2;
+import { r as reactExports, b as React } from "../react.mjs";
+import { u as useLayoutEffect2 } from "./react-use-layout-effect+[...].mjs";
+var useInsertionEffect = React[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
 function useControllableState({
   prop,
   defaultProp,
@@ -16,8 +15,8 @@ function useControllableState({
   const isControlled = prop !== void 0;
   const value = isControlled ? prop : uncontrolledProp;
   {
-    const isControlledRef = _libs_react.reactExports.useRef(prop !== void 0);
-    _libs_react.reactExports.useEffect(() => {
+    const isControlledRef = reactExports.useRef(prop !== void 0);
+    reactExports.useEffect(() => {
       const wasControlled = isControlledRef.current;
       if (wasControlled !== isControlled) {
         const from = wasControlled ? "controlled" : "uncontrolled";
@@ -29,7 +28,7 @@ function useControllableState({
       isControlledRef.current = isControlled;
     }, [isControlled, caller]);
   }
-  const setValue = _libs_react.reactExports.useCallback(
+  const setValue = reactExports.useCallback(
     (nextValue) => {
       if (isControlled) {
         const value2 = isFunction(nextValue) ? nextValue(prop) : nextValue;
@@ -48,13 +47,13 @@ function useUncontrolledState({
   defaultProp,
   onChange
 }) {
-  const [value, setValue] = _libs_react.reactExports.useState(defaultProp);
-  const prevValueRef = _libs_react.reactExports.useRef(value);
-  const onChangeRef = _libs_react.reactExports.useRef(onChange);
+  const [value, setValue] = reactExports.useState(defaultProp);
+  const prevValueRef = reactExports.useRef(value);
+  const onChangeRef = reactExports.useRef(onChange);
   useInsertionEffect(() => {
     onChangeRef.current = onChange;
   }, [onChange]);
-  _libs_react.reactExports.useEffect(() => {
+  reactExports.useEffect(() => {
     if (prevValueRef.current !== value) {
       onChangeRef.current?.(value);
       prevValueRef.current = value;
@@ -65,4 +64,6 @@ function useUncontrolledState({
 function isFunction(value) {
   return typeof value === "function";
 }
-exports.useControllableState = useControllableState;
+export {
+  useControllableState as u
+};

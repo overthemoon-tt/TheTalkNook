@@ -1,2 +1,1 @@
-"use strict";
-require("../react.mjs");
+import "../react.mjs";

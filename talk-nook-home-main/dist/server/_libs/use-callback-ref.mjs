@@ -1,5 +1,4 @@
-"use strict";
-const _libs_react = require("./react.mjs");
+import { r as reactExports } from "./react.mjs";
 function assignRef(ref, value) {
   if (typeof ref === "function") {
     ref(value);
@@ -9,7 +8,7 @@ function assignRef(ref, value) {
   return ref;
 }
 function useCallbackRef(initialValue, callback) {
-  var ref = _libs_react.reactExports.useState(function() {
+  var ref = reactExports.useState(function() {
     return {
       // value
       value: initialValue,
@@ -33,7 +32,7 @@ function useCallbackRef(initialValue, callback) {
   ref.callback = callback;
   return ref.facade;
 }
-var useIsomorphicLayoutEffect = typeof window !== "undefined" ? _libs_react.reactExports.useLayoutEffect : _libs_react.reactExports.useEffect;
+var useIsomorphicLayoutEffect = typeof window !== "undefined" ? reactExports.useLayoutEffect : reactExports.useEffect;
 var currentValues = /* @__PURE__ */ new WeakMap();
 function useMergeRefs(refs, defaultValue) {
   var callbackRef = useCallbackRef(null, function(newValue) {
@@ -62,4 +61,6 @@ function useMergeRefs(refs, defaultValue) {
   }, [refs]);
   return callbackRef;
 }
-exports.useMergeRefs = useMergeRefs;
+export {
+  useMergeRefs as u
+};

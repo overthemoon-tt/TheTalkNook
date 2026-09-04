@@ -1,28 +1,27 @@
-"use strict";
-const _libs_react = require("./react.mjs");
-const _libs__radixUi_reactContext = require("./radix-ui__react-context.mjs");
-const _libs__radixUi_reactCollection = require("./radix-ui__react-collection.mjs");
-const _libs__radixUi_reactComposeRefs = require("./radix-ui__react-compose-refs.mjs");
-const _libs__radixUi_primitive = require("./radix-ui__primitive.mjs");
-const _libs__radixUi_reactUseControllableState = require("./@radix-ui/react-use-controllable-state+[...].mjs");
-const _libs__radixUi_reactPrimitive = require("./radix-ui__react-primitive.mjs");
-const _libs__radixUi_reactCollapsible = require("./radix-ui__react-collapsible.mjs");
-const _libs__radixUi_reactId = require("./radix-ui__react-id.mjs");
-const _libs__radixUi_reactDirection = require("./radix-ui__react-direction.mjs");
+import { R as React, j as jsxRuntimeExports } from "./react.mjs";
+import { c as createContextScope } from "./radix-ui__react-context.mjs";
+import { c as createCollection } from "./radix-ui__react-collection.mjs";
+import { u as useComposedRefs } from "./radix-ui__react-compose-refs.mjs";
+import { c as composeEventHandlers } from "./radix-ui__primitive.mjs";
+import { u as useControllableState } from "./@radix-ui/react-use-controllable-state+[...].mjs";
+import { P as Primitive } from "./radix-ui__react-primitive.mjs";
+import { R as Root, T as Trigger, C as Content, c as createCollapsibleScope } from "./radix-ui__react-collapsible.mjs";
+import { u as useId } from "./radix-ui__react-id.mjs";
+import { u as useDirection } from "./radix-ui__react-direction.mjs";
 var ACCORDION_NAME = "Accordion";
 var ACCORDION_KEYS = ["Home", "End", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"];
-var [Collection, useCollection, createCollectionScope] = _libs__radixUi_reactCollection.createCollection(ACCORDION_NAME);
-var [createAccordionContext] = _libs__radixUi_reactContext.createContextScope(ACCORDION_NAME, [
+var [Collection, useCollection, createCollectionScope] = createCollection(ACCORDION_NAME);
+var [createAccordionContext] = createContextScope(ACCORDION_NAME, [
   createCollectionScope,
-  _libs__radixUi_reactCollapsible.createCollapsibleScope
+  createCollapsibleScope
 ]);
-var useCollapsibleScope = _libs__radixUi_reactCollapsible.createCollapsibleScope();
-var Accordion = _libs_react.React.forwardRef(
+var useCollapsibleScope = createCollapsibleScope();
+var Accordion = React.forwardRef(
   (props, forwardedRef) => {
     const { type, ...accordionProps } = props;
     const singleProps = accordionProps;
     const multipleProps = accordionProps;
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Collection.Provider, { scope: props.__scopeAccordion, children: type === "multiple" ? /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AccordionImplMultiple, { ...multipleProps, ref: forwardedRef }) : /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AccordionImplSingle, { ...singleProps, ref: forwardedRef }) });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Provider, { scope: props.__scopeAccordion, children: type === "multiple" ? /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImplMultiple, { ...multipleProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImplSingle, { ...singleProps, ref: forwardedRef }) });
   }
 );
 Accordion.displayName = ACCORDION_NAME;
@@ -31,7 +30,7 @@ var [AccordionCollapsibleProvider, useAccordionCollapsibleContext] = createAccor
   ACCORDION_NAME,
   { collapsible: false }
 );
-var AccordionImplSingle = _libs_react.React.forwardRef(
+var AccordionImplSingle = React.forwardRef(
   (props, forwardedRef) => {
     const {
       value: valueProp,
@@ -41,25 +40,25 @@ var AccordionImplSingle = _libs_react.React.forwardRef(
       collapsible = false,
       ...accordionSingleProps
     } = props;
-    const [value, setValue] = _libs__radixUi_reactUseControllableState.useControllableState({
+    const [value, setValue] = useControllableState({
       prop: valueProp,
       defaultProp: defaultValue ?? "",
       onChange: onValueChange,
       caller: ACCORDION_NAME
     });
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
       AccordionValueProvider,
       {
         scope: props.__scopeAccordion,
-        value: _libs_react.React.useMemo(() => value ? [value] : [], [value]),
+        value: React.useMemo(() => value ? [value] : [], [value]),
         onItemOpen: setValue,
-        onItemClose: _libs_react.React.useCallback(() => collapsible && setValue(""), [collapsible, setValue]),
-        children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AccordionImpl, { ...accordionSingleProps, ref: forwardedRef }) })
+        onItemClose: React.useCallback(() => collapsible && setValue(""), [collapsible, setValue]),
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImpl, { ...accordionSingleProps, ref: forwardedRef }) })
       }
     );
   }
 );
-var AccordionImplMultiple = _libs_react.React.forwardRef((props, forwardedRef) => {
+var AccordionImplMultiple = React.forwardRef((props, forwardedRef) => {
   const {
     value: valueProp,
     defaultValue,
@@ -67,41 +66,41 @@ var AccordionImplMultiple = _libs_react.React.forwardRef((props, forwardedRef) =
     },
     ...accordionMultipleProps
   } = props;
-  const [value, setValue] = _libs__radixUi_reactUseControllableState.useControllableState({
+  const [value, setValue] = useControllableState({
     prop: valueProp,
     defaultProp: defaultValue ?? [],
     onChange: onValueChange,
     caller: ACCORDION_NAME
   });
-  const handleItemOpen = _libs_react.React.useCallback(
+  const handleItemOpen = React.useCallback(
     (itemValue) => setValue((prevValue = []) => [...prevValue, itemValue]),
     [setValue]
   );
-  const handleItemClose = _libs_react.React.useCallback(
+  const handleItemClose = React.useCallback(
     (itemValue) => setValue((prevValue = []) => prevValue.filter((value2) => value2 !== itemValue)),
     [setValue]
   );
-  return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
     AccordionValueProvider,
     {
       scope: props.__scopeAccordion,
       value,
       onItemOpen: handleItemOpen,
       onItemClose: handleItemClose,
-      children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible: true, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(AccordionImpl, { ...accordionMultipleProps, ref: forwardedRef }) })
+      children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionCollapsibleProvider, { scope: props.__scopeAccordion, collapsible: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AccordionImpl, { ...accordionMultipleProps, ref: forwardedRef }) })
     }
   );
 });
 var [AccordionImplProvider, useAccordionContext] = createAccordionContext(ACCORDION_NAME);
-var AccordionImpl = _libs_react.React.forwardRef(
+var AccordionImpl = React.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAccordion, disabled, dir, orientation = "vertical", ...accordionProps } = props;
-    const accordionRef = _libs_react.React.useRef(null);
-    const composedRefs = _libs__radixUi_reactComposeRefs.useComposedRefs(accordionRef, forwardedRef);
+    const accordionRef = React.useRef(null);
+    const composedRefs = useComposedRefs(accordionRef, forwardedRef);
     const getItems = useCollection(__scopeAccordion);
-    const direction = _libs__radixUi_reactDirection.useDirection(dir);
+    const direction = useDirection(dir);
     const isDirectionLTR = direction === "ltr";
-    const handleKeyDown = _libs__radixUi_primitive.composeEventHandlers(props.onKeyDown, (event) => {
+    const handleKeyDown = composeEventHandlers(props.onKeyDown, (event) => {
       if (!ACCORDION_KEYS.includes(event.key)) return;
       const target = event.target;
       const triggerCollection = getItems().filter((item) => !item.ref.current?.disabled);
@@ -163,15 +162,15 @@ var AccordionImpl = _libs_react.React.forwardRef(
       const clampedIndex = nextIndex % triggerCount;
       triggerCollection[clampedIndex].ref.current?.focus();
     });
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
       AccordionImplProvider,
       {
         scope: __scopeAccordion,
         disabled,
         direction: dir,
         orientation,
-        children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Collection.Slot, { scope: __scopeAccordion, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
-          _libs__radixUi_reactPrimitive.Primitive.div,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.Slot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Primitive.div,
           {
             ...accordionProps,
             "data-orientation": orientation,
@@ -185,24 +184,24 @@ var AccordionImpl = _libs_react.React.forwardRef(
 );
 var ITEM_NAME = "AccordionItem";
 var [AccordionItemProvider, useAccordionItemContext] = createAccordionContext(ITEM_NAME);
-var AccordionItem = _libs_react.React.forwardRef(
+var AccordionItem = React.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAccordion, value, ...accordionItemProps } = props;
     const accordionContext = useAccordionContext(ITEM_NAME, __scopeAccordion);
     const valueContext = useAccordionValueContext(ITEM_NAME, __scopeAccordion);
     const collapsibleScope = useCollapsibleScope(__scopeAccordion);
-    const triggerId = _libs__radixUi_reactId.useId();
+    const triggerId = useId();
     const open = value && valueContext.value.includes(value) || false;
     const disabled = accordionContext.disabled || props.disabled;
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
       AccordionItemProvider,
       {
         scope: __scopeAccordion,
         open,
         disabled,
         triggerId,
-        children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
-          _libs__radixUi_reactCollapsible.Root,
+        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Root,
           {
             "data-orientation": accordionContext.orientation,
             "data-state": getState(open),
@@ -226,13 +225,13 @@ var AccordionItem = _libs_react.React.forwardRef(
 );
 AccordionItem.displayName = ITEM_NAME;
 var HEADER_NAME = "AccordionHeader";
-var AccordionHeader = _libs_react.React.forwardRef(
+var AccordionHeader = React.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAccordion, ...headerProps } = props;
     const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
     const itemContext = useAccordionItemContext(HEADER_NAME, __scopeAccordion);
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
-      _libs__radixUi_reactPrimitive.Primitive.h3,
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Primitive.h3,
       {
         "data-orientation": accordionContext.orientation,
         "data-state": getState(itemContext.open),
@@ -245,15 +244,15 @@ var AccordionHeader = _libs_react.React.forwardRef(
 );
 AccordionHeader.displayName = HEADER_NAME;
 var TRIGGER_NAME = "AccordionTrigger";
-var AccordionTrigger = _libs_react.React.forwardRef(
+var AccordionTrigger = React.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAccordion, ...triggerProps } = props;
     const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
     const itemContext = useAccordionItemContext(TRIGGER_NAME, __scopeAccordion);
     const collapsibleContext = useAccordionCollapsibleContext(TRIGGER_NAME, __scopeAccordion);
     const collapsibleScope = useCollapsibleScope(__scopeAccordion);
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(Collection.ItemSlot, { scope: __scopeAccordion, children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
-      _libs__radixUi_reactCollapsible.Trigger,
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(Collection.ItemSlot, { scope: __scopeAccordion, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Trigger,
       {
         "aria-disabled": itemContext.open && !collapsibleContext.collapsible || void 0,
         "data-orientation": accordionContext.orientation,
@@ -267,14 +266,14 @@ var AccordionTrigger = _libs_react.React.forwardRef(
 );
 AccordionTrigger.displayName = TRIGGER_NAME;
 var CONTENT_NAME = "AccordionContent";
-var AccordionContent = _libs_react.React.forwardRef(
+var AccordionContent = React.forwardRef(
   (props, forwardedRef) => {
     const { __scopeAccordion, ...contentProps } = props;
     const accordionContext = useAccordionContext(ACCORDION_NAME, __scopeAccordion);
     const itemContext = useAccordionItemContext(CONTENT_NAME, __scopeAccordion);
     const collapsibleScope = useCollapsibleScope(__scopeAccordion);
-    return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(
-      _libs__radixUi_reactCollapsible.Content,
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Content,
       {
         role: "region",
         "aria-labelledby": itemContext.triggerId,
@@ -300,8 +299,10 @@ var Item = AccordionItem;
 var Header = AccordionHeader;
 var Trigger2 = AccordionTrigger;
 var Content2 = AccordionContent;
-exports.Content2 = Content2;
-exports.Header = Header;
-exports.Item = Item;
-exports.Root2 = Root2;
-exports.Trigger2 = Trigger2;
+export {
+  Content2 as C,
+  Header as H,
+  Item as I,
+  Root2 as R,
+  Trigger2 as T
+};

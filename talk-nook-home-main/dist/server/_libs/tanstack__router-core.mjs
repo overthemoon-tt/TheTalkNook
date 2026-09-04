@@ -1,10 +1,9 @@
-"use strict";
-const _libs__tanstack_history = require("./tanstack__history.mjs");
-const _libs_cookieEs = require("./cookie-es.mjs");
-const _libs_seroval = require("./seroval.mjs");
-const _libs_serovalPlugins = require("./seroval-plugins.mjs");
-const web = require("node:stream/web");
-const node_stream = require("node:stream");
+import { p as parseHref } from "./tanstack__history.mjs";
+import { s as splitSetCookieString } from "./cookie-es.mjs";
+import { a as ai, r as re, S as Sn, d as dn } from "./seroval.mjs";
+import { p } from "./seroval-plugins.mjs";
+import { ReadableStream as ReadableStream$1 } from "node:stream/web";
+import { Readable } from "node:stream";
 const isServer = true;
 function last(arr) {
   return arr[arr.length - 1];
@@ -146,13 +145,13 @@ function decodePath(path) {
     path,
     handledProtocolRelativeURL: false
   };
-  const re = /%25|%5C/gi;
+  const re2 = /%25|%5C/gi;
   let cursor = 0;
   let result = "";
   let match;
-  while (null !== (match = re.exec(path))) {
+  while (null !== (match = re2.exec(path))) {
     result += decodeSegment(path.slice(cursor, match.index)) + match[0];
-    cursor = re.lastIndex;
+    cursor = re2.lastIndex;
   }
   result = result + decodeSegment(cursor ? path.slice(cursor) : path);
   let handledProtocolRelativeURL = false;
@@ -2394,7 +2393,7 @@ var RouterCore = class {
     this.buildAndCommitLocation = ({ replace, resetScroll, hashScrollIntoView, viewTransition, ignoreBlocker, href, ...rest } = {}) => {
       if (href) {
         const currentIndex = this.history.location.state.__TSR_index;
-        const parsed = _libs__tanstack_history.parseHref(href, { __TSR_index: replace ? currentIndex : currentIndex + 1 });
+        const parsed = parseHref(href, { __TSR_index: replace ? currentIndex : currentIndex + 1 });
         const hrefUrl = new URL(parsed.pathname, this.origin);
         rest.to = executeRewriteInput(this.rewrite, hrefUrl).pathname;
         rest.search = this.options.parseSearch(parsed.search);
@@ -3258,7 +3257,7 @@ function createSerializationAdapter(opts) {
 }
 // @__NO_SIDE_EFFECTS__
 function makeSsrSerovalPlugin(serializationAdapter, options) {
-  return /* @__PURE__ */ _libs_seroval.ai({
+  return /* @__PURE__ */ ai({
     tag: "$TSR/t/" + serializationAdapter.key,
     test: serializationAdapter.test,
     parse: { stream(value, ctx, _data) {
@@ -3273,7 +3272,7 @@ function makeSsrSerovalPlugin(serializationAdapter, options) {
 }
 // @__NO_SIDE_EFFECTS__
 function makeSerovalPlugin(serializationAdapter) {
-  return /* @__PURE__ */ _libs_seroval.ai({
+  return /* @__PURE__ */ ai({
     tag: "$TSR/t/" + serializationAdapter.key,
     test: serializationAdapter.test,
     parse: {
@@ -3370,7 +3369,7 @@ const RAW_STREAM_FACTORY_CONSTRUCTOR_TEXT = (stream) => {
 const FACTORY_BINARY = `(s=>new ReadableStream({start(c){s.on({next(b){try{const d=atob(b),a=new Uint8Array(d.length);for(let i=0;i<d.length;i++)a[i]=d.charCodeAt(i);c.enqueue(a)}catch(_){}},throw(e){c.error(e)},return(){try{c.close()}catch(_){}}})}}))`;
 const FACTORY_TEXT = `(s=>{const e=new TextEncoder();return new ReadableStream({start(c){s.on({next(v){try{if(typeof v==='string'){c.enqueue(e.encode(v))}else{const d=atob(v.$b64),a=new Uint8Array(d.length);for(let i=0;i<d.length;i++)a[i]=d.charCodeAt(i);c.enqueue(a)}}catch(_){}},throw(x){c.error(x)},return(){try{c.close()}catch(_){}}})}})})`;
 function toBinaryStream(readable) {
-  const stream = _libs_seroval.re();
+  const stream = re();
   const reader = readable.getReader();
   (async () => {
     try {
@@ -3391,7 +3390,7 @@ function toBinaryStream(readable) {
   return stream;
 }
 function toTextStream(readable) {
-  const stream = _libs_seroval.re();
+  const stream = re();
   const reader = readable.getReader();
   const decoder = new TextDecoder("utf-8", { fatal: true });
   (async () => {
@@ -3422,9 +3421,9 @@ function toTextStream(readable) {
   })();
   return stream;
 }
-const RawStreamSSRPlugin = /* @__PURE__ */ _libs_seroval.ai({
+const RawStreamSSRPlugin = /* @__PURE__ */ ai({
   tag: "tss/RawStream",
-  extends: [/* @__PURE__ */ _libs_seroval.ai({
+  extends: [/* @__PURE__ */ ai({
     tag: "tss/RawStreamFactory",
     test(value) {
       return value === RAW_STREAM_FACTORY_BINARY;
@@ -3446,7 +3445,7 @@ const RawStreamSSRPlugin = /* @__PURE__ */ _libs_seroval.ai({
     deserialize(_node, _ctx, _data) {
       return RAW_STREAM_FACTORY_BINARY;
     }
-  }), /* @__PURE__ */ _libs_seroval.ai({
+  }), /* @__PURE__ */ ai({
     tag: "tss/RawStreamFactoryText",
     test(value) {
       return value === RAW_STREAM_FACTORY_TEXT;
@@ -3478,7 +3477,7 @@ const RawStreamSSRPlugin = /* @__PURE__ */ _libs_seroval.ai({
       return {
         hint: ctx.parse(value.hint),
         factory: ctx.parse(factory),
-        stream: ctx.parse(_libs_seroval.re())
+        stream: ctx.parse(re())
       };
     },
     async async(value, ctx, _data) {
@@ -3511,7 +3510,7 @@ const RawStreamSSRPlugin = /* @__PURE__ */ _libs_seroval.ai({
 // @__NO_SIDE_EFFECTS__
 function createRawStreamRPCPlugin(onRawStream) {
   let nextStreamId = 1;
-  return /* @__PURE__ */ _libs_seroval.ai({
+  return /* @__PURE__ */ ai({
     tag: "tss/RawStream",
     test(value) {
       return value instanceof RawStream;
@@ -3536,7 +3535,7 @@ function createRawStreamRPCPlugin(onRawStream) {
     }
   });
 }
-const ShallowErrorPlugin = /* @__PURE__ */ _libs_seroval.ai({
+const ShallowErrorPlugin = /* @__PURE__ */ ai({
   tag: "$TSR/Error",
   test(value) {
     return value instanceof Error;
@@ -3562,7 +3561,7 @@ const ShallowErrorPlugin = /* @__PURE__ */ _libs_seroval.ai({
 const defaultSerovalPlugins = [
   ShallowErrorPlugin,
   RawStreamSSRPlugin,
-  _libs_serovalPlugins.p
+  p
 ];
 function toHeadersInstance(init) {
   if (init instanceof Headers) return init;
@@ -3574,7 +3573,7 @@ function mergeHeaders(...headers) {
   return headers.reduce((acc, header) => {
     const headersInstance = toHeadersInstance(header);
     if (!headersInstance) return acc;
-    for (const [key, value] of headersInstance.entries()) if (key === "set-cookie") _libs_cookieEs.splitSetCookieString(value).forEach((cookie) => acc.append("set-cookie", cookie));
+    for (const [key, value] of headersInstance.entries()) if (key === "set-cookie") splitSetCookieString(value).forEach((cookie) => acc.append("set-cookie", cookie));
     else acc.set(key, value);
     return acc;
   }, new Headers());
@@ -3602,7 +3601,7 @@ function dehydrateMatch(match) {
   if (match.globalNotFound) dehydratedMatch.g = true;
   return dehydratedMatch;
 }
-const INITIAL_SCRIPTS = [_libs_seroval.dn(SCOPE_ID), tsrScript_default];
+const INITIAL_SCRIPTS = [dn(SCOPE_ID), tsrScript_default];
 var ScriptBuffer = class {
   constructor(injectScript) {
     this._scriptBarrierLifted = false;
@@ -3914,7 +3913,7 @@ function attachRouterServerSsrUtils({ router, manifest, getRequestAssets }) {
         scriptBuffer.flush();
         signalSerializationComplete();
       };
-      _libs_seroval.Sn(dehydratedRouter, {
+      Sn(dehydratedRouter, {
         refs: /* @__PURE__ */ new Map(),
         plugins,
         onSerialize: (data, initial) => {
@@ -4101,7 +4100,7 @@ function transformReadableStreamWithRouter(router, routerStream, opts) {
   return transformStreamWithRouter(router, routerStream, opts);
 }
 function transformPipeableStreamWithRouter(router, routerStream, opts) {
-  return node_stream.Readable.fromWeb(transformStreamWithRouter(router, node_stream.Readable.toWeb(routerStream), opts));
+  return Readable.fromWeb(transformStreamWithRouter(router, Readable.toWeb(routerStream), opts));
 }
 const MIN_CLOSING_TAG_LENGTH = 4;
 const DEFAULT_SERIALIZATION_TIMEOUT_MS = 6e4;
@@ -4271,7 +4270,7 @@ function makeFastPathStream(appStream, opts, serverSsr) {
       cleanup(err);
     }
   }, lifetimeMs);
-  return new web.ReadableStream({
+  return new ReadableStream$1({
     start(c) {
       controller = c;
     },
@@ -4443,7 +4442,7 @@ function makeMainStream(serverSsr, appStream, opts) {
     streamBarrierLifted = true;
     serverSsr.liftScriptBarrier();
   }
-  const stream = new web.ReadableStream({
+  const stream = new ReadableStream$1({
     start(c) {
       controller = c;
       drainPending();
@@ -4676,46 +4675,48 @@ function getScrollRestorationScriptForRouter(router) {
   if (userKey === defaultGetScrollRestorationKey(location)) return defaultInlineScrollRestorationScript;
   return getScrollRestorationScript(userKey);
 }
-exports.BaseRootRoute = BaseRootRoute;
-exports.BaseRoute = BaseRoute;
-exports.RouterCore = RouterCore;
-exports.appendUniqueUserTags = appendUniqueUserTags;
-exports.attachRouterServerSsrUtils = attachRouterServerSsrUtils;
-exports.createNonReactiveMutableStore = createNonReactiveMutableStore;
-exports.createNonReactiveReadonlyStore = createNonReactiveReadonlyStore;
-exports.createRawStreamRPCPlugin = createRawStreamRPCPlugin;
-exports.createSerializationAdapter = createSerializationAdapter;
-exports.createSsrStreamResponse = createSsrStreamResponse;
-exports.deepEqual = deepEqual;
-exports.defaultSerovalPlugins = defaultSerovalPlugins;
-exports.defineHandlerCallback = defineHandlerCallback;
-exports.escapeHtml = escapeHtml;
-exports.exactPathTest = exactPathTest;
-exports.executeRewriteInput = executeRewriteInput;
-exports.functionalUpdate = functionalUpdate;
-exports.getAssetCrossOrigin = getAssetCrossOrigin;
-exports.getNormalizedURL = getNormalizedURL;
-exports.getOrigin = getOrigin;
-exports.getScriptPreloadAttrs = getScriptPreloadAttrs;
-exports.getScrollRestorationScriptForRouter = getScrollRestorationScriptForRouter;
-exports.getStylesheetHref = getStylesheetHref;
-exports.hasKeys = hasKeys;
-exports.invariant = invariant;
-exports.isDangerousProtocol = isDangerousProtocol;
-exports.isModuleNotFoundError = isModuleNotFoundError;
-exports.isNotFound = isNotFound;
-exports.isRedirect = isRedirect;
-exports.isResolvedRedirect = isResolvedRedirect;
-exports.isServer = isServer;
-exports.isSsrResponse = isSsrResponse;
-exports.makeSerovalPlugin = makeSerovalPlugin;
-exports.mergeHeaders = mergeHeaders;
-exports.normalizeSsrResponse = normalizeSsrResponse;
-exports.removeTrailingSlash = removeTrailingSlash;
-exports.replaceSsrResponse = replaceSsrResponse;
-exports.resolveManifestAssetLink = resolveManifestAssetLink;
-exports.resolveManifestCssLink = resolveManifestCssLink;
-exports.rootRouteId = rootRouteId;
-exports.stripSsrResponseBody = stripSsrResponseBody;
-exports.transformPipeableStreamWithRouter = transformPipeableStreamWithRouter;
-exports.transformReadableStreamWithRouter = transformReadableStreamWithRouter;
+export {
+  getNormalizedURL as A,
+  BaseRootRoute as B,
+  getOrigin as C,
+  normalizeSsrResponse as D,
+  attachRouterServerSsrUtils as E,
+  createSerializationAdapter as F,
+  createRawStreamRPCPlugin as G,
+  isResolvedRedirect as H,
+  replaceSsrResponse as I,
+  mergeHeaders as J,
+  executeRewriteInput as K,
+  stripSsrResponseBody as L,
+  defaultSerovalPlugins as M,
+  makeSerovalPlugin as N,
+  getStylesheetHref as O,
+  isSsrResponse as P,
+  RouterCore as R,
+  isDangerousProtocol as a,
+  BaseRoute as b,
+  isModuleNotFoundError as c,
+  deepEqual as d,
+  exactPathTest as e,
+  functionalUpdate as f,
+  isNotFound as g,
+  hasKeys as h,
+  invariant as i,
+  getScrollRestorationScriptForRouter as j,
+  rootRouteId as k,
+  isServer as l,
+  isRedirect as m,
+  createNonReactiveReadonlyStore as n,
+  createNonReactiveMutableStore as o,
+  escapeHtml as p,
+  getAssetCrossOrigin as q,
+  removeTrailingSlash as r,
+  getScriptPreloadAttrs as s,
+  appendUniqueUserTags as t,
+  resolveManifestCssLink as u,
+  transformReadableStreamWithRouter as v,
+  createSsrStreamResponse as w,
+  transformPipeableStreamWithRouter as x,
+  defineHandlerCallback as y,
+  resolveManifestAssetLink as z
+};
