@@ -55,7 +55,7 @@ let serverEntryPromise;
 async function getServerEntry() {
   if (!serverEntryPromise) {
     serverEntryPromise = Promise.resolve().then(function() {
-      return require("./server-DZlzska-.mjs");
+      return require("./server-Dg8JQFIf.mjs");
     }).then((n) => n.s).then(
       (m) => m.default ?? m
     );
