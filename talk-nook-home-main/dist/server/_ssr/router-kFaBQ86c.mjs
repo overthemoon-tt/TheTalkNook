@@ -26,7 +26,7 @@ require("../_libs/iceberg-js.mjs");
 require("../_libs/supabase__auth-js.mjs");
 require("tslib");
 require("../_libs/supabase__functions-js.mjs");
-const appCss = "/assets/styles-DrL-5aLR.css";
+const appCss = "/assets/styles-Bqgxu2S4.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -137,7 +137,7 @@ function RootComponent() {
   ] });
 }
 const $$splitComponentImporter$7 = () => Promise.resolve().then(function() {
-  return require("./talknook-admin-panel-8Ejydgxm.mjs");
+  return require("./talknook-admin-panel-CoHcUeaC.mjs");
 });
 const Route$7 = _libs__tanstack_reactRouter.createFileRoute("/talknook-admin-panel")({
   head: () => ({
@@ -191,7 +191,7 @@ const Route$5 = _libs__tanstack_reactRouter.createFileRoute("/health-navigation"
   component: _libs__tanstack_reactRouter.lazyRouteComponent($$splitComponentImporter$5, "component")
 });
 const $$splitComponentImporter$4 = () => Promise.resolve().then(function() {
-  return require("./contact-DQHDSqCP.mjs");
+  return require("./contact-D0gDh3_9.mjs");
 });
 const Route$4 = _libs__tanstack_reactRouter.createFileRoute("/contact")({
   head: () => ({
@@ -205,7 +205,7 @@ const Route$4 = _libs__tanstack_reactRouter.createFileRoute("/contact")({
   component: _libs__tanstack_reactRouter.lazyRouteComponent($$splitComponentImporter$4, "component")
 });
 const $$splitComponentImporter$3 = () => Promise.resolve().then(function() {
-  return require("./book-C2VNzbA2.mjs");
+  return require("./book-X8-QKh2_.mjs");
 });
 const Route$3 = _libs__tanstack_reactRouter.createFileRoute("/book")({
   validateSearch: (s) => ({
@@ -260,7 +260,7 @@ const supabase = new Proxy({}, {
   }
 });
 const $$splitComponentImporter$1 = () => Promise.resolve().then(function() {
-  return require("./index-BsR3JCRC.mjs");
+  return require("./index-Dqz8Hh05.mjs");
 });
 const Route$1 = _libs__tanstack_reactRouter.createFileRoute("/")({
   head: () => ({
@@ -280,7 +280,7 @@ const Route$1 = _libs__tanstack_reactRouter.createFileRoute("/")({
   component: _libs__tanstack_reactRouter.lazyRouteComponent($$splitComponentImporter$1, "component")
 });
 const $$splitComponentImporter = () => Promise.resolve().then(function() {
-  return require("./chat._chatId-DLO12hL4.mjs");
+  return require("./chat._chatId-DEaGt2_J.mjs");
 });
 const Route = _libs__tanstack_reactRouter.createFileRoute("/chat/$chatId")({
   head: () => ({

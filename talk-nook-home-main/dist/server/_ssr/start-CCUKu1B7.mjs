@@ -1,5 +1,5 @@
 "use strict";
-const serverDg8JQFIf = require("./server-Dg8JQFIf.mjs");
+const serverCzgKo3Mk = require("./server-CzgKo3Mk.mjs");
 const index = require("./index.mjs");
 require("../_libs/seroval.mjs");
 require("../_libs/react.mjs");
@@ -44,10 +44,10 @@ var createStart = (getOptions) => {
       }
       return options;
     },
-    createMiddleware: serverDg8JQFIf.c
+    createMiddleware: serverCzgKo3Mk.c
   };
 };
-const errorMiddleware = serverDg8JQFIf.c().server(async ({ next }) => {
+const errorMiddleware = serverCzgKo3Mk.c().server(async ({ next }) => {
   try {
     return await next();
   } catch (error) {

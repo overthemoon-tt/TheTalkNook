@@ -38,7 +38,6 @@ type Session = {
 };
 
 const SESSION_MS = 25 * 60 * 1000;
-const TYPING_IDLE_MS = 1500;
 
 function ChatPage() {
   const { chatId } = Route.useParams();
@@ -63,41 +62,10 @@ function ChatPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const endedRef = useRef(false);
-
+  
   // ── CLOCK-INDEPENDENT TIMER STATE ────────────────────────────────────
   const [timerActive, setTimerActive] = useState(false);
   const localStartTimeRef = useRef<number | null>(null);
-
-  // ── TYPING INDICATOR STATE ───────────────────────────────────────────
-  const [otherTyping, setOtherTyping] = useState(false);
-  const channelRef = useRef<any>(null);
-  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const myRole = asListener ? "listener" : "user";
-
-  const broadcastTyping = (isTyping: boolean) => {
-    channelRef.current?.send({
-      type: "broadcast",
-      event: "typing",
-      payload: { role: myRole, isTyping },
-    });
-  };
-
-  const handleTypingInput = () => {
-    if (ended) return;
-    broadcastTyping(true);
-    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-    typingTimeoutRef.current = setTimeout(() => {
-      broadcastTyping(false);
-    }, TYPING_IDLE_MS);
-  };
-
-  const stopTyping = () => {
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-      typingTimeoutRef.current = null;
-    }
-    broadcastTyping(false);
-  };
 
   // ── IMPROVED AUTO-SCROLL LOGIC ───────────────────────────────────────────
   const scrollToBottom = (behavior: "smooth" | "auto" = "smooth") => {
@@ -114,14 +82,6 @@ function ChatPage() {
       return () => clearTimeout(timeoutId);
     }
   }, [messages]);
-
-  // Scroll when the other person starts typing too
-  useEffect(() => {
-    if (otherTyping) {
-      const timeoutId = setTimeout(() => scrollToBottom("smooth"), 50);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [otherTyping]);
 
   // ── Initial load ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -181,15 +141,10 @@ function ChatPage() {
           filter: `chat_id=eq.${chatId}`,
         },
         (p) => {
-          const newMsg = p.new as Msg;
           setMessages((prev) => {
-            if (prev.some((m) => m.id === newMsg.id)) return prev;
-            return [...prev, newMsg];
+            if (prev.some((m) => m.id === (p.new as any).id)) return prev;
+            return [...prev, p.new as any];
           });
-          // A new message from the other side means they've stopped typing
-          if (newMsg.sender_role !== myRole) {
-            setOtherTyping(false);
-          }
         }
       )
       .on(
@@ -203,7 +158,7 @@ function ChatPage() {
         (p) => {
           const newSession = p.new as Session;
           setSession(newSession);
-
+          
           if (newSession.session_started_at && !timerActive && !endedRef.current) {
             setTimerActive(true);
           }
@@ -213,37 +168,15 @@ function ChatPage() {
             setEnded(true);
             setRemaining(0);
             setTimerActive(false);
-            setOtherTyping(false);
             if (asListener) setShowEndedAlert(true);
             if (!asListener) setShowFeedback(true);
           }
         }
       )
-      .on("broadcast", { event: "typing" }, (payload) => {
-        const { role, isTyping } = (payload.payload || {}) as {
-          role: "user" | "listener";
-          isTyping: boolean;
-        };
-        if (role !== myRole) {
-          setOtherTyping(isTyping);
-        }
-      })
       .subscribe();
 
-    channelRef.current = ch;
-
-    return () => {
-      supabase.removeChannel(ch);
-      channelRef.current = null;
-    };
-  }, [chatId, asListener, timerActive, myRole]);
-
-  // Clear any pending typing timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-    };
-  }, []);
+    return () => { supabase.removeChannel(ch); };
+  }, [chatId, asListener, timerActive]);
 
   // ── Mark listener as joined ───────────────────────────────────────────────
   const listenerJoinedHandled = useRef(false);
@@ -300,11 +233,10 @@ function ChatPage() {
         setRemaining(0);
         setEnded(true);
         setTimerActive(false);
-        setOtherTyping(false);
-
+        
         if (!asListener) setShowFeedback(true);
         if (asListener) setShowEndedAlert(true);
-
+        
         supabase
           .from("chat_sessions")
           .update({ session_ended_at: new Date().toISOString(), status: "ended" })
@@ -331,15 +263,14 @@ function ChatPage() {
     if (!text.trim() || ended) return;
     const msg = text.trim();
     setText("");
-    stopTyping();
-
+  
     const role = asListener ? "listener" : "user";
     const name = asListener
       ? "Listener"
       : booking?.is_anonymous
       ? "Friend"
       : booking?.user_name || "You";
-
+  
     // Insert message first always
     await supabase.from("chat_messages").insert({
       chat_id: chatId,
@@ -347,7 +278,7 @@ function ChatPage() {
       sender_display_name: name,
       content: msg,
     });
-
+  
     // Start session timer after message is inserted
     if (asListener && session && !session.session_started_at) {
       await supabase.from("chat_sessions")
@@ -362,8 +293,6 @@ function ChatPage() {
     endedRef.current = true;
     setEnded(true);
     setTimerActive(false);
-    stopTyping();
-    setOtherTyping(false);
     await supabase
       .from("chat_sessions")
       .update({ session_ended_at: new Date().toISOString(), status: "ended" })
@@ -396,14 +325,14 @@ function ChatPage() {
     booking?.session_type === "text_health"
       ? "Health Navigation — Text"
       : "Peer Support — Text";
-
+  
       if (loading) {
         return (
           <div className="flex items-center justify-center h-screen">
             <div className="text-muted-foreground text-sm">Loading your session…</div>
           </div>
         );
-      }
+      }    
 
   if (!session) {
     return (
@@ -423,12 +352,6 @@ function ChatPage() {
       </SiteShell>
     );
   }
-
-  const otherName = asListener
-    ? booking?.is_anonymous
-      ? "Friend"
-      : booking?.user_name || "User"
-    : "Listener";
 
   return (
     <div className="flex flex-col h-screen bg-background overflow-hidden">
@@ -473,7 +396,7 @@ function ChatPage() {
             Waiting for your listener to join…
           </div>
         )}
-
+        
         {messages.map((m, idx) => {
           if (m.sender_role === "system")
             return (
@@ -481,9 +404,9 @@ function ChatPage() {
                 — {m.content} —
               </div>
             );
-
+          
           const mine = asListener ? m.sender_role === "listener" : m.sender_role === "user";
-
+          
           return (
             <div key={m.id || idx} className={`flex ${mine ? "justify-end" : "justify-start"} animate-in fade-in slide-in-from-bottom-2 duration-300`}>
               <div
@@ -501,26 +424,10 @@ function ChatPage() {
             </div>
           );
         })}
-
-        {/* Typing indicator bubble */}
-        {otherTyping && !ended && (
-          <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <div className="max-w-[85%] rounded-2xl rounded-tl-none px-4 py-3 shadow-sm bg-secondary text-secondary-foreground">
-              <div className="text-[10px] font-bold uppercase tracking-tighter opacity-50 mb-1">
-                {otherName}
-              </div>
-              <div className="flex items-center gap-1 h-4 py-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 animate-bounce [animation-delay:-0.3s]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 animate-bounce [animation-delay:-0.15s]" />
-                <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60 animate-bounce" />
-              </div>
-            </div>
-          </div>
-        )}
-
+        
         {/* Invisible element to anchor the scroll */}
         <div ref={messagesEndRef} className="h-4 w-full" />
-
+        
         {ended && (
           <div className="text-center py-8">
             <div className="inline-block px-6 py-3 rounded-xl bg-muted text-muted-foreground text-sm border border-border font-medium">
@@ -541,7 +448,6 @@ function ChatPage() {
               // Auto-expand textarea
               e.target.style.height = 'inherit';
               e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
-              handleTypingInput();
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
@@ -550,7 +456,6 @@ function ChatPage() {
                 e.currentTarget.style.height = 'inherit';
               }
             }}
-            onBlur={stopTyping}
             placeholder={
               ended
                 ? "Session has ended"

@@ -2,7 +2,7 @@
 const _libs_react = require("../_libs/react.mjs");
 const _libs__tanstack_reactRouter = require("../_libs/tanstack__react-router.mjs");
 const SiteShellCxrl0jzj = require("./SiteShell-Cxrl0jzj.mjs");
-const routerCpCDZ1M0 = require("./router-CpCDZ1M0.mjs");
+const routerKFaBQ86c = require("./router-kFaBQ86c.mjs");
 const _libs__radixUi_reactAlertDialog = require("../_libs/radix-ui__react-alert-dialog.mjs");
 const utilsH80jjgLf = require("./utils-H80jjgLf.mjs");
 const _libs__radixUi_reactSlot = require("../_libs/radix-ui__react-slot.mjs");
@@ -158,11 +158,10 @@ const AlertDialogCancel = _libs_react.reactExports.forwardRef(({ className, ...p
 ));
 AlertDialogCancel.displayName = _libs__radixUi_reactAlertDialog.Cancel.displayName;
 const SESSION_MS = 25 * 60 * 1e3;
-const TYPING_IDLE_MS = 1500;
 function ChatPage() {
   const {
     chatId
-  } = routerCpCDZ1M0.a.useParams();
+  } = routerKFaBQ86c.a.useParams();
   const search = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
   const asListener = search.get("as") === "listener";
   const [session, setSession] = _libs_react.reactExports.useState(null);
@@ -183,35 +182,6 @@ function ChatPage() {
   const endedRef = _libs_react.reactExports.useRef(false);
   const [timerActive, setTimerActive] = _libs_react.reactExports.useState(false);
   const localStartTimeRef = _libs_react.reactExports.useRef(null);
-  const [otherTyping, setOtherTyping] = _libs_react.reactExports.useState(false);
-  const channelRef = _libs_react.reactExports.useRef(null);
-  const typingTimeoutRef = _libs_react.reactExports.useRef(null);
-  const myRole = asListener ? "listener" : "user";
-  const broadcastTyping = (isTyping) => {
-    channelRef.current?.send({
-      type: "broadcast",
-      event: "typing",
-      payload: {
-        role: myRole,
-        isTyping
-      }
-    });
-  };
-  const handleTypingInput = () => {
-    if (ended) return;
-    broadcastTyping(true);
-    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-    typingTimeoutRef.current = setTimeout(() => {
-      broadcastTyping(false);
-    }, TYPING_IDLE_MS);
-  };
-  const stopTyping = () => {
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-      typingTimeoutRef.current = null;
-    }
-    broadcastTyping(false);
-  };
   const scrollToBottom = (behavior = "smooth") => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({
@@ -226,24 +196,18 @@ function ChatPage() {
     }
   }, [messages]);
   _libs_react.reactExports.useEffect(() => {
-    if (otherTyping) {
-      const timeoutId = setTimeout(() => scrollToBottom("smooth"), 50);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [otherTyping]);
-  _libs_react.reactExports.useEffect(() => {
     let mounted = true;
     (async () => {
       const {
         data: s
-      } = await routerCpCDZ1M0.s.from("chat_sessions").select("*").eq("id", chatId).maybeSingle();
+      } = await routerKFaBQ86c.s.from("chat_sessions").select("*").eq("id", chatId).maybeSingle();
       if (!mounted) return;
       setSession(s);
       setLoading(false);
       if (s) {
         const {
           data: b
-        } = await routerCpCDZ1M0.s.from("bookings").select("*").eq("id", s.booking_id).maybeSingle();
+        } = await routerKFaBQ86c.s.from("bookings").select("*").eq("id", s.booking_id).maybeSingle();
         if (mounted) setBooking(b);
         if (s.session_ended_at) {
           endedRef.current = true;
@@ -255,7 +219,7 @@ function ChatPage() {
       }
       const {
         data: msgs
-      } = await routerCpCDZ1M0.s.from("chat_messages").select("*").eq("chat_id", chatId).order("created_at");
+      } = await routerKFaBQ86c.s.from("chat_messages").select("*").eq("chat_id", chatId).order("created_at");
       if (mounted) {
         setMessages(msgs || []);
         setTimeout(() => scrollToBottom("auto"), 200);
@@ -266,20 +230,16 @@ function ChatPage() {
     };
   }, [chatId]);
   _libs_react.reactExports.useEffect(() => {
-    const ch = routerCpCDZ1M0.s.channel(`chat_${chatId}`).on("postgres_changes", {
+    const ch = routerKFaBQ86c.s.channel(`chat_${chatId}`).on("postgres_changes", {
       event: "INSERT",
       schema: "public",
       table: "chat_messages",
       filter: `chat_id=eq.${chatId}`
     }, (p) => {
-      const newMsg = p.new;
       setMessages((prev) => {
-        if (prev.some((m) => m.id === newMsg.id)) return prev;
-        return [...prev, newMsg];
+        if (prev.some((m) => m.id === p.new.id)) return prev;
+        return [...prev, p.new];
       });
-      if (newMsg.sender_role !== myRole) {
-        setOtherTyping(false);
-      }
     }).on("postgres_changes", {
       event: "UPDATE",
       schema: "public",
@@ -296,42 +256,24 @@ function ChatPage() {
         setEnded(true);
         setRemaining(0);
         setTimerActive(false);
-        setOtherTyping(false);
         if (asListener) setShowEndedAlert(true);
         if (!asListener) setShowFeedback(true);
       }
-    }).on("broadcast", {
-      event: "typing"
-    }, (payload) => {
-      const {
-        role,
-        isTyping
-      } = payload.payload || {};
-      if (role !== myRole) {
-        setOtherTyping(isTyping);
-      }
     }).subscribe();
-    channelRef.current = ch;
     return () => {
-      routerCpCDZ1M0.s.removeChannel(ch);
-      channelRef.current = null;
+      routerKFaBQ86c.s.removeChannel(ch);
     };
-  }, [chatId, asListener, timerActive, myRole]);
-  _libs_react.reactExports.useEffect(() => {
-    return () => {
-      if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
-    };
-  }, []);
+  }, [chatId, asListener, timerActive]);
   const listenerJoinedHandled = _libs_react.reactExports.useRef(false);
   _libs_react.reactExports.useEffect(() => {
     if (!asListener || !session || ended || listenerJoinedHandled.current) return;
     if (!session.listener_joined_at) {
       listenerJoinedHandled.current = true;
-      routerCpCDZ1M0.s.from("chat_sessions").update({
+      routerKFaBQ86c.s.from("chat_sessions").update({
         listener_joined_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).eq("id", chatId).then(() => {
-        routerCpCDZ1M0.s.from("chat_messages").insert({
+        routerKFaBQ86c.s.from("chat_messages").insert({
           chat_id: chatId,
           sender_role: "system",
           sender_display_name: "System",
@@ -369,14 +311,13 @@ function ChatPage() {
         setRemaining(0);
         setEnded(true);
         setTimerActive(false);
-        setOtherTyping(false);
         if (!asListener) setShowFeedback(true);
         if (asListener) setShowEndedAlert(true);
-        routerCpCDZ1M0.s.from("chat_sessions").update({
+        routerKFaBQ86c.s.from("chat_sessions").update({
           session_ended_at: (/* @__PURE__ */ new Date()).toISOString(),
           status: "ended"
         }).eq("id", chatId).is("session_ended_at", null).then(() => {
-          routerCpCDZ1M0.s.from("chat_messages").insert({
+          routerKFaBQ86c.s.from("chat_messages").insert({
             chat_id: chatId,
             sender_role: "system",
             sender_display_name: "System",
@@ -393,17 +334,16 @@ function ChatPage() {
     if (!text.trim() || ended) return;
     const msg = text.trim();
     setText("");
-    stopTyping();
     const role = asListener ? "listener" : "user";
     const name = asListener ? "Listener" : booking?.is_anonymous ? "Friend" : booking?.user_name || "You";
-    await routerCpCDZ1M0.s.from("chat_messages").insert({
+    await routerKFaBQ86c.s.from("chat_messages").insert({
       chat_id: chatId,
       sender_role: role,
       sender_display_name: name,
       content: msg
     });
     if (asListener && session && !session.session_started_at) {
-      await routerCpCDZ1M0.s.from("chat_sessions").update({
+      await routerKFaBQ86c.s.from("chat_sessions").update({
         session_started_at: (/* @__PURE__ */ new Date()).toISOString(),
         status: "active"
       }).eq("id", chatId);
@@ -414,13 +354,11 @@ function ChatPage() {
     endedRef.current = true;
     setEnded(true);
     setTimerActive(false);
-    stopTyping();
-    setOtherTyping(false);
-    await routerCpCDZ1M0.s.from("chat_sessions").update({
+    await routerKFaBQ86c.s.from("chat_sessions").update({
       session_ended_at: (/* @__PURE__ */ new Date()).toISOString(),
       status: "ended"
     }).eq("id", chatId).is("session_ended_at", null);
-    await routerCpCDZ1M0.s.from("chat_messages").insert({
+    await routerKFaBQ86c.s.from("chat_messages").insert({
       chat_id: chatId,
       sender_role: "system",
       sender_display_name: "System",
@@ -433,7 +371,7 @@ function ChatPage() {
     setFeedbackSubmitting(true);
     const {
       error
-    } = await routerCpCDZ1M0.s.from("session_feedback").insert({
+    } = await routerKFaBQ86c.s.from("session_feedback").insert({
       chat_id: chatId,
       rating: feedbackRating,
       comment: feedbackComment.trim() || null
@@ -455,7 +393,6 @@ function ChatPage() {
       /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__tanstack_reactRouter.Link, { to: "/", className: "mt-6 inline-block rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm", children: "Back home" })
     ] }) });
   }
-  const otherName = asListener ? booking?.is_anonymous ? "Friend" : booking?.user_name || "User" : "Listener";
   return /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "flex flex-col h-screen bg-background overflow-hidden", children: [
     /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("header", { className: "border-b border-border bg-card px-4 py-3 flex items-center gap-2 flex-wrap z-10", children: [
       /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs__tanstack_reactRouter.Link, { to: "/", className: "text-muted-foreground hover:text-foreground", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.ArrowLeft, { className: "h-4 w-4" }) }),
@@ -487,14 +424,6 @@ function ChatPage() {
           /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-[15px] whitespace-pre-wrap leading-relaxed", children: m.content })
         ] }) }, m.id || idx);
       }),
-      otherTyping && !ended && /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "flex justify-start animate-in fade-in slide-in-from-bottom-2 duration-200", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "max-w-[85%] rounded-2xl rounded-tl-none px-4 py-3 shadow-sm bg-secondary text-secondary-foreground", children: [
-        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-[10px] font-bold uppercase tracking-tighter opacity-50 mb-1", children: otherName }),
-        /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1 h-4 py-1", children: [
-          /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-current opacity-60 animate-bounce [animation-delay:-0.3s]" }),
-          /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-current opacity-60 animate-bounce [animation-delay:-0.15s]" }),
-          /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("span", { className: "w-1.5 h-1.5 rounded-full bg-current opacity-60 animate-bounce" })
-        ] })
-      ] }) }),
       /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { ref: messagesEndRef, className: "h-4 w-full" }),
       ended && /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "text-center py-8", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "inline-block px-6 py-3 rounded-xl bg-muted text-muted-foreground text-sm border border-border font-medium", children: "This session has ended." }) })
     ] }),
@@ -503,14 +432,13 @@ function ChatPage() {
         setText(e.target.value);
         e.target.style.height = "inherit";
         e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
-        handleTypingInput();
       }, onKeyDown: (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
           e.preventDefault();
           send();
           e.currentTarget.style.height = "inherit";
         }
-      }, onBlur: stopTyping, placeholder: ended ? "Session has ended" : asListener && !session.listener_joined_at ? "Type to greet…" : "Say what's on your mind…", disabled: ended, className: "flex-1 rounded-2xl border border-input bg-background px-4 py-3 text-sm resize-none disabled:opacity-60 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none", style: {
+      }, placeholder: ended ? "Session has ended" : asListener && !session.listener_joined_at ? "Type to greet…" : "Say what's on your mind…", disabled: ended, className: "flex-1 rounded-2xl border border-input bg-background px-4 py-3 text-sm resize-none disabled:opacity-60 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none", style: {
         minHeight: "44px"
       } }),
       /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("button", { onClick: () => {

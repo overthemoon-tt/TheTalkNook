@@ -2,7 +2,7 @@
 const _libs_react = require("../_libs/react.mjs");
 const _libs__tanstack_reactRouter = require("../_libs/tanstack__react-router.mjs");
 const SiteShellCxrl0jzj = require("./SiteShell-Cxrl0jzj.mjs");
-const routerCpCDZ1M0 = require("./router-CpCDZ1M0.mjs");
+const routerKFaBQ86c = require("./router-kFaBQ86c.mjs");
 require("../_libs/sonner.mjs");
 const _libs_lucideReact = require("../_libs/lucide-react.mjs");
 require("../_libs/tanstack__router-core.mjs");
@@ -153,7 +153,7 @@ function Impact() {
 function Testimonials() {
   const [reviews, setReviews] = _libs_react.reactExports.useState([]);
   _libs_react.reactExports.useEffect(() => {
-    routerCpCDZ1M0.s.from("session_feedback").select("rating, comment, created_at").not("comment", "is", null).gte("rating", 4).order("created_at", {
+    routerKFaBQ86c.s.from("session_feedback").select("rating, comment, created_at").not("comment", "is", null).gte("rating", 4).order("created_at", {
       ascending: false
     }).limit(6).then(({
       data

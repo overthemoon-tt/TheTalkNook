@@ -1,7 +1,7 @@
 "use strict";
 const _libs_react = require("../_libs/react.mjs");
 const SiteShellCxrl0jzj = require("./SiteShell-Cxrl0jzj.mjs");
-const routerCpCDZ1M0 = require("./router-CpCDZ1M0.mjs");
+const routerKFaBQ86c = require("./router-kFaBQ86c.mjs");
 const _libs_sonner = require("../_libs/sonner.mjs");
 const _libs_lucideReact = require("../_libs/lucide-react.mjs");
 require("../_libs/tanstack__react-router.mjs");
@@ -42,7 +42,7 @@ function ContactPage() {
     setLoading(true);
     const {
       error
-    } = await routerCpCDZ1M0.s.from("contact_messages").insert(form);
+    } = await routerKFaBQ86c.s.from("contact_messages").insert(form);
     setLoading(false);
     if (error) return _libs_sonner.toast.error(error.message);
     _libs_sonner.toast.success("Thank you. We'll get back to you soon.");

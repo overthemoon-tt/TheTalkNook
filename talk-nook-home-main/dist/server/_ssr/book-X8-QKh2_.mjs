@@ -2,7 +2,7 @@
 const _libs_react = require("../_libs/react.mjs");
 const _libs__tanstack_reactRouter = require("../_libs/tanstack__react-router.mjs");
 const SiteShellCxrl0jzj = require("./SiteShell-Cxrl0jzj.mjs");
-const routerCpCDZ1M0 = require("./router-CpCDZ1M0.mjs");
+const routerKFaBQ86c = require("./router-kFaBQ86c.mjs");
 const _libs_sonner = require("../_libs/sonner.mjs");
 const _libs_lucideReact = require("../_libs/lucide-react.mjs");
 require("../_libs/tanstack__router-core.mjs");
@@ -48,7 +48,7 @@ const SERVICES = {
 function BookPage() {
   const {
     s
-  } = routerCpCDZ1M0.R.useSearch();
+  } = routerKFaBQ86c.R.useSearch();
   const [step, setStep] = _libs_react.reactExports.useState(() => {
     if (typeof window === "undefined") return 1;
     const saved = localStorage.getItem("tn_confirmation");
@@ -203,7 +203,7 @@ function Step3({
     const {
       data: booking,
       error
-    } = await routerCpCDZ1M0.s.from("bookings").insert({
+    } = await routerKFaBQ86c.s.from("bookings").insert({
       user_name: userName,
       preferred_date: today,
       preferred_time: "ASAP",
@@ -240,13 +240,13 @@ function Step3({
     if (service === "text_peer" || service === "text_health") {
       const {
         data: cs
-      } = await routerCpCDZ1M0.s.from("chat_sessions").insert({
+      } = await routerKFaBQ86c.s.from("chat_sessions").insert({
         booking_id: booking.id,
         status: "waiting"
       }).select("id").maybeSingle();
       if (cs) {
         chatId = cs.id;
-        await routerCpCDZ1M0.s.from("bookings").update({
+        await routerKFaBQ86c.s.from("bookings").update({
           chat_id: chatId
         }).eq("id", booking.id);
       }
@@ -301,12 +301,12 @@ function Step4({
   const [status, setStatus] = _libs_react.reactExports.useState("pending_verification");
   _libs_react.reactExports.useEffect(() => {
     if (!confirmation.bookingId) return;
-    routerCpCDZ1M0.s.from("bookings").select("status").eq("id", confirmation.bookingId).maybeSingle().then(({
+    routerKFaBQ86c.s.from("bookings").select("status").eq("id", confirmation.bookingId).maybeSingle().then(({
       data
     }) => {
       if (data?.status) setStatus(data.status);
     });
-    const ch = routerCpCDZ1M0.s.channel(`booking_${confirmation.bookingId}`).on("postgres_changes", {
+    const ch = routerKFaBQ86c.s.channel(`booking_${confirmation.bookingId}`).on("postgres_changes", {
       event: "UPDATE",
       schema: "public",
       table: "bookings",
@@ -317,7 +317,7 @@ function Step4({
       if (newStatus) setStatus(newStatus);
     }).subscribe();
     return () => {
-      routerCpCDZ1M0.s.removeChannel(ch);
+      routerKFaBQ86c.s.removeChannel(ch);
     };
   }, [confirmation.bookingId]);
   _libs_react.reactExports.useEffect(() => {

@@ -1,7 +1,7 @@
 "use strict";
 const _libs_react = require("../_libs/react.mjs");
 const _libs__tanstack_reactRouter = require("../_libs/tanstack__react-router.mjs");
-const routerCpCDZ1M0 = require("./router-CpCDZ1M0.mjs");
+const routerKFaBQ86c = require("./router-kFaBQ86c.mjs");
 const utilsH80jjgLf = require("./utils-H80jjgLf.mjs");
 const _libs_sonner = require("../_libs/sonner.mjs");
 const _libs_lucideReact = require("../_libs/lucide-react.mjs");
@@ -98,7 +98,7 @@ function AdminPanel() {
   const [tab, setTab] = _libs_react.reactExports.useState("overview");
   _libs_react.reactExports.useEffect(() => {
     let mounted = true;
-    routerCpCDZ1M0.s.auth.getSession().then(({
+    routerKFaBQ86c.s.auth.getSession().then(({
       data
     }) => {
       if (!mounted) return;
@@ -108,7 +108,7 @@ function AdminPanel() {
     });
     const {
       data: sub
-    } = routerCpCDZ1M0.s.auth.onAuthStateChange((_e, s) => {
+    } = routerKFaBQ86c.s.auth.onAuthStateChange((_e, s) => {
       if (!mounted) return;
       setSession(s);
       setIsAdmin(!!s);
@@ -127,7 +127,7 @@ function AdminPanel() {
       /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(NavItem, { icon: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.LayoutDashboard, { className: "h-4 w-4" }), label: "Overview", active: tab === "overview", onClick: () => setTab("overview") }),
       /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(NavItem, { icon: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.ListChecks, { className: "h-4 w-4" }), label: "Bookings", active: tab === "bookings", onClick: () => setTab("bookings") }),
       /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(NavItem, { icon: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.MessageSquare, { className: "h-4 w-4" }), label: "Active Chats", active: tab === "chats", onClick: () => setTab("chats") }),
-      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "mt-auto", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("button", { onClick: () => routerCpCDZ1M0.s.auth.signOut(), className: "w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-secondary", children: [
+      /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx("div", { className: "mt-auto", children: /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsxs("button", { onClick: () => routerKFaBQ86c.s.auth.signOut(), className: "w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-secondary", children: [
         /* @__PURE__ */ _libs_react.jsxRuntimeExports.jsx(_libs_lucideReact.LogOut, { className: "h-4 w-4" }),
         " Sign out"
       ] }) })
@@ -161,7 +161,7 @@ function Login() {
     setLoading(true);
     const {
       error
-    } = await routerCpCDZ1M0.s.auth.signInWithPassword({
+    } = await routerKFaBQ86c.s.auth.signInWithPassword({
       email,
       password
     });
@@ -238,16 +238,16 @@ function StatCards() {
       }, {
         count: completed,
         error: e4
-      }] = await Promise.all([routerCpCDZ1M0.s.from("bookings").select("*", {
+      }] = await Promise.all([routerKFaBQ86c.s.from("bookings").select("*", {
         count: "exact",
         head: true
-      }), routerCpCDZ1M0.s.from("bookings").select("*", {
+      }), routerKFaBQ86c.s.from("bookings").select("*", {
         count: "exact",
         head: true
-      }).eq("status", "pending_verification"), routerCpCDZ1M0.s.from("bookings").select("*", {
+      }).eq("status", "pending_verification"), routerKFaBQ86c.s.from("bookings").select("*", {
         count: "exact",
         head: true
-      }).eq("status", "confirmed"), routerCpCDZ1M0.s.from("bookings").select("*", {
+      }).eq("status", "confirmed"), routerKFaBQ86c.s.from("bookings").select("*", {
         count: "exact",
         head: true
       }).eq("status", "completed")]);
@@ -289,7 +289,7 @@ function RecentBookings() {
       const {
         data,
         error: error2
-      } = await routerCpCDZ1M0.s.from("bookings").select("id,user_name,session_type,preferred_date,preferred_time,bkash_transaction_id,status,created_at").order("created_at", {
+      } = await routerKFaBQ86c.s.from("bookings").select("id,user_name,session_type,preferred_date,preferred_time,bkash_transaction_id,status,created_at").order("created_at", {
         ascending: false
       }).range(0, 9);
       if (error2) throw error2;
@@ -356,7 +356,7 @@ function Bookings() {
     try {
       const from = page * PAGE_SIZE;
       const to = from + PAGE_SIZE - 1;
-      let q = routerCpCDZ1M0.s.from("bookings").select("*", {
+      let q = routerKFaBQ86c.s.from("bookings").select("*", {
         count: "exact"
       }).order("created_at", {
         ascending: false
@@ -389,7 +389,7 @@ function Bookings() {
         const {
           data: cs,
           error: csErr
-        } = await routerCpCDZ1M0.s.from("chat_sessions").insert({
+        } = await routerKFaBQ86c.s.from("chat_sessions").insert({
           booking_id: b.id,
           status: "waiting"
         }).select("id").maybeSingle();
@@ -398,7 +398,7 @@ function Bookings() {
       }
       const {
         error: error2
-      } = await routerCpCDZ1M0.s.from("bookings").update({
+      } = await routerKFaBQ86c.s.from("bookings").update({
         status,
         chat_id
       }).eq("id", b.id);
@@ -495,7 +495,7 @@ function ActiveChats() {
       const {
         data,
         error: error2
-      } = await routerCpCDZ1M0.s.from("bookings").select("id,chat_id,user_name,is_anonymous,preferred_date,preferred_time,session_type").in("session_type", ["text_peer", "text_health"]).eq("status", "confirmed").not("chat_id", "is", null).order("preferred_date", {
+      } = await routerKFaBQ86c.s.from("bookings").select("id,chat_id,user_name,is_anonymous,preferred_date,preferred_time,session_type").in("session_type", ["text_peer", "text_health"]).eq("status", "confirmed").not("chat_id", "is", null).order("preferred_date", {
         ascending: true
       }).range(0, 49);
       if (error2) throw error2;
