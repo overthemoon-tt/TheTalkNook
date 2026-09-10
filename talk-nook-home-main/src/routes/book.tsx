@@ -2,8 +2,9 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { SiteShell } from "@/components/SiteShell";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { notifyBooking } from "@/lib/notify-booking";
 import { toast } from "sonner";
-import { Check, MessageCircle, Phone, Stethoscope, Copy, ArrowRight } from "lucide-react";
+import { Check, MessageCircle, Phone, Copy, ArrowRight } from "lucide-react";
 
 type ServiceKey = "text_peer" | "voice_peer" | "text_health";
 
@@ -200,26 +201,23 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
       })
       .select("id, reference_code")
       .maybeSingle();
-  
-
-      try {
-        await fetch(`${import.meta.env.VITE_API_URL ?? ""}/api/notify-booking`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userName,
-            service: cfg.label,
-            txid: txid.trim(),
-            ref: booking?.reference_code,
-          }),
-        });
-      } catch (e) {
-        console.error("Notification failed:", e);
-      }
 
     if (error || !booking) {
       setLoading(false);
       return toast.error(error?.message || "Could not save booking.");
+    }
+
+    try {
+      await notifyBooking({
+        data: {
+          userName,
+          service: cfg.label,
+          txid: txid.trim(),
+          ref: booking.reference_code,
+        },
+      });
+    } catch (e) {
+      console.error("Notification failed:", e);
     }
   
     // Generate Meet link for voice sessions
