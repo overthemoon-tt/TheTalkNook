@@ -171,12 +171,7 @@ function ChatPage() {
   // ── Realtime subscription ─────────────────────────────────────────────────
   useEffect(() => {
     const ch = supabase
-  .channel(`chat_${chatId}`, {
-    config: {
-      broadcast: { self: false },
-    },
-  })
-
+      .channel(`chat_${chatId}`)
       .on(
         "postgres_changes",
         {
