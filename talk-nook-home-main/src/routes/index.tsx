@@ -74,7 +74,39 @@ function StepCard({ n, icon: Icon, title, desc }: { n: number; icon: any; title:
   );
 }
 
-
+function HowItWorks() {
+  return (
+    <section className="mx-auto max-w-6xl px-5 py-20">
+      <div className="text-center mb-12">
+        <h2 className="font-serif text-3xl sm:text-4xl">How it works</h2>
+        <p className="mt-3 text-muted-foreground">Simple, gentle, and yours to pace.</p>
+      </div>
+      <div className="grid gap-10 md:grid-cols-1">
+        <div>
+          <p className="text-xs uppercase tracking-wider text-accent mb-4 font-medium">Peer Listening</p>
+          <div className="grid gap-3">
+            <StepCard n={1} icon={Calendar} title="Book" desc="Pick a time and a session that fits — text or voice." />
+            <StepCard n={2} icon={UserCheck} title="Match" desc="We match you with a trained peer listener." />
+            <StepCard n={3} icon={MessageCircle} title="Talk" desc="Show up as you are. Be heard. Leave lighter." />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+function Services() {
+  return (
+    <section className="mx-auto max-w-6xl px-5 py-12">
+      <div className="grid gap-6 md:grid-cols-2">
+        <ServiceCard
+          icon={<Heart className="h-5 w-5" />}
+          title="Peer Listening"
+          desc="Trained peer listeners who hold space without judgment. Text or voice. 25–30 minutes."
+          to="/peer-support"
+        />
+      </div>
+    </section>
+  );
 }
 
 function ServiceCard({ icon, title, desc, to }: { icon: React.ReactNode; title: string; desc: string; to: string }) {
