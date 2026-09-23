@@ -6,7 +6,7 @@ import { R as Root2, P as Portal2, C as Content2, T as Title2, D as Description2
 import { c as cn } from "./utils-H80jjgLf.mjs";
 import { S as Slot } from "../_libs/radix-ui__react-slot.mjs";
 import { c as cva } from "../_libs/class-variance-authority.mjs";
-import { a as Route } from "./router-BP_jko0A.mjs";
+import { a as Route } from "./router-DyYhLJPg.mjs";
 import "../_libs/sonner.mjs";
 import { o as ArrowLeft, p as Clock, d as CircleAlert, q as Send } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
