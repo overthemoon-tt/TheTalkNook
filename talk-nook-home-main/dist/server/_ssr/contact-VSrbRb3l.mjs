@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { s as supabase } from "./router-CO6Xqijl.mjs";
+import { s as supabase } from "./client-Xq59pGEw.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
 import { i as Mail, F as Facebook } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__react-router.mjs";
@@ -17,8 +17,6 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "../_libs/tanstack__query-core.mjs";
-import "../_libs/tanstack__react-query.mjs";
 import "../_libs/supabase__supabase-js.mjs";
 import "../_libs/supabase__postgrest-js.mjs";
 import "../_libs/supabase__realtime-js.mjs";

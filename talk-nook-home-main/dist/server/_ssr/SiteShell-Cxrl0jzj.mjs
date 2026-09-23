@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { e as useRouterState, L as Link } from "../_libs/tanstack__react-router.mjs";
-import { X, t as Menu, F as Facebook, u as Linkedin } from "../_libs/lucide-react.mjs";
+import { X, r as Menu, F as Facebook, s as Linkedin } from "../_libs/lucide-react.mjs";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },

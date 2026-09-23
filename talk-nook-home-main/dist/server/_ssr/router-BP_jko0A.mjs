@@ -3,7 +3,6 @@ import { Q as QueryClientProvider } from "../_libs/tanstack__react-query.mjs";
 import { c as createRouter, a as createRootRouteWithContext, u as useRouter, L as Link, O as Outlet, H as HeadContent, S as Scripts, b as createFileRoute, l as lazyRouteComponent } from "../_libs/tanstack__react-router.mjs";
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { T as Toaster$1 } from "../_libs/sonner.mjs";
-import { c as createClient } from "../_libs/supabase__supabase-js.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/cookie-es.mjs";
 import "../_libs/seroval.mjs";
@@ -17,15 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "../_libs/supabase__postgrest-js.mjs";
-import "../_libs/supabase__realtime-js.mjs";
-import "../_libs/supabase__phoenix.mjs";
-import "../_libs/supabase__storage-js.mjs";
-import "../_libs/iceberg-js.mjs";
-import "../_libs/supabase__auth-js.mjs";
-import "tslib";
-import "../_libs/supabase__functions-js.mjs";
-const appCss = "/assets/styles-Bqgxu2S4.css";
+const appCss = "/assets/styles-BiU0ocaB.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -135,7 +126,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster, {})
   ] });
 }
-const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-5WOUGcuO.mjs");
+const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-DggxNt35.mjs");
 const Route$7 = createFileRoute("/talknook-admin-panel")({
   head: () => ({
     meta: [{
@@ -183,7 +174,7 @@ const Route$5 = createFileRoute("/health-navigation")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-const $$splitComponentImporter$4 = () => import("./contact-Cm0rZj1X.mjs");
+const $$splitComponentImporter$4 = () => import("./contact-VSrbRb3l.mjs");
 const Route$4 = createFileRoute("/contact")({
   head: () => ({
     meta: [{
@@ -195,7 +186,7 @@ const Route$4 = createFileRoute("/contact")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./book-K5K6I0LI.mjs");
+const $$splitComponentImporter$3 = () => import("./book-C8sL5YVm.mjs");
 const Route$3 = createFileRoute("/book")({
   validateSearch: (s) => ({
     s: s.s || void 0
@@ -228,25 +219,7 @@ const Route$2 = createFileRoute("/about")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-function createSupabaseClient() {
-  const SUPABASE_URL = "https://wbniqxwcwygvtcushndo.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-BRSvkudigQLeGhiu5N4Zg_Iw0v7TL-";
-  return createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-    auth: {
-      storage: typeof window !== "undefined" ? localStorage : void 0,
-      persistSession: true,
-      autoRefreshToken: true
-    }
-  });
-}
-let _supabase;
-const supabase = new Proxy({}, {
-  get(_, prop, receiver) {
-    if (!_supabase) _supabase = createSupabaseClient();
-    return Reflect.get(_supabase, prop, receiver);
-  }
-});
-const $$splitComponentImporter$1 = () => import("./index-CRFOn7yC.mjs");
+const $$splitComponentImporter$1 = () => import("./index-DAGtT3Di.mjs");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{
@@ -264,7 +237,7 @@ const Route$1 = createFileRoute("/")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./chat._chatId-BbIXDTid.mjs");
+const $$splitComponentImporter = () => import("./chat._chatId-br86LrI_.mjs");
 const Route = createFileRoute("/chat/$chatId")({
   head: () => ({
     meta: [{
@@ -344,6 +317,5 @@ const router = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
 export {
   Route$3 as R,
   Route as a,
-  router as r,
-  supabase as s
+  router as r
 };

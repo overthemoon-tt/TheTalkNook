@@ -1,9 +1,8 @@
 import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
 import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
-import { s as supabase } from "./router-CO6Xqijl.mjs";
-import "../_libs/sonner.mjs";
-import { e as MessageCircle, o as Calendar, U as UserCheck, H as Heart, p as Users, A as ArrowRight } from "../_libs/lucide-react.mjs";
+import { s as supabase } from "./client-Xq59pGEw.mjs";
+import { e as MessageCircle } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/cookie-es.mjs";
 import "../_libs/seroval.mjs";
@@ -17,8 +16,6 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "../_libs/tanstack__query-core.mjs";
-import "../_libs/tanstack__react-query.mjs";
 import "../_libs/supabase__supabase-js.mjs";
 import "../_libs/supabase__postgrest-js.mjs";
 import "../_libs/supabase__realtime-js.mjs";
@@ -31,8 +28,6 @@ import "../_libs/supabase__functions-js.mjs";
 function Index() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(SiteShell, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(HowItWorks, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Services, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Impact, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Testimonials, {})
   ] });
@@ -59,58 +54,6 @@ function Hero() {
         " Talk to a Listener"
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-6 text-xs text-muted-foreground", children: "Not therapy. Not medical advice. Just real, human conversation." })
-    ] })
-  ] });
-}
-function StepCard({
-  n,
-  icon: Icon,
-  title,
-  desc
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative rounded-2xl border border-border bg-card p-6", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-3xl font-serif text-primary/70", children: String(n).padStart(2, "0") }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "h-4 w-4 text-primary" }) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "mt-4 font-serif text-lg", children: title }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: desc })
-  ] });
-}
-function HowItWorks() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto max-w-6xl px-5 py-20", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-12", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-serif text-3xl sm:text-4xl", children: "How it works" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-muted-foreground", children: "Simple, gentle, and yours to pace." })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-10 md:grid-cols-1", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase tracking-wider text-accent mb-4 font-medium", children: "Peer Listening" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StepCard, { n: 1, icon: Calendar, title: "Book", desc: "Pick a time and a session that fits — text or voice." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StepCard, { n: 2, icon: UserCheck, title: "Match", desc: "We match you with a trained peer listener." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(StepCard, { n: 3, icon: MessageCircle, title: "Talk", desc: "Show up as you are. Be heard. Leave lighter." })
-      ] })
-    ] }) })
-  ] });
-}
-function Services() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-6xl px-5 py-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 md:grid-cols-2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(ServiceCard, { icon: /* @__PURE__ */ jsxRuntimeExports.jsx(Heart, { className: "h-5 w-5" }), title: "Peer Listening", desc: "Trained peer listeners who hold space without judgment. Text or voice. 25–30 minutes.", to: "/peer-support" }) }) });
-}
-function ServiceCard({
-  icon,
-  title,
-  desc,
-  to
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "group rounded-3xl border border-border bg-card p-8 hover:border-primary/40 transition", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-11 w-11 rounded-full bg-primary/12 text-primary flex items-center justify-center", children: icon }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-serif text-2xl", children: title })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-muted-foreground", children: desc }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(Link, { to, className: "mt-6 inline-flex items-center gap-2 text-sm text-primary font-medium", children: [
-      "Learn more ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "h-4 w-4 group-hover:translate-x-1 transition" })
     ] })
   ] });
 }
@@ -157,22 +100,15 @@ function Testimonials() {
     }).limit(6).then(({
       data
     }) => {
-      if (data && data.length > 0) setReviews(data);
+      if (data) setReviews(data);
     });
   }, []);
-  const hardcoded = [{
-    q: "I didn't realize how much I needed someone to just listen. No advice. Just listening.",
-    a: "— University student, Dhaka"
-  }, {
-    q: "I was scared to call. I'm so glad I did. They didn't make me feel small.",
-    a: "— Anonymous"
-  }];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto max-w-6xl px-5 py-20", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center mb-12", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-serif text-3xl sm:text-4xl", children: "In their own words" }),
-      reviews.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-muted-foreground", children: "Real feedback from real sessions." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-muted-foreground", children: "Real feedback from real sessions." })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-5 md:grid-cols-3", children: reviews.length > 0 ? reviews.map((r, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-border bg-card p-7", children: [
+    reviews.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-5 md:grid-cols-3", children: reviews.map((r, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-border bg-card p-7", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-0.5 mb-3", children: [1, 2, 3, 4, 5].map((star) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-lg ${r.rating >= star ? "text-yellow-400" : "text-muted-foreground/20"}`, children: "★" }, star)) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-serif text-lg leading-snug", children: [
         '"',
@@ -180,15 +116,7 @@ function Testimonials() {
         '"'
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-sm text-muted-foreground", children: "— Anonymous" })
-    ] }, i)) : hardcoded.map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-border bg-card p-7", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "h-5 w-5 text-accent mb-3" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "font-serif text-lg leading-snug", children: [
-        '"',
-        t.q,
-        '"'
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-sm text-muted-foreground", children: t.a })
-    ] }, i)) })
+    ] }, i)) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-center text-muted-foreground", children: "No reviews yet." })
   ] });
 }
 export {

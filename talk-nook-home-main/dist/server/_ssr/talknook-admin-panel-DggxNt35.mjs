@@ -1,6 +1,6 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
-import { s as supabase } from "./router-CO6Xqijl.mjs";
+import { s as supabase } from "./client-Xq59pGEw.mjs";
 import { c as cn } from "./utils-H80jjgLf.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
 import { L as LayoutDashboard, a as ListChecks, M as MessageSquare, b as LogOut, C as ChevronLeft, c as ChevronRight, S as Search, d as CircleAlert } from "../_libs/lucide-react.mjs";
@@ -17,8 +17,6 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "../_libs/tanstack__query-core.mjs";
-import "../_libs/tanstack__react-query.mjs";
 import "../_libs/supabase__supabase-js.mjs";
 import "../_libs/supabase__postgrest-js.mjs";
 import "../_libs/supabase__realtime-js.mjs";
