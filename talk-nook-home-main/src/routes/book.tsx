@@ -11,7 +11,7 @@ type ServiceKey = "text_peer" | "voice_peer" | "text_health";
 const bn = (n: number) => n.toLocaleString("bn-BD");
 
 const SERVICES: Record<ServiceKey, { label: string; mins: number; price: number; icon: any; desc: string }> = {
-  text_peer:   { label: "টেক্সট সেশন", mins: 25, price: 29, icon: MessageCircle, desc: "টেক্সটে লিসেনারের সাথে কথা বলুন।" },
+  text_peer:   { label: "টেক্সট সেশন", mins: 25, price: 49, icon: MessageCircle, desc: "টেক্সটে লিসেনারের সাথে কথা বলুন।" },
   voice_peer:  { label: "ভয়েস সেশন",  mins: 30, price: 99, icon: Phone,         desc: "লিসেনারের সাথে গুগল মিটে যুক্ত হোন।" },
 };
 
