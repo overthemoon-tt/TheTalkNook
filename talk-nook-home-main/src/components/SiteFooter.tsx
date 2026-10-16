@@ -13,7 +13,7 @@ export function SiteFooter() {
             <span className="font-serif text-xl">The Talk Nook</span>
           </div>
           <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-            A safe, judgment-free space to be heard. Based in Bangladesh.
+            নিজের কথা বলার একটি নিরাপদ, বিচারমুক্ত জায়গা। বাংলাদেশভিত্তিক।
           </p>
           <div className="mt-4 flex gap-3">
             <a href="https://www.facebook.com/thetalknook" target="_blank" rel="noreferrer" className="h-9 w-9 rounded-full bg-background border border-border flex items-center justify-center hover:text-primary transition">
@@ -25,37 +25,35 @@ export function SiteFooter() {
           </div>
         </div>
         <div>
-          <h4 className="text-sm font-semibold mb-3">Explore</h4>
+          <h4 className="text-sm font-semibold mb-3">ঘুরে দেখুন</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/about" className="hover:text-foreground">About</Link></li>
-            <li><Link to="/peer-support" className="hover:text-foreground">Peer Support</Link></li>
-            <li><Link to="/health-navigation" className="hover:text-foreground">Health Navigation</Link></li>
-            <li><Link to="/contact" className="hover:text-foreground">Contact</Link></li>
+            <li><Link to="/about" className="hover:text-foreground">আমাদের সম্পর্কে</Link></li>
+            <li><Link to="/contact" className="hover:text-foreground">যোগাযোগ</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-semibold mb-3">Join Us</h4>
+          <h4 className="text-sm font-semibold mb-3">আমাদের সঙ্গে যুক্ত হোন</h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
-            <li><Link to="/contact" className="hover:text-foreground">Become a Listener</Link></li>
-            <li><Link to="/contact" className="hover:text-foreground">Become a Navigator</Link></li>
-            <li><Link to="/contact" className="hover:text-foreground">Partnerships</Link></li>
+            <li><Link to="/contact" className="hover:text-foreground">শ্রোতা হোন</Link></li>
+            <li><Link to="/contact" className="hover:text-foreground">নেভিগেটর হোন</Link></li>
+            <li><Link to="/contact" className="hover:text-foreground">অংশীদারিত্ব</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-semibold mb-3">Reach Us</h4>
+          <h4 className="text-sm font-semibold mb-3">যোগাযোগ করুন</h4>
           <p className="text-sm text-muted-foreground">thetalknook@proton.me</p>
           <p className="mt-4 text-xs text-muted-foreground leading-relaxed">
-            Talk Nook is not a medical or mental health service provider.
+            The Talk Nook কোনো চিকিৎসা বা মানসিক স্বাস্থ্যসেবা প্রদানকারী প্রতিষ্ঠান নয়।
           </p>
         </div>
       </div>
       <div className="border-t border-border/60">
         <div className="mx-auto max-w-6xl px-5 py-5 text-xs text-muted-foreground flex flex-wrap justify-between gap-3">
-          <span>© {new Date().getFullYear()}The Talk Nook. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} The Talk Nook. সর্বস্বত্ব সংরক্ষিত।</span>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-foreground">Privacy</a>
-            <a href="#" className="hover:text-foreground">Terms</a>
-            <a href="#" className="hover:text-foreground">Disclaimers</a>
+            <a href="#" className="hover:text-foreground">গোপনীয়তা</a>
+            <a href="#" className="hover:text-foreground">শর্তাবলি</a>
+            <a href="#" className="hover:text-foreground">দাবিত্যাগ</a>
           </div>
         </div>
       </div>

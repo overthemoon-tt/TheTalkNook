@@ -74,7 +74,7 @@ function PeerPage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-3 font-serif text-2xl", children: "Voice Session" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: "Via Google Meet link. 30 minutes. Hear and be heard." }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5 flex items-baseline gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-serif text-3xl text-primary", children: "BDT 149" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-serif text-3xl text-primary", children: "BDT 49" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-muted-foreground", children: "/ session" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/book", search: {

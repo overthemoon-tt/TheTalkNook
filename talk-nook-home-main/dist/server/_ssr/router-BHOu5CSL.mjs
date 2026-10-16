@@ -16,7 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-const appCss = "/assets/styles-CXok1JhF.css";
+const appCss = "/assets/styles-BwmkEffB.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -53,8 +53,8 @@ const Toaster = ({ ...props }) => {
 function NotFoundComponent() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-serif text-6xl text-foreground", children: "404" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-muted-foreground", children: "This page wandered off somewhere quiet." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90", children: "Back home" }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-muted-foreground", children: "এই পাতাটি কোনো নিরিবিলি জায়গায় হারিয়ে গেছে।" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { to: "/", className: "inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90", children: "হোমে ফিরে যান" }) })
   ] }) });
 }
 function ErrorComponent({ error, reset }) {
@@ -64,8 +64,8 @@ function ErrorComponent({ error, reset }) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-md text-center", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-serif text-2xl text-foreground", children: "Something didn't load." }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: "It's not you — let's try that again." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-serif text-2xl text-foreground", children: "কিছু একটা লোড হয়নি।" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: "এটা আপনার দোষ নয় — চলুন আবার চেষ্টা করি।" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-6 flex flex-wrap justify-center gap-2", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "button",
@@ -75,34 +75,37 @@ function ErrorComponent({ error, reset }) {
             reset();
           },
           className: "rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90",
-          children: "Try again"
+          children: "আবার চেষ্টা করুন"
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/", className: "rounded-full border border-border px-5 py-2.5 text-sm font-medium hover:bg-secondary", children: "Go home" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "/", className: "rounded-full border border-border px-5 py-2.5 text-sm font-medium hover:bg-secondary", children: "হোমে যান" })
     ] })
   ] }) });
 }
+const TITLE = "The Talk Nook — আপনার মনের ভারের কথা বলতে পারেন";
+const DESCRIPTION = "বাংলাদেশে পিয়ার সাপোর্ট দিকনির্দেশনা। এটি থেরাপি নয়। নিজের কথা বলার এবং শোনা হওয়ার একটি জায়গা।";
+const OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c7ed1fd3-1b5b-4754-8c97-e32343a274cd/id-preview-329eb026--924507dc-6719-42cc-b002-47d824f96add.lovable.app-1780224386083.png";
 const Route$8 = createRootRouteWithContext()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "The Talk Nook — You can say what burdens you" },
-      { name: "description", content: "Peer emotional support and basic health navigation in Bangladesh. Not therapy. A space to be heard." },
-      { property: "og:title", content: "The Talk Nook — You can say what burdens you" },
-      { property: "og:description", content: "Peer emotional support and basic health navigation in Bangladesh. Not therapy. A space to be heard." },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "The Talk Nook — You can say what burdens you" },
-      { name: "twitter:description", content: "Peer emotional support and basic health navigation in Bangladesh. Not therapy. A space to be heard." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c7ed1fd3-1b5b-4754-8c97-e32343a274cd/id-preview-329eb026--924507dc-6719-42cc-b002-47d824f96add.lovable.app-1780224386083.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c7ed1fd3-1b5b-4754-8c97-e32343a274cd/id-preview-329eb026--924507dc-6719-42cc-b002-47d824f96add.lovable.app-1780224386083.png" }
+      { name: "twitter:title", content: TITLE },
+      { name: "twitter:description", content: DESCRIPTION },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:image", content: OG_IMAGE }
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" }
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" }
     ]
   }),
   shellComponent: RootShell,
@@ -111,7 +114,7 @@ const Route$8 = createRootRouteWithContext()({
   errorComponent: ErrorComponent
 });
 function RootShell({ children }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("html", { lang: "en", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("html", { lang: "bn", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("head", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(HeadContent, {}) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("body", { children: [
       children,
@@ -138,7 +141,7 @@ const Route$7 = createFileRoute("/talknook-admin-panel")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-const $$splitComponentImporter$6 = () => import("./peer-support-CybGJ1By.mjs");
+const $$splitComponentImporter$6 = () => import("./peer-support-AB-TYSEl.mjs");
 const Route$6 = createFileRoute("/peer-support")({
   head: () => ({
     meta: [{
@@ -186,7 +189,7 @@ const Route$4 = createFileRoute("/contact")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./book-o2Pfl0K9.mjs");
+const $$splitComponentImporter$3 = () => import("./book-CvwBsgga.mjs");
 const Route$3 = createFileRoute("/book")({
   validateSearch: (s) => ({
     s: s.s || void 0
@@ -237,7 +240,7 @@ const Route$1 = createFileRoute("/")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./chat._chatId-D9A98nYG.mjs");
+const $$splitComponentImporter = () => import("./chat._chatId-DHkXGNB5.mjs");
 const Route = createFileRoute("/chat/$chatId")({
   head: () => ({
     meta: [{

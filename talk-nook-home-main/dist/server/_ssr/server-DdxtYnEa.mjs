@@ -85,7 +85,7 @@ function getResponse() {
 }
 var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-RFn3DiQq.mjs");
+  const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-CsXeJa5Q.mjs");
   const startManifest = tsrStartManifest();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -107,7 +107,7 @@ async function getStartManifest(matchedRoutes) {
 const manifest = {
   "96c8deb2eeea00f12084f43dcfec35745451684544f42f101ff4819dfdf40117": {
     functionName: "notifyBooking_createServerFn_handler",
-    importer: () => import("./notify-booking-7oDZh2GL.mjs")
+    importer: () => import("./notify-booking-DkbI3fgw.mjs")
   }
 };
 async function getServerFnById(id, access) {
@@ -1337,8 +1337,8 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    import("./router-DyYhLJPg.mjs").then((n) => n.r),
-    import("./start-B9Ep8dLn.mjs"),
+    import("./router-BHOu5CSL.mjs").then((n) => n.r),
+    import("./start-C9DYlA2T.mjs"),
     import("./empty-plugin-adapters-BFgPZ6_d.mjs")
   ]);
   return {

@@ -8,14 +8,16 @@ import { Check, MessageCircle, Phone, Copy, ArrowRight } from "lucide-react";
 
 type ServiceKey = "text_peer" | "voice_peer" | "text_health";
 
+const bn = (n: number) => n.toLocaleString("bn-BD");
+
 const SERVICES: Record<ServiceKey, { label: string; mins: number; price: number; icon: any; desc: string }> = {
-  text_peer:   { label: "Text Venting",     mins: 25, price: 29,  icon: MessageCircle, desc: "Real-time chat with a trained peer listener." },
-  voice_peer:  { label: "Voice Venting",    mins: 30, price: 99, icon: Phone,         desc: "Google Meet call with a peer listener." },
+  text_peer:   { label: "টেক্সট সেশন", mins: 25, price: 29, icon: MessageCircle, desc: "টেক্সটে লিসেনারের সাথে কথা বলুন।" },
+  voice_peer:  { label: "ভয়েস সেশন",  mins: 30, price: 99, icon: Phone,         desc: "লিসেনারের সাথে গুগল মিটে যুক্ত হোন।" },
 };
 
 export const Route = createFileRoute("/book")({
   validateSearch: (s: Record<string, unknown>) => ({ s: (s.s as ServiceKey) || undefined }),
-  head: () => ({ meta: [{ title: "Book a Session — The Talk Nook" }, { name: "description", content: "Book a peer support or health navigation session." }] }),
+  head: () => ({ meta: [{ title: "কথা বলুন — The Talk Nook" }, { name: "description", content: "পিয়ার লিসেনিং সেশনে লিসেনারের সাথে কথা বলুন।" }] }),
   component: BookPage,
 });
 
@@ -48,8 +50,8 @@ function BookPage() {
   return (
     <SiteShell>
       <section className="mx-auto max-w-2xl px-5 pt-14 pb-20">
-        <p className="text-xs uppercase tracking-widest text-accent">Book a session</p>
-        <h1 className="mt-3 font-serif text-4xl">Let's set you up.</h1>
+        <p className="text-xs text-accent">কথা বলুন</p>
+        <h1 className="mt-3 font-serif text-4xl leading-snug">চলুন শুরু করা যাক</h1>
         <Stepper step={step} />
         {step === 1 && <Step1 service={service} setService={setService} onNext={() => service && setStep(2)} />}
         {step === 2 && service && (
@@ -88,7 +90,7 @@ function BookPage() {
 }
 
 function Stepper({ step }: { step: number }) {
-  const labels = ["Service", "Your details", "Payment", "Confirmed"];
+  const labels = ["সার্ভিস", "আপনার তথ্য", "পেমেন্ট", "কনফার্ম করুন"];
   return (
     <div className="mt-6 mb-10 flex items-center gap-2">
       {labels.map((l, i) => {
@@ -98,9 +100,9 @@ function Stepper({ step }: { step: number }) {
         return (
           <div key={l} className="flex items-center flex-1">
             <div className={`h-7 w-7 rounded-full flex items-center justify-center text-xs ${done ? "bg-primary text-primary-foreground" : active ? "bg-accent text-accent-foreground" : "bg-secondary text-muted-foreground"}`}>
-              {done ? <Check className="h-3.5 w-3.5" /> : n}
+              {done ? <Check className="h-3.5 w-3.5" /> : bn(n)}
             </div>
-            <div className="ml-2 text-xs hidden sm:block text-muted-foreground">{l}</div>
+            <div className="ml-2 text-xs hidden sm:block text-muted-foreground whitespace-nowrap">{l}</div>
             {i < labels.length - 1 && <div className="flex-1 h-px bg-border mx-3" />}
           </div>
         );
@@ -122,16 +124,16 @@ function Step1({ service, setService, onNext }: { service: ServiceKey | null; se
             <div className="flex-1">
               <div className="flex items-baseline justify-between">
                 <h3 className="font-serif text-lg">{cfg.label}</h3>
-                <span className="font-serif text-xl text-primary">BDT {cfg.price}</span>
+                <span className="font-serif text-xl text-primary">{bn(cfg.price)} টাকা</span>
               </div>
               <p className="text-sm text-muted-foreground mt-1">{cfg.desc}</p>
-              <p className="text-xs text-muted-foreground mt-1">{cfg.mins} minutes</p>
+              <p className="text-xs text-muted-foreground mt-1">{bn(cfg.mins)} মিনিট</p>
             </div>
           </button>
         );
       })}
       <button disabled={!service} onClick={onNext} className="mt-4 w-full rounded-full bg-primary text-primary-foreground py-3 text-sm font-medium disabled:opacity-40">
-        Continue
+        এগিয়ে যান
       </button>
     </div>
   );
@@ -140,18 +142,18 @@ function Step1({ service, setService, onNext }: { service: ServiceKey | null; se
 function Step2({ service, userName, setUserName, isAnonymous, setIsAnonymous, onBack, onNext }: any) {
   const cfg = SERVICES[service as ServiceKey];
   const submit = () => {
-    if (!userName.trim()) return toast.error("Please enter your name.");
+    if (!userName.trim()) return toast.error("অনুগ্রহ করে আপনার নাম লিখুন।");
     onNext();
   };
   return (
     <div className="space-y-4 rounded-3xl border border-border bg-card p-6">
-      <h3 className="font-serif text-xl">Your details for {cfg.label}</h3>
+      <h3 className="font-serif text-xl">{cfg.label}-এর জন্য আপনার তথ্য</h3>
       <label className="flex items-center gap-2 text-sm">
         <input type="checkbox" checked={isAnonymous} onChange={(e) => setIsAnonymous(e.target.checked)} />
-        I'd like to stay anonymous (we still need a name to call you)
+        আমি পরিচয় গোপন রাখতে চাই (তবে আপনাকে সম্বোধন করার জন্য একটি নাম বা ডাকনাম আমাদের প্রয়োজন)
       </label>
       <div>
-        <label className="text-sm">Your name (or nickname) *</label>
+        <label className="text-sm">আপনার নাম (বা ডাকনাম) *</label>
         <input
           type="text"
           value={userName}
@@ -166,13 +168,13 @@ function Step2({ service, userName, setUserName, isAnonymous, setIsAnonymous, on
           </svg>
         </div>
         <div>
-          <div className="font-medium text-sm">As soon as possible (ASAP)</div>
-          <div className="text-xs text-muted-foreground mt-0.5">We'll match you with the next available listener and notify you shortly.</div>
+          <div className="font-medium text-sm">যত দ্রুত সম্ভব</div>
+          <div className="text-xs text-muted-foreground mt-0.5">পরবর্তী সহজলভ্য লিসেনারের সাথে আমরা আপনাকে যুক্ত করে দিবো এবং শীঘ্রই জানিয়ে দিবো।</div>
         </div>
       </div>
       <div className="flex gap-3 pt-2">
-        <button onClick={onBack} className="rounded-full border border-border px-5 py-2.5 text-sm">Back</button>
-        <button onClick={submit} className="flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium">Continue to payment</button>
+        <button onClick={onBack} className="rounded-full border border-border px-5 py-2.5 text-sm">পেছনে যান</button>
+        <button onClick={submit} className="flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium">পেমেন্টে এগিয়ে যান</button>
       </div>
     </div>
   );
@@ -183,7 +185,7 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
   const [loading, setLoading] = useState(false);
 
   const submit = async () => {
-    if (!txid.trim()) return toast.error("Please enter your bKash Transaction ID.");
+    if (!txid.trim()) return toast.error("অনুগ্রহ করে আপনার বিকাশ ট্রান্সেকশন আইডি দিন।");
     setLoading(true);
   
     const today = new Date().toISOString().split('T')[0];
@@ -204,7 +206,7 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
 
     if (error || !booking) {
       setLoading(false);
-      return toast.error(error?.message || "Could not save booking.");
+      return toast.error(error?.message || "অনুরোধ সংরক্ষণ করা যায়নি।");
     }
 
     try {
@@ -244,40 +246,38 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
     onConfirmed(booking.reference_code, chatId, meetLink, booking.id);
   };
 
-  const copyNumber = () => { navigator.clipboard.writeText("01301046838"); toast.success("Number copied"); };
+  const copyNumber = () => { navigator.clipboard.writeText("01301046838"); toast.success("নম্বর কপি হয়েছে"); };
 
   return (
     <div className="space-y-4 rounded-3xl border border-border bg-card p-6">
       <div className="flex items-baseline justify-between">
-        <h3 className="font-serif text-xl">Pay via bKash</h3>
-        <div className="font-serif text-2xl text-primary">BDT {cfg.price}</div>
+        <h3 className="font-serif text-xl">বিকাশে পেমেন্ট করুন</h3>
+        <div className="font-serif text-2xl text-primary">{bn(cfg.price)} টাকা</div>
       </div>
       <ol className="text-sm text-muted-foreground space-y-3 list-decimal pl-5">
         <li>
-          Send <b className="text-foreground">BDT {cfg.price}</b> to bKash merchant:
+          বিকাশ মার্চেন্ট নম্বরে <b className="text-foreground">{bn(cfg.price)} টাকা</b> পাঠান:
           <div className="mt-2 flex items-center gap-2 rounded-xl bg-secondary/60 border border-border px-3 py-2 w-fit">
             <span className="font-mono text-foreground text-base">01301046838</span>
             <button onClick={copyNumber} className="text-primary"><Copy className="h-4 w-4" /></button>
           </div>
         </li>
-        <li>Copy your bKash Transaction ID (TrxID).</li>
-        <li>Paste it below and confirm.</li>
+        <li>আপনার বিকাশ ট্রান্সেকশন আইডি (TrxID) কপি করুন।</li>
+        <li>নিচে পেস্ট করে কনফার্ম করুন।</li>
       </ol>
       <div>
-        <label className="text-sm">bKash Transaction ID *</label>
-        <input value={txid} onChange={(e) => setTxid(e.target.value)} placeholder="e.g. 9A8B7C6D5E" className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 font-mono" />
+        <label className="text-sm">বিকাশ ট্রান্সেকশন আইডি *</label>
+        <input value={txid} onChange={(e) => setTxid(e.target.value)} placeholder="যেমন: 9A8B7C6D5E" className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 font-mono" />
       </div>
       <div className="flex gap-3 pt-2">
-        <button onClick={onBack} className="rounded-full border border-border px-5 py-2.5 text-sm">Back</button>
+        <button onClick={onBack} className="rounded-full border border-border px-5 py-2.5 text-sm">পেছনে যান</button>
         <button onClick={submit} disabled={loading} className="flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium disabled:opacity-50">
-          {loading ? "Saving..." : "Confirm booking"}
+          {loading ? "সংরক্ষণ হচ্ছে..." : "কনফার্ম করুন"}
         </button>
       </div>
     </div>
   );
 }
-
-// Replace your existing Step4 function in book.tsx with this
 
 function Step4({ service, confirmation }: { 
   service: ServiceKey; 
@@ -334,9 +334,9 @@ function Step4({ service, confirmation }: {
   const isCancelled = status === "cancelled";
 
   const steps = [
-    { label: "Booking received", done: true },
-    { label: "Your listener is being assigned...", done: isConfirmed, active: !isConfirmed && !isCancelled },
-    { label: "Room ready", done: isConfirmed },
+    { label: "আপনার অনুরোধ গৃহীত হয়েছে", done: true },
+    { label: "আপনার লিসেনার ঠিক করা হচ্ছে...", done: isConfirmed, active: !isConfirmed && !isCancelled },
+    { label: "রুম প্রস্তুত", done: isConfirmed },
   ];
 
   return (
@@ -353,19 +353,19 @@ function Step4({ service, confirmation }: {
             <span className="text-2xl" style={{ animation: "pulse 2s infinite" }}>☕</span>
           )}
         </div>
-        <h3 className="font-serif text-2xl">
+        <h3 className="font-serif text-2xl leading-snug">
           {isConfirmed
-            ? "Your Talk Nook is ready"
+            ? "আপনার Talk Nook প্রস্তুত"
             : isCancelled
-            ? "Booking cancelled"
-            : "Your Talk Nook is being prepared"}
+            ? "আপনার অনুরোধ বাতিল হয়েছে"
+            : "আপনার Talk Nook প্রস্তুত করা হচ্ছে"}
         </h3>
         <p className="mt-2 text-sm text-muted-foreground">
           {isConfirmed
-            ? "Your listener is ready. Join whenever you are."
+            ? "আপনার লিসেনার প্রস্তুত। আপনি প্রস্তুত হলেই যুক্ত হোন।"
             : isCancelled
-            ? "Your booking was cancelled. Please reach us at thetalknook@proton.me if this was a mistake."
-            : "Typical connection time: 25 minutes"}
+            ? "আপনার অনুরোধ বাতিল করা হয়েছে। ভুলবশত হয়ে থাকলে অনুগ্রহ করে thetalknook@proton.me-এ আমাদের জানান।"
+            : "সাধারণত যুক্ত হতে সময় লাগে প্রায় ২৫ মিনিট"}
         </p>
       </div>
 
@@ -424,9 +424,9 @@ function Step4({ service, confirmation }: {
 
       {/* Reference code */}
       <div className="rounded-2xl bg-secondary/60 border border-border px-5 py-4 text-center mb-6">
-        <div className="text-xs uppercase tracking-wider text-muted-foreground">Booking reference</div>
+        <div className="text-xs text-muted-foreground">রেফারেন্স কোড</div>
         <div className="font-mono text-lg mt-1">{confirmation.ref}</div>
-        <div className="text-xs text-muted-foreground mt-1">Save this code to return to your session</div>
+        <div className="text-xs text-muted-foreground mt-1">সেশনে ফিরে আসতে এই কোডটি সংরক্ষণ করুন</div>
       </div>
 
       {/* Action button — only shows when confirmed */}
@@ -443,7 +443,7 @@ function Step4({ service, confirmation }: {
               onClick={() => localStorage.removeItem('tn_confirmation')}
               className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-8 py-3 text-sm font-medium"
             >
-              📹 Join Session <ArrowRight className="h-4 w-4" />
+              📹 সেশনে যুক্ত হোন <ArrowRight className="h-4 w-4" />
             </a>
           )}
           {(service === "text_peer" || service === "text_health") && confirmation.chatId && (
@@ -454,7 +454,7 @@ function Step4({ service, confirmation }: {
             }}
             className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-8 py-3 text-sm font-medium"
           >
-            Enter Chat Room <ArrowRight className="h-4 w-4" />
+            চ্যাট রুমে প্রবেশ করুন <ArrowRight className="h-4 w-4" />
           </button>
           )}
         </div>

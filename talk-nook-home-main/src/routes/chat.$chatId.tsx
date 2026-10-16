@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export const Route = createFileRoute("/chat/$chatId")({
-  head: () => ({ meta: [{ title: "Your chat — The Talk Nook" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "আপনার চ্যাট — The Talk Nook" }, { name: "robots", content: "noindex" }] }),
   component: ChatPage,
 });
 
@@ -46,6 +46,7 @@ function ChatPage() {
       ? new URLSearchParams(window.location.search)
       : new URLSearchParams();
   const asListener = search.get("as") === "listener";
+  const myRole = asListener ? "listener" : "user";
   const [session, setSession] = useState<Session | null>(null);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [text, setText] = useState("");
@@ -62,7 +63,14 @@ function ChatPage() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const endedRef = useRef(false);
-  
+
+  // ── TYPING INDICATOR STATE ───────────────────────────────────────────────
+  const [otherTyping, setOtherTyping] = useState(false);
+  const typingChannelRef = useRef<any>(null);
+  const typingReadyRef = useRef(false);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastTypingSentRef = useRef(0);
+
   // ── CLOCK-INDEPENDENT TIMER STATE ────────────────────────────────────
   const [timerActive, setTimerActive] = useState(false);
   const localStartTimeRef = useRef<number | null>(null);
@@ -74,14 +82,19 @@ function ChatPage() {
     }
   };
 
-  // Scroll on initial load and when messages change
+  // Scroll on initial load, when messages change, and when the typing bubble appears
   useEffect(() => {
-    if (messages.length > 0) {
+    if (messages.length > 0 || otherTyping) {
       // Small timeout to ensure DOM has updated
       const timeoutId = setTimeout(() => scrollToBottom("smooth"), 100);
       return () => clearTimeout(timeoutId);
     }
-  }, [messages]);
+  }, [messages, otherTyping]);
+
+  // Hide the typing bubble once the session has ended
+  useEffect(() => {
+    if (ended) setOtherTyping(false);
+  }, [ended]);
 
   // ── Initial load ──────────────────────────────────────────────────────────
   useEffect(() => {
@@ -128,6 +141,42 @@ function ChatPage() {
     return () => { mounted = false; };
   }, [chatId]);
 
+  // ── Typing indicator channel (broadcast only, nothing saved to the database) ──
+  useEffect(() => {
+    const ch = supabase.channel(`typing_${chatId}`, {
+      config: { broadcast: { self: false } },
+    });
+
+    ch.on("broadcast", { event: "typing" }, ({ payload }: any) => {
+      if (!payload || payload.role === myRole) return;
+      if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+      if (payload.typing) {
+        setOtherTyping(true);
+        // Safety net: hide the bubble if no new signal arrives
+        typingTimeoutRef.current = setTimeout(() => setOtherTyping(false), 4000);
+      } else {
+        setOtherTyping(false);
+      }
+    }).subscribe((status: string) => {
+      typingReadyRef.current = status === "SUBSCRIBED";
+    });
+
+    typingChannelRef.current = ch;
+
+    return () => {
+      typingReadyRef.current = false;
+      typingChannelRef.current = null;
+      if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+      supabase.removeChannel(ch);
+    };
+  }, [chatId, myRole]);
+
+  const sendTyping = (typing: boolean) => {
+    const ch = typingChannelRef.current;
+    if (!ch || !typingReadyRef.current || endedRef.current) return;
+    ch.send({ type: "broadcast", event: "typing", payload: { role: myRole, typing } });
+  };
+
   // ── Realtime subscription ─────────────────────────────────────────────────
   useEffect(() => {
     const ch = supabase
@@ -141,6 +190,8 @@ function ChatPage() {
           filter: `chat_id=eq.${chatId}`,
         },
         (p) => {
+          // A new message from the other person means they stopped typing
+          if ((p.new as any).sender_role !== myRole) setOtherTyping(false);
           setMessages((prev) => {
             if (prev.some((m) => m.id === (p.new as any).id)) return prev;
             return [...prev, p.new as any];
@@ -176,7 +227,7 @@ function ChatPage() {
       .subscribe();
 
     return () => { supabase.removeChannel(ch); };
-  }, [chatId, asListener, timerActive]);
+  }, [chatId, asListener, timerActive, myRole]);
 
   // ── Mark listener as joined ───────────────────────────────────────────────
   const listenerJoinedHandled = useRef(false);
@@ -193,7 +244,7 @@ function ChatPage() {
             chat_id: chatId,
             sender_role: "system",
             sender_display_name: "System",
-            content: "Listener has joined.",
+            content: "লিসেনার যুক্ত হয়েছেন।",
           });
         });
     }
@@ -247,7 +298,7 @@ function ChatPage() {
               chat_id: chatId,
               sender_role: "system",
               sender_display_name: "System",
-              content: "Session has ended. Thank you for choosing The Talk Nook.",
+              content: "সেশন শেষ হয়েছে। The Talk Nook-কে বেছে নেওয়ার জন্য ধন্যবাদ।",
             });
           });
       } else {
@@ -263,13 +314,17 @@ function ChatPage() {
     if (!text.trim() || ended) return;
     const msg = text.trim();
     setText("");
+
+    // Tell the other side we stopped typing
+    lastTypingSentRef.current = 0;
+    sendTyping(false);
   
     const role = asListener ? "listener" : "user";
     const name = asListener
-      ? "Listener"
+      ? "লিসেনার"
       : booking?.is_anonymous
-      ? "Friend"
-      : booking?.user_name || "You";
+      ? "বন্ধু"
+      : booking?.user_name || "আপনি";
   
     // Insert message first always
     await supabase.from("chat_messages").insert({
@@ -302,7 +357,7 @@ function ChatPage() {
       chat_id: chatId,
       sender_role: "system",
       sender_display_name: "System",
-      content: "Session has ended. Thank you for choosing The Talk Nook.",
+      content: "সেশন শেষ হয়েছে। The Talk Nook-কে বেছে নেওয়ার জন্য ধন্যবাদ।",
     });
     if (!asListener) setShowFeedback(true);
   };
@@ -323,13 +378,20 @@ function ChatPage() {
 
   const sessionLabel =
     booking?.session_type === "text_health"
-      ? "Health Navigation — Text"
-      : "Peer Support — Text";
+      ? "স্বাস্থ্যসেবা নির্দেশনা — টেক্সট"
+      : "পিয়ার লিসেনিং — টেক্সট";
+
+  // Name shown on the typing bubble (the other person's name)
+  const otherName = asListener
+    ? booking?.is_anonymous
+      ? "বন্ধু"
+      : booking?.user_name || "বন্ধু"
+    : "লিসেনার";
   
       if (loading) {
         return (
           <div className="flex items-center justify-center h-screen">
-            <div className="text-muted-foreground text-sm">Loading your session…</div>
+            <div className="text-muted-foreground text-sm">আপনার সেশন লোড হচ্ছে…</div>
           </div>
         );
       }    
@@ -338,15 +400,15 @@ function ChatPage() {
     return (
       <SiteShell>
         <div className="mx-auto max-w-md px-5 py-20 text-center">
-          <h2 className="font-serif text-2xl">Chat not found</h2>
+          <h2 className="font-serif text-2xl leading-snug">চ্যাট খুঁজে পাওয়া যায়নি</h2>
           <p className="mt-2 text-muted-foreground">
-            This chat link is invalid or has expired.
+            এই চ্যাট লিংকটি সঠিক নয় অথবা এর মেয়াদ শেষ হয়ে গেছে।
           </p>
           <Link
             to="/"
             className="mt-6 inline-block rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm"
           >
-            Back home
+            হোমে ফিরে যান
           </Link>
         </div>
       </SiteShell>
@@ -373,14 +435,14 @@ function ChatPage() {
         {!ended && session.status !== "ended" && (
           <button
             onClick={() => setShowEndDialog(true)}
-            className="flex-shrink-0 text-xs px-3 py-1.5 rounded-full border border-destructive/30 text-destructive hover:bg-destructive/10 transition font-medium"
+            className="flex-shrink-0 text-xs px-3 py-1.5 rounded-full border border-destructive/30 text-destructive hover:bg-destructive/10 transition font-medium whitespace-nowrap"
           >
-            End Chat
+            চ্যাট শেষ করুন
           </button>
         )}
         {ended && (
-          <span className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-full bg-destructive/10 text-destructive font-medium animate-pulse">
-            <AlertCircle className="h-3 w-3" /> Session Ended
+          <span className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-full bg-destructive/10 text-destructive font-medium animate-pulse whitespace-nowrap">
+            <AlertCircle className="h-3 w-3" /> সেশন শেষ হয়েছে
           </span>
         )}
       </header>
@@ -393,14 +455,14 @@ function ChatPage() {
       >
         {!session.listener_joined_at && !ended && (
           <div className="text-center text-sm text-muted-foreground py-12 animate-pulse">
-            Waiting for your listener to join…
+            আপনার লিসেনারের যুক্ত হওয়ার অপেক্ষায়…
           </div>
         )}
         
         {messages.map((m, idx) => {
           if (m.sender_role === "system")
             return (
-              <div key={m.id || idx} className="text-center text-[11px] text-muted-foreground py-4 uppercase tracking-widest opacity-60">
+              <div key={m.id || idx} className="text-center text-xs text-muted-foreground py-4 opacity-70">
                 — {m.content} —
               </div>
             );
@@ -416,7 +478,7 @@ function ChatPage() {
                     : "bg-secondary text-secondary-foreground rounded-tl-none"
                 }`}
               >
-                <div className="text-[10px] font-bold uppercase tracking-tighter opacity-50 mb-1">
+                <div className="text-xs font-bold opacity-60 mb-1">
                   {m.sender_display_name}
                 </div>
                 <div className="text-[15px] whitespace-pre-wrap leading-relaxed">{m.content}</div>
@@ -424,6 +486,24 @@ function ChatPage() {
             </div>
           );
         })}
+
+        {/* Typing bubble — shows when the other person is typing */}
+        {otherTyping && !ended && (
+          <div className="flex justify-start animate-in fade-in slide-in-from-bottom-2 duration-300">
+            <div className="rounded-2xl rounded-tl-none bg-secondary text-secondary-foreground px-4 py-3 shadow-sm">
+              <div className="text-xs font-bold opacity-60 mb-1">{otherName} লিখছেন…</div>
+              <div className="flex items-center gap-1.5 h-5" aria-label={`${otherName} লিখছেন`}>
+                {[0, 1, 2].map((i) => (
+                  <span
+                    key={i}
+                    className="h-2 w-2 rounded-full bg-current opacity-50 animate-bounce"
+                    style={{ animationDelay: `${i * 150}ms`, animationDuration: "1s" }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
         
         {/* Invisible element to anchor the scroll */}
         <div ref={messagesEndRef} className="h-4 w-full" />
@@ -431,7 +511,7 @@ function ChatPage() {
         {ended && (
           <div className="text-center py-8">
             <div className="inline-block px-6 py-3 rounded-xl bg-muted text-muted-foreground text-sm border border-border font-medium">
-              This session has ended.
+              এই সেশন শেষ হয়েছে।
             </div>
           </div>
         )}
@@ -444,10 +524,23 @@ function ChatPage() {
             rows={1}
             value={text}
             onChange={(e) => {
-              setText(e.target.value);
+              const value = e.target.value;
+              setText(value);
               // Auto-expand textarea
               e.target.style.height = 'inherit';
               e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
+
+              // Typing signal: send at most once every 2 seconds while typing
+              if (!value.trim()) {
+                lastTypingSentRef.current = 0;
+                sendTyping(false);
+              } else {
+                const now = Date.now();
+                if (now - lastTypingSentRef.current > 2000) {
+                  lastTypingSentRef.current = now;
+                  sendTyping(true);
+                }
+              }
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
@@ -458,10 +551,10 @@ function ChatPage() {
             }}
             placeholder={
               ended
-                ? "Session has ended"
+                ? "সেশন শেষ হয়েছে"
                 : asListener && !session.listener_joined_at
-                ? "Type to greet…"
-                : "Say what's on your mind…"
+                ? "শুভেচ্ছা জানাতে লিখুন…"
+                : "আপনার মনের কথা লিখুন…"
             }
             disabled={ended}
             className="flex-1 rounded-2xl border border-input bg-background px-4 py-3 text-sm resize-none disabled:opacity-60 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none"
@@ -485,9 +578,9 @@ function ChatPage() {
       {showFeedback && !asListener && (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/60 backdrop-blur-sm transition-all">
           <div className="w-full max-w-md bg-card rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom duration-500">
-            <h2 className="font-serif text-3xl text-center mb-2">How was it?</h2>
+            <h2 className="font-serif text-3xl leading-snug text-center mb-2">কেমন লাগলো?</h2>
             <p className="text-center text-sm text-muted-foreground mb-8">
-              Your feedback helps us make The Talk Nook better.
+              আপনার মতামত The Talk Nook-কে আরও ভালো করতে আমাদের সাহায্য করে।
             </p>
 
             <div className="flex justify-center gap-4 mb-8">
@@ -507,12 +600,12 @@ function ChatPage() {
             <textarea
               value={feedbackComment}
               onChange={(e) => setFeedbackComment(e.target.value.slice(0, 200))}
-              placeholder="Anything else you'd like to share?"
+              placeholder="আর কিছু বলতে চাইলে লিখুন…"
               rows={3}
               className="w-full rounded-2xl border border-input bg-background px-5 py-4 text-sm resize-none mb-2 outline-none focus:ring-2 focus:ring-primary/20"
             />
-            <div className="text-right text-[10px] font-bold uppercase tracking-widest text-muted-foreground/40 mb-6">
-              {feedbackComment.length} / 200
+            <div className="text-right text-xs font-bold text-muted-foreground/50 mb-6">
+              {feedbackComment.length.toLocaleString("bn-BD")} / {(200).toLocaleString("bn-BD")}
             </div>
 
             <button
@@ -520,13 +613,13 @@ function ChatPage() {
               disabled={feedbackRating === 0 || feedbackSubmitting}
               className="w-full rounded-full bg-primary text-primary-foreground py-4 text-sm font-bold shadow-lg hover:shadow-xl disabled:opacity-40 transition-all"
             >
-              {feedbackSubmitting ? "Sending..." : "Submit Feedback"}
+              {feedbackSubmitting ? "পাঠানো হচ্ছে..." : "মতামত পাঠান"}
             </button>
             <button
               onClick={() => setShowFeedback(false)}
-              className="w-full text-center text-xs font-bold uppercase tracking-widest text-muted-foreground mt-5 hover:text-foreground transition-colors"
+              className="w-full text-center text-xs font-bold text-muted-foreground mt-5 hover:text-foreground transition-colors"
             >
-              Maybe later
+              এখন নয়
             </button>
           </div>
         </div>
@@ -536,20 +629,20 @@ function ChatPage() {
       <AlertDialog open={showEndDialog} onOpenChange={setShowEndDialog}>
         <AlertDialogContent className="rounded-2xl">
           <AlertDialogHeader>
-            <AlertDialogTitle className="font-serif text-2xl">End this session?</AlertDialogTitle>
+            <AlertDialogTitle className="font-serif text-2xl leading-snug">সেশন শেষ করবেন?</AlertDialogTitle>
             <AlertDialogDescription className="text-base">
-              Are you sure? You won't be able to send more messages in this quiet corner.
+              আপনি কি নিশ্চিত? এরপর আর কোনো বার্তা পাঠাতে পারবেন না।
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="mt-4">
-            <AlertDialogCancel className="rounded-full border-none bg-muted text-foreground font-bold uppercase tracking-widest text-[10px]">
-              Stay
+            <AlertDialogCancel className="rounded-full border-none bg-muted text-foreground font-bold text-xs">
+              থাকুন
             </AlertDialogCancel>
             <AlertDialogAction
               onClick={handleEndSession}
-              className="rounded-full bg-destructive text-destructive-foreground font-bold uppercase tracking-widest text-[10px] hover:bg-destructive/90"
+              className="rounded-full bg-destructive text-destructive-foreground font-bold text-xs hover:bg-destructive/90"
             >
-              End Session
+              সেশন শেষ করুন
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -558,17 +651,17 @@ function ChatPage() {
       <AlertDialog open={showEndedAlert} onOpenChange={setShowEndedAlert}>
         <AlertDialogContent className="rounded-2xl">
           <AlertDialogHeader>
-            <AlertDialogTitle className="flex items-center gap-2 text-destructive font-serif text-2xl">
+            <AlertDialogTitle className="flex items-center gap-2 text-destructive font-serif text-2xl leading-snug">
               <AlertCircle className="h-6 w-6" />
-              Session Finished
+              সেশন শেষ
             </AlertDialogTitle>
             <AlertDialogDescription className="text-base">
-              The 25-minute timer has completed. Thank you for your time.
+              ২৫ মিনিটের সময় শেষ হয়েছে। আপনার সময় দেওয়ার জন্য ধন্যবাদ।
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="mt-4">
-            <AlertDialogAction onClick={() => setShowEndedAlert(false)} className="rounded-full bg-primary font-bold uppercase tracking-widest text-[10px]">
-              Understood
+            <AlertDialogAction onClick={() => setShowEndedAlert(false)} className="rounded-full bg-primary font-bold text-xs">
+              বুঝেছি
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -583,5 +676,5 @@ function formatMs(ms: number) {
     .toString()
     .padStart(2, "0");
   const r = (s % 60).toString().padStart(2, "0");
-  return `${m}:${r}`;
+  return `${m}:${r}`.replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[Number(d)]);
 }

@@ -76,7 +76,7 @@ function PeerPage() {
             <h3 className="mt-3 font-serif text-2xl">Voice Session</h3>
             <p className="mt-2 text-sm text-muted-foreground">Via Google Meet link. 30 minutes. Hear and be heard.</p>
             <div className="mt-5 flex items-baseline gap-2">
-              <span className="font-serif text-3xl text-primary">BDT 149</span>
+              <span className="font-serif text-3xl text-primary">BDT 49</span>
               <span className="text-sm text-muted-foreground">/ session</span>
             </div>
             <Link to="/book" search={{ s: "voice_peer" } as never} className="mt-6 inline-block rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-medium hover:opacity-90">

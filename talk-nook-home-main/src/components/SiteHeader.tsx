@@ -3,11 +3,8 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const nav = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/peer-support", label: "Peer Support" },
-  { to: "/health-navigation", label: "Health Navigation" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", label: "হোম" },
+  { to: "/about", label: "আমাদের সম্পর্কে" },
 ] as const;
 
 export function SiteHeader() {
@@ -36,10 +33,10 @@ export function SiteHeader() {
             to="/book"
             className="px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm hover:opacity-90 transition"
           >
-            Book a Session
+            কথা বলুন
           </Link>
         </nav>
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="মেনু খুলুন বা বন্ধ করুন">
           {open ? <X /> : <Menu />}
         </button>
       </div>
@@ -52,7 +49,7 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link to="/book" onClick={() => setOpen(false)} className="mt-2 px-4 py-2 rounded-full bg-primary text-primary-foreground text-center">
-              Book a Session
+              কথা বলুন
             </Link>
           </div>
         </div>

@@ -8,8 +8,8 @@ import { Mail, Facebook } from "lucide-react";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Talk Nook" },
-      { name: "description", content: "Get in touch with Talk Nook." },
+      { title: "যোগাযোগ — Talk Nook" },
+      { name: "description", content: "Talk Nook-এর সাথে যোগাযোগ করুন।" },
     ],
   }),
   component: ContactPage,
@@ -20,51 +20,51 @@ function ContactPage() {
   const [loading, setLoading] = useState(false);
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) return toast.error("Please fill all fields.");
+    if (!form.name || !form.email || !form.message) return toast.error("অনুগ্রহ করে সবগুলো ঘর পূরণ করুন।");
     setLoading(true);
     const { error } = await supabase.from("contact_messages").insert(form);
     setLoading(false);
     if (error) return toast.error(error.message);
-    toast.success("Thank you. We'll get back to you soon.");
+    toast.success("ধন্যবাদ। আমরা শীঘ্রই আপনার সাথে যোগাযোগ করবো।");
     setForm({ name: "", email: "", message: "" });
   };
   return (
     <SiteShell>
       <section className="mx-auto max-w-3xl px-5 pt-16 pb-20">
-        <p className="text-xs uppercase tracking-widest text-accent">Contact</p>
-        <h1 className="mt-3 font-serif text-4xl sm:text-5xl leading-tight">Say hello.</h1>
-        <p className="mt-4 text-muted-foreground">We respond to every message — usually within a day or two.</p>
+        <p className="text-xs text-accent">যোগাযোগ</p>
+        <h1 className="mt-3 font-serif text-4xl sm:text-5xl leading-snug">যোগাযোগ করুন</h1>
+        <p className="mt-4 text-muted-foreground">আমরা সাধারণত এক থেকে দুইদিনের মাঝে প্রতিটি মেসেজের জবাব দেই।</p>
 
         <div className="mt-10 grid gap-8 md:grid-cols-[1fr,300px]">
           <form onSubmit={submit} className="rounded-3xl border border-border bg-card p-7 space-y-4">
             <div>
-              <label className="text-sm">Your name</label>
+              <label className="text-sm">আপনার নাম</label>
               <input className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
             </div>
             <div>
-              <label className="text-sm">Email</label>
+              <label className="text-sm">ইমেইল</label>
               <input type="email" className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
             </div>
             <div>
-              <label className="text-sm">Message</label>
+              <label className="text-sm">আপনার বার্তা</label>
               <textarea rows={5} className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
             </div>
             <button disabled={loading} className="rounded-full bg-primary text-primary-foreground px-6 py-2.5 text-sm font-medium hover:opacity-90 disabled:opacity-50">
-              {loading ? "Sending..." : "Send message"}
+              {loading ? "পাঠানো হচ্ছে..." : "সেন্ড মেসেজ"}
             </button>
           </form>
           <div className="space-y-4">
             <a href="mailto:thetalknook@proton.me" className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 hover:border-primary/40 transition">
               <Mail className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-xs text-muted-foreground">Email</div>
+                <div className="text-xs text-muted-foreground">ইমেইল</div>
                 <div className="text-sm">thetalknook@proton.me</div>
               </div>
             </a>
             <a href="https://www.facebook.com/thetalknook" target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 hover:border-primary/40 transition">
               <Facebook className="h-5 w-5 text-primary" />
               <div>
-                <div className="text-xs text-muted-foreground">Facebook</div>
+                <div className="text-xs text-muted-foreground">ফেসবুক</div>
                 <div className="text-sm">@thetalknook</div>
               </div>
             </a>
