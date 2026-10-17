@@ -56,7 +56,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 const TITLE = "The Talk Nook — আপনার মনের ভারের কথা বলতে পারেন";
 const DESCRIPTION =
-  "বাংলাদেশে পিয়ার সাপোর্ট দিকনির্দেশনা। এটি থেরাপি নয়। নিজের কথা বলার এবং শোনা হওয়ার একটি জায়গা।";
+  "এটি থেরাপি নয়। নিজের কথা বলার এবং শোনা হওয়ার একটি জায়গা।";
 const OG_IMAGE =
   "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c7ed1fd3-1b5b-4754-8c97-e32343a274cd/id-preview-329eb026--924507dc-6719-42cc-b002-47d824f96add.lovable.app-1780224386083.png";
 
@@ -81,6 +81,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" },
+    ],
+    scripts: [
+      { src: "https://www.googletagmanager.com/gtag/js?id=G-6DVLQHZ9LZ", async: true },
+      {
+        children: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6DVLQHZ9LZ');
+        `,
+      },
     ],
   }),
   shellComponent: RootShell,
