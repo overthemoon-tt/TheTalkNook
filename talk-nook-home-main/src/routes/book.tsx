@@ -44,6 +44,7 @@ function BookPage() {
   const [userName, setUserName] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [txid, setTxid] = useState("");
+  const [coupon, setCoupon] = useState("");
 
   useEffect(() => { if (s) setService(s); }, [s]);
 
@@ -70,6 +71,8 @@ function BookPage() {
             service={service}
             txid={txid}
             setTxid={setTxid}
+            coupon={coupon}
+            setCoupon={setCoupon}
             userName={userName}
             isAnonymous={isAnonymous}
             onBack={() => setStep(2)}
@@ -180,7 +183,7 @@ function Step2({ service, userName, setUserName, isAnonymous, setIsAnonymous, on
   );
 }
 
-function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfirmed }: any) {
+function Step3({ service, txid, setTxid, coupon, setCoupon, userName, isAnonymous, onBack, onConfirmed }: any) {
   const cfg = SERVICES[service as ServiceKey];
   const [loading, setLoading] = useState(false);
 
@@ -200,6 +203,7 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
         session_type: service,
         bkash_transaction_id: txid.trim(),
         status: "pending_verification",
+        ...(coupon.trim() ? { coupon_code: coupon.trim() } : {}),
       })
       .select("id, reference_code")
       .maybeSingle();
@@ -269,6 +273,10 @@ function Step3({ service, txid, setTxid, userName, isAnonymous, onBack, onConfir
         <label className="text-sm">বিকাশ ট্রান্সেকশন আইডি *</label>
         <input value={txid} onChange={(e) => setTxid(e.target.value)} placeholder="যেমন: 9A8B7C6D5E" className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 font-mono" />
       </div>
+      <div>
+        <label className="text-sm">কুপন কোড (থাকলে)</label>
+        <input value={coupon} onChange={(e) => setCoupon(e.target.value)} placeholder="কুপন কোড লিখুন" className="mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 font-mono" />
+      </div>
       <div className="flex gap-3 pt-2">
         <button onClick={onBack} className="rounded-full border border-border px-5 py-2.5 text-sm">পেছনে যান</button>
         <button onClick={submit} disabled={loading} className="flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium disabled:opacity-50">
@@ -335,8 +343,8 @@ function Step4({ service, confirmation }: {
 
   const steps = [
     { label: "আপনার অনুরোধ গৃহীত হয়েছে", done: true },
-    { label: "আপনার লিসেনার ঠিক করা হচ্ছে...", done: isConfirmed, active: !isConfirmed && !isCancelled },
-    { label: "রুম প্রস্তুত", done: isConfirmed },
+    { label: "আপনার লিসেনার যুক্ত হচ্ছেন...", done: isConfirmed, active: !isConfirmed && !isCancelled },
+    { label: "প্রস্তুত", done: isConfirmed },
   ];
 
   return (

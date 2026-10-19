@@ -16,7 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-const appCss = "/assets/styles-BwmkEffB.css";
+const appCss = "/assets/styles-DzCI-SMJ.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -83,7 +83,7 @@ function ErrorComponent({ error, reset }) {
   ] }) });
 }
 const TITLE = "The Talk Nook — আপনার মনের ভারের কথা বলতে পারেন";
-const DESCRIPTION = "বাংলাদেশে পিয়ার সাপোর্ট দিকনির্দেশনা। এটি থেরাপি নয়। নিজের কথা বলার এবং শোনা হওয়ার একটি জায়গা।";
+const DESCRIPTION = "এটি থেরাপি নয়। নিজের কথা বলার এবং শোনা হওয়ার একটি জায়গা।";
 const OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c7ed1fd3-1b5b-4754-8c97-e32343a274cd/id-preview-329eb026--924507dc-6719-42cc-b002-47d824f96add.lovable.app-1780224386083.png";
 const Route$8 = createRootRouteWithContext()({
   head: () => ({
@@ -106,6 +106,17 @@ const Route$8 = createRootRouteWithContext()({
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500;600;700&display=swap" }
+    ],
+    scripts: [
+      { src: "https://www.googletagmanager.com/gtag/js?id=G-6DVLQHZ9LZ", async: true },
+      {
+        children: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6DVLQHZ9LZ');
+        `
+      }
     ]
   }),
   shellComponent: RootShell,
@@ -141,7 +152,7 @@ const Route$7 = createFileRoute("/talknook-admin-panel")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$7, "component")
 });
-const $$splitComponentImporter$6 = () => import("./peer-support-AB-TYSEl.mjs");
+const $$splitComponentImporter$6 = () => import("./peer-support-C4Ct4PYk.mjs");
 const Route$6 = createFileRoute("/peer-support")({
   head: () => ({
     meta: [{
@@ -159,7 +170,7 @@ const Route$6 = createFileRoute("/peer-support")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-const $$splitComponentImporter$5 = () => import("./health-navigation-DiC5Ms2v.mjs");
+const $$splitComponentImporter$5 = () => import("./health-navigation-DaJ7v5Qg.mjs");
 const Route$5 = createFileRoute("/health-navigation")({
   head: () => ({
     meta: [{
@@ -177,74 +188,71 @@ const Route$5 = createFileRoute("/health-navigation")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$5, "component")
 });
-const $$splitComponentImporter$4 = () => import("./contact-VSrbRb3l.mjs");
+const $$splitComponentImporter$4 = () => import("./contact-LA0ZuLXg.mjs");
 const Route$4 = createFileRoute("/contact")({
   head: () => ({
     meta: [{
-      title: "Contact — Talk Nook"
+      title: "যোগাযোগ — Talk Nook"
     }, {
       name: "description",
-      content: "Get in touch with Talk Nook."
+      content: "Talk Nook-এর সাথে যোগাযোগ করুন।"
     }]
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./book-CvwBsgga.mjs");
+const $$splitComponentImporter$3 = () => import("./book-YaZfcRpt.mjs");
 const Route$3 = createFileRoute("/book")({
   validateSearch: (s) => ({
     s: s.s || void 0
   }),
   head: () => ({
     meta: [{
-      title: "Book a Session — The Talk Nook"
+      title: "কথা বলুন — The Talk Nook"
     }, {
       name: "description",
-      content: "Book a peer support or health navigation session."
+      content: "পিয়ার লিসেনিং সেশনে লিসেনারের সাথে কথা বলুন।"
     }]
   }),
   component: lazyRouteComponent($$splitComponentImporter$3, "component")
 });
-const $$splitComponentImporter$2 = () => import("./about-CZVLg3v2.mjs");
+const $$splitComponentImporter$2 = () => import("./about-DfMfuuJE.mjs");
 const Route$2 = createFileRoute("/about")({
   head: () => ({
     meta: [{
-      title: "About — Talk Nook"
+      title: "আমাদের সম্পর্কে — Talk Nook"
     }, {
       name: "description",
-      content: "Our mission to make emotional support accessible to everyone in Bangladesh — no appointments, no stigma."
+      content: "বাংলাদেশের সবার জন্য মানসিক সহায়তা সহজলভ্য করাই আমাদের উদ্দেশ্য।"
     }, {
       property: "og:title",
-      content: "About Talk Nook"
+      content: "আমাদের সম্পর্কে — Talk Nook"
     }, {
       property: "og:description",
-      content: "Making emotional support accessible to everyone in Bangladesh."
+      content: "বাংলাদেশের সবার জন্য মানসিক সহায়তা সহজলভ্য করা।"
     }]
   }),
   component: lazyRouteComponent($$splitComponentImporter$2, "component")
 });
-const $$splitComponentImporter$1 = () => import("./index-ByEBw2Br.mjs");
+const $$splitComponentImporter$1 = () => import("./index-4_J9kBAQ.mjs");
 const Route$1 = createFileRoute("/")({
   head: () => ({
     meta: [{
-      title: "The Talk Nook — A space to be heard"
+      title: "The Talk Nook — নিজের কথা বলার একটি জায়গা"
     }, {
       name: "description",
-      content: "Peer emotional support in Bangladesh. Not therapy. No judgment."
+      content: "এটি থেরাপি নয়। কোনো judgement or advice নেই।"
     }, {
       property: "og:title",
-      content: "The Talk Nook — A space to be heard"
-    }, {
-      property: "og:description",
-      content: "Peer emotional support in Bangladesh."
+      content: "The Talk Nook — নিজের কথা বলার একটি জায়গা"
     }]
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./chat._chatId-DHkXGNB5.mjs");
+const $$splitComponentImporter = () => import("./chat._chatId-DpO_7Aj4.mjs");
 const Route = createFileRoute("/chat/$chatId")({
   head: () => ({
     meta: [{
-      title: "Your chat — The Talk Nook"
+      title: "আপনার চ্যাট — The Talk Nook"
     }, {
       name: "robots",
       content: "noindex"

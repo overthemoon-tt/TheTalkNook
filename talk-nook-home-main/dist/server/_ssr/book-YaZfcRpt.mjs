@@ -1,10 +1,10 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
-import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
+import { S as SiteShell } from "./SiteShell-C6-qY__4.mjs";
 import { s as supabase } from "./client-Xq59pGEw.mjs";
-import { a as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-DdxtYnEa.mjs";
+import { a as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-cf4vQ0IM.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
-import { R as Route$3 } from "./router-BHOu5CSL.mjs";
+import { R as Route$3 } from "./router-Dz_LzR0a.mjs";
 import "../_libs/seroval.mjs";
 import { j as Check, P as Phone, e as MessageCircle, k as Copy, A as ArrowRight } from "../_libs/lucide-react.mjs";
 import { o as objectType, s as stringType } from "../_libs/zod.mjs";
@@ -59,20 +59,21 @@ const notifyBooking = createServerFn({
   txid: stringType().min(1),
   ref: stringType().optional()
 })).handler(createSsrRpc("96c8deb2eeea00f12084f43dcfec35745451684544f42f101ff4819dfdf40117"));
+const bn = (n) => n.toLocaleString("bn-BD");
 const SERVICES = {
   text_peer: {
-    label: "Text Venting",
+    label: "টেক্সট সেশন",
     mins: 25,
-    price: 29,
+    price: 49,
     icon: MessageCircle,
-    desc: "Real-time chat with a trained peer listener."
+    desc: "টেক্সটে লিসেনারের সাথে কথা বলুন।"
   },
   voice_peer: {
-    label: "Voice Venting",
+    label: "ভয়েস সেশন",
     mins: 30,
     price: 99,
     icon: Phone,
-    desc: "Google Meet call with a peer listener."
+    desc: "লিসেনারের সাথে গুগল মিটে যুক্ত হোন।"
   }
 };
 function BookPage() {
@@ -98,16 +99,17 @@ function BookPage() {
   const [userName, setUserName] = reactExports.useState("");
   const [isAnonymous, setIsAnonymous] = reactExports.useState(false);
   const [txid, setTxid] = reactExports.useState("");
+  const [coupon, setCoupon] = reactExports.useState("");
   reactExports.useEffect(() => {
     if (s) setService(s);
   }, [s]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(SiteShell, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto max-w-2xl px-5 pt-14 pb-20", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase tracking-widest text-accent", children: "Book a session" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-3 font-serif text-4xl", children: "Let's set you up." }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs text-accent", children: "কথা বলুন" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-3 font-serif text-4xl leading-snug", children: "চলুন শুরু করা যাক" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Stepper, { step }),
     step === 1 && /* @__PURE__ */ jsxRuntimeExports.jsx(Step1, { service, setService, onNext: () => service && setStep(2) }),
     step === 2 && service && /* @__PURE__ */ jsxRuntimeExports.jsx(Step2, { service, userName, setUserName, isAnonymous, setIsAnonymous, onBack: () => setStep(1), onNext: () => setStep(3) }),
-    step === 3 && service && /* @__PURE__ */ jsxRuntimeExports.jsx(Step3, { service, txid, setTxid, userName, isAnonymous, onBack: () => setStep(2), onConfirmed: (r, c, m, id) => {
+    step === 3 && service && /* @__PURE__ */ jsxRuntimeExports.jsx(Step3, { service, txid, setTxid, coupon, setCoupon, userName, isAnonymous, onBack: () => setStep(2), onConfirmed: (r, c, m, id) => {
       const data = {
         confirmation: {
           ref: r,
@@ -132,14 +134,14 @@ function BookPage() {
 function Stepper({
   step
 }) {
-  const labels = ["Service", "Your details", "Payment", "Confirmed"];
+  const labels = ["সার্ভিস", "আপনার তথ্য", "পেমেন্ট", "কনফার্ম করুন"];
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 mb-10 flex items-center gap-2", children: labels.map((l, i) => {
     const n = i + 1;
     const active = step === n;
     const done = step > n;
     return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center flex-1", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `h-7 w-7 rounded-full flex items-center justify-center text-xs ${done ? "bg-primary text-primary-foreground" : active ? "bg-accent text-accent-foreground" : "bg-secondary text-muted-foreground"}`, children: done ? /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "h-3.5 w-3.5" }) : n }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "ml-2 text-xs hidden sm:block text-muted-foreground", children: l }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `h-7 w-7 rounded-full flex items-center justify-center text-xs ${done ? "bg-primary text-primary-foreground" : active ? "bg-accent text-accent-foreground" : "bg-secondary text-muted-foreground"}`, children: done ? /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "h-3.5 w-3.5" }) : bn(n) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "ml-2 text-xs hidden sm:block text-muted-foreground whitespace-nowrap", children: l }),
       i < labels.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-px bg-border mx-3" })
     ] }, l);
   }) });
@@ -160,19 +162,19 @@ function Step1({
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-baseline justify-between", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-serif text-lg", children: cfg.label }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-serif text-xl text-primary", children: [
-              "BDT ",
-              cfg.price
+              bn(cfg.price),
+              " টাকা"
             ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground mt-1", children: cfg.desc }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-xs text-muted-foreground mt-1", children: [
-            cfg.mins,
-            " minutes"
+            bn(cfg.mins),
+            " মিনিট"
           ] })
         ] })
       ] }, k);
     }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { disabled: !service, onClick: onNext, className: "mt-4 w-full rounded-full bg-primary text-primary-foreground py-3 text-sm font-medium disabled:opacity-40", children: "Continue" })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("button", { disabled: !service, onClick: onNext, className: "mt-4 w-full rounded-full bg-primary text-primary-foreground py-3 text-sm font-medium disabled:opacity-40", children: "এগিয়ে যান" })
   ] });
 }
 function Step2({
@@ -186,32 +188,32 @@ function Step2({
 }) {
   const cfg = SERVICES[service];
   const submit = () => {
-    if (!userName.trim()) return toast.error("Please enter your name.");
+    if (!userName.trim()) return toast.error("অনুগ্রহ করে আপনার নাম লিখুন।");
     onNext();
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 rounded-3xl border border-border bg-card p-6", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("h3", { className: "font-serif text-xl", children: [
-      "Your details for ",
-      cfg.label
+      cfg.label,
+      "-এর জন্য আপনার তথ্য"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "flex items-center gap-2 text-sm", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "checkbox", checked: isAnonymous, onChange: (e) => setIsAnonymous(e.target.checked) }),
-      "I'd like to stay anonymous (we still need a name to call you)"
+      "আমি পরিচয় গোপন রাখতে চাই (তবে আপনাকে সম্বোধন করার জন্য একটি নাম বা ডাকনাম আমাদের প্রয়োজন)"
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm", children: "Your name (or nickname) *" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm", children: "আপনার নাম (বা ডাকনাম) *" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("input", { type: "text", value: userName, onChange: (e) => setUserName(e.target.value), className: "mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border-2 border-primary bg-primary/5 px-5 py-4 flex items-start gap-4", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-5 w-5 rounded-full bg-primary flex items-center justify-center mt-0.5 shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx("svg", { className: "h-3 w-3 text-primary-foreground", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor", strokeWidth: 3, children: /* @__PURE__ */ jsxRuntimeExports.jsx("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M5 13l4 4L19 7" }) }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-medium text-sm", children: "As soon as possible (ASAP)" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-0.5", children: "We'll match you with the next available listener and notify you shortly." })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-medium text-sm", children: "যত দ্রুত সম্ভব" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-0.5", children: "পরবর্তী সহজলভ্য লিসেনারের সাথে আমরা আপনাকে যুক্ত করে দিবো এবং শীঘ্রই জানিয়ে দিবো।" })
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-3 pt-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: onBack, className: "rounded-full border border-border px-5 py-2.5 text-sm", children: "Back" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: submit, className: "flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium", children: "Continue to payment" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: onBack, className: "rounded-full border border-border px-5 py-2.5 text-sm", children: "পেছনে যান" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: submit, className: "flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium", children: "পেমেন্টে এগিয়ে যান" })
     ] })
   ] });
 }
@@ -219,6 +221,8 @@ function Step3({
   service,
   txid,
   setTxid,
+  coupon,
+  setCoupon,
   userName,
   isAnonymous,
   onBack,
@@ -227,7 +231,7 @@ function Step3({
   const cfg = SERVICES[service];
   const [loading, setLoading] = reactExports.useState(false);
   const submit = async () => {
-    if (!txid.trim()) return toast.error("Please enter your bKash Transaction ID.");
+    if (!txid.trim()) return toast.error("অনুগ্রহ করে আপনার বিকাশ ট্রান্সেকশন আইডি দিন।");
     setLoading(true);
     const today = (/* @__PURE__ */ new Date()).toISOString().split("T")[0];
     const {
@@ -240,11 +244,14 @@ function Step3({
       is_anonymous: isAnonymous,
       session_type: service,
       bkash_transaction_id: txid.trim(),
-      status: "pending_verification"
+      status: "pending_verification",
+      ...coupon.trim() ? {
+        coupon_code: coupon.trim()
+      } : {}
     }).select("id, reference_code").maybeSingle();
     if (error || !booking) {
       setLoading(false);
-      return toast.error(error?.message || "Could not save booking.");
+      return toast.error(error?.message || "অনুরোধ সংরক্ষণ করা যায়নি।");
     }
     try {
       await notifyBooking({
@@ -282,39 +289,43 @@ function Step3({
   };
   const copyNumber = () => {
     navigator.clipboard.writeText("01301046838");
-    toast.success("Number copied");
+    toast.success("নম্বর কপি হয়েছে");
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 rounded-3xl border border-border bg-card p-6", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-baseline justify-between", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-serif text-xl", children: "Pay via bKash" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-serif text-xl", children: "বিকাশে পেমেন্ট করুন" }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "font-serif text-2xl text-primary", children: [
-        "BDT ",
-        cfg.price
+        bn(cfg.price),
+        " টাকা"
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("ol", { className: "text-sm text-muted-foreground space-y-3 list-decimal pl-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-        "Send ",
+        "বিকাশ মার্চেন্ট নম্বরে ",
         /* @__PURE__ */ jsxRuntimeExports.jsxs("b", { className: "text-foreground", children: [
-          "BDT ",
-          cfg.price
+          bn(cfg.price),
+          " টাকা"
         ] }),
-        " to bKash merchant:",
+        " পাঠান:",
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex items-center gap-2 rounded-xl bg-secondary/60 border border-border px-3 py-2 w-fit", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-foreground text-base", children: "01301046838" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: copyNumber, className: "text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Copy, { className: "h-4 w-4" }) })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Copy your bKash Transaction ID (TrxID)." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "Paste it below and confirm." })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "আপনার বিকাশ ট্রান্সেকশন আইডি (TrxID) কপি করুন।" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: "নিচে পেস্ট করে কনফার্ম করুন।" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm", children: "bKash Transaction ID *" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("input", { value: txid, onChange: (e) => setTxid(e.target.value), placeholder: "e.g. 9A8B7C6D5E", className: "mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 font-mono" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm", children: "বিকাশ ট্রান্সেকশন আইডি *" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("input", { value: txid, onChange: (e) => setTxid(e.target.value), placeholder: "যেমন: 9A8B7C6D5E", className: "mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 font-mono" })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("label", { className: "text-sm", children: "কুপন কোড (থাকলে)" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("input", { value: coupon, onChange: (e) => setCoupon(e.target.value), placeholder: "কুপন কোড লিখুন", className: "mt-1 w-full rounded-xl border border-input bg-background px-4 py-2.5 font-mono" })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-3 pt-2", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: onBack, className: "rounded-full border border-border px-5 py-2.5 text-sm", children: "Back" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: submit, disabled: loading, className: "flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium disabled:opacity-50", children: loading ? "Saving..." : "Confirm booking" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: onBack, className: "rounded-full border border-border px-5 py-2.5 text-sm", children: "পেছনে যান" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: submit, disabled: loading, className: "flex-1 rounded-full bg-primary text-primary-foreground py-2.5 text-sm font-medium disabled:opacity-50", children: loading ? "সংরক্ষণ হচ্ছে..." : "কনফার্ম করুন" })
     ] })
   ] });
 }
@@ -355,14 +366,14 @@ function Step4({
   const isConfirmed = status === "confirmed";
   const isCancelled = status === "cancelled";
   const steps = [{
-    label: "Booking received",
+    label: "আপনার অনুরোধ গৃহীত হয়েছে",
     done: true
   }, {
-    label: "Your listener is being assigned...",
+    label: "আপনার লিসেনার যুক্ত হচ্ছেন...",
     done: isConfirmed,
     active: !isConfirmed && !isCancelled
   }, {
-    label: "Room ready",
+    label: "প্রস্তুত",
     done: isConfirmed
   }];
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-3xl border border-border bg-card p-8", children: [
@@ -370,8 +381,8 @@ function Step4({
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto h-14 w-14 rounded-full bg-primary/15 text-primary flex items-center justify-center mb-4", children: isConfirmed ? /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "h-7 w-7" }) : isCancelled ? /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xl", children: "✕" }) : /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-2xl", style: {
         animation: "pulse 2s infinite"
       }, children: "☕" }) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-serif text-2xl", children: isConfirmed ? "Your Talk Nook is ready" : isCancelled ? "Booking cancelled" : "Your Talk Nook is being prepared" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: isConfirmed ? "Your listener is ready. Join whenever you are." : isCancelled ? "Your booking was cancelled. Please reach us at thetalknook@proton.me if this was a mistake." : "Typical connection time: 25 minutes" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-serif text-2xl leading-snug", children: isConfirmed ? "আপনার Talk Nook প্রস্তুত" : isCancelled ? "আপনার অনুরোধ বাতিল হয়েছে" : "আপনার Talk Nook প্রস্তুত করা হচ্ছে" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: isConfirmed ? "আপনার লিসেনার প্রস্তুত। আপনি প্রস্তুত হলেই যুক্ত হোন।" : isCancelled ? "আপনার অনুরোধ বাতিল করা হয়েছে। ভুলবশত হয়ে থাকলে অনুগ্রহ করে thetalknook@proton.me-এ আমাদের জানান।" : "সাধারণত যুক্ত হতে সময় লাগে প্রায় ২৫ মিনিট" })
     ] }),
     !isConfirmed && !isCancelled && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-6 h-1 rounded-full bg-border overflow-hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-full bg-primary/40 rounded-full", style: {
       width: "60%",
@@ -384,15 +395,15 @@ function Step4({
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-sm ${step.done ? "text-foreground font-medium" : step.active ? "text-foreground" : "text-muted-foreground"}`, children: step.label })
     ] }, i)) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl bg-secondary/60 border border-border px-5 py-4 text-center mb-6", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs uppercase tracking-wider text-muted-foreground", children: "Booking reference" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground", children: "রেফারেন্স কোড" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-mono text-lg mt-1", children: confirmation.ref }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-1", children: "Save this code to return to your session" })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-1", children: "সেশনে ফিরে আসতে এই কোডটি সংরক্ষণ করুন" })
     ] }),
     isConfirmed && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-center", style: {
       animation: "fadeSlideUp 0.5s ease forwards"
     }, children: [
       service === "voice_peer" && confirmation.meetLink && /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: confirmation.meetLink, target: "_blank", rel: "noopener noreferrer", onClick: () => localStorage.removeItem("tn_confirmation"), className: "inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-8 py-3 text-sm font-medium", children: [
-        "📹 Join Session ",
+        "📹 সেশনে যুক্ত হোন ",
         /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "h-4 w-4" })
       ] }),
       (service === "text_peer" || service === "text_health") && confirmation.chatId && /* @__PURE__ */ jsxRuntimeExports.jsxs("button", { onClick: () => {
@@ -404,7 +415,7 @@ function Step4({
           }
         });
       }, className: "inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-8 py-3 text-sm font-medium", children: [
-        "Enter Chat Room ",
+        "চ্যাট রুমে প্রবেশ করুন ",
         /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "h-4 w-4" })
       ] })
     ] }),

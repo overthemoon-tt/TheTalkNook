@@ -1,6 +1,6 @@
 import { j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { S as SiteShell } from "./SiteShell-Cxrl0jzj.mjs";
+import { S as SiteShell } from "./SiteShell-C6-qY__4.mjs";
 import { A as Accordion, a as AccordionItem, b as AccordionTrigger, c as AccordionContent } from "./accordion-0YUX3eCL.mjs";
 import { T as TriangleAlert, S as Search, U as UserCheck, f as Stethoscope, g as CircleQuestionMark } from "../_libs/lucide-react.mjs";
 import "../_libs/tanstack__router-core.mjs";
