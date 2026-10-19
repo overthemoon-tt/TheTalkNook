@@ -220,6 +220,7 @@ function Step3({ service, txid, setTxid, coupon, setCoupon, userName, isAnonymou
           service: cfg.label,
           txid: txid.trim(),
           ref: booking.reference_code,
+          coupon: coupon.trim() || undefined,
         },
       });
     } catch (e) {
