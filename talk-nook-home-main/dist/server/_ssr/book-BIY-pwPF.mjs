@@ -2,9 +2,9 @@ import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { d as useNavigate } from "../_libs/tanstack__react-router.mjs";
 import { S as SiteShell } from "./SiteShell-C6-qY__4.mjs";
 import { s as supabase } from "./client-Xq59pGEw.mjs";
-import { a as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-cf4vQ0IM.mjs";
+import { a as createServerFn, T as TSS_SERVER_FUNCTION, g as getServerFnById } from "./server-CmcdQSQo.mjs";
 import { t as toast } from "../_libs/sonner.mjs";
-import { R as Route$3 } from "./router-Dz_LzR0a.mjs";
+import { R as Route$3 } from "./router-DjCfpaLu.mjs";
 import "../_libs/seroval.mjs";
 import { j as Check, P as Phone, e as MessageCircle, k as Copy, A as ArrowRight } from "../_libs/lucide-react.mjs";
 import { o as objectType, s as stringType } from "../_libs/zod.mjs";
@@ -259,7 +259,8 @@ function Step3({
           userName,
           service: cfg.label,
           txid: txid.trim(),
-          ref: booking.reference_code
+          ref: booking.reference_code,
+          coupon: coupon.trim() || void 0
         }
       });
     } catch (e) {

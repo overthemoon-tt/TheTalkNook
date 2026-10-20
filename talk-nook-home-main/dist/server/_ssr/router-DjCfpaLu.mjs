@@ -16,7 +16,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-const appCss = "/assets/styles-DzCI-SMJ.css";
+const appCss = "/assets/styles-DKGVOBXd.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -140,7 +140,7 @@ function RootComponent() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Toaster, {})
   ] });
 }
-const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-DggxNt35.mjs");
+const $$splitComponentImporter$7 = () => import("./talknook-admin-panel-B3WsOWPW.mjs");
 const Route$7 = createFileRoute("/talknook-admin-panel")({
   head: () => ({
     meta: [{
@@ -200,7 +200,7 @@ const Route$4 = createFileRoute("/contact")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
-const $$splitComponentImporter$3 = () => import("./book-YaZfcRpt.mjs");
+const $$splitComponentImporter$3 = () => import("./book-BIY-pwPF.mjs");
 const Route$3 = createFileRoute("/book")({
   validateSearch: (s) => ({
     s: s.s || void 0
@@ -248,7 +248,7 @@ const Route$1 = createFileRoute("/")({
   }),
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./chat._chatId-DpO_7Aj4.mjs");
+const $$splitComponentImporter = () => import("./chat._chatId-jroqAXYc.mjs");
 const Route = createFileRoute("/chat/$chatId")({
   head: () => ({
     meta: [{

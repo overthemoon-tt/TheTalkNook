@@ -118,11 +118,20 @@ function StatusBadge({ s }: { s: string }) {
   return <span className={`text-[11px] px-2 py-0.5 rounded-full border ${map[s] || ""}`}>{s.replace("_", " ")}</span>;
 }
 
+function CouponBadge({ code }: { code?: string | null }) {
+  if (!code) return <span className="text-muted-foreground">—</span>;
+  return (
+    <span className="inline-block rounded-full bg-accent/15 text-accent border border-accent/30 px-2.5 py-0.5 text-xs font-semibold font-mono">
+      {code}
+    </span>
+  );
+}
+
 function ErrorState({ message, onRetry }: { message: string; onRetry?: () => void }) {
   return (
     <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-5 flex items-start gap-3">
       <AlertCircle className="h-5 w-5 text-destructive mt-0.5 shrink-0" />
-      <div className="flex-1">``
+      <div className="flex-1">
         <div className="text-sm text-destructive font-medium">Couldn't load data</div>
         <div className="text-xs text-muted-foreground mt-1">{message}</div>
         {onRetry && (
@@ -201,7 +210,7 @@ function RecentBookings() {
     try {
       const { data, error } = await supabase
         .from("bookings")
-        .select("id,user_name,session_type,preferred_date,preferred_time,bkash_transaction_id,status,created_at")
+        .select("id,user_name,session_type,preferred_date,preferred_time,bkash_transaction_id,coupon_code,status,created_at")
         .order("created_at", { ascending: false })
         .range(0, 9);
       if (error) throw error;
@@ -227,7 +236,7 @@ function RecentBookings() {
       ) : (
         <Table>
           <TableHeader>
-            <TableRow><TableHead>Name</TableHead><TableHead>Type</TableHead><TableHead>Date/Time</TableHead><TableHead>TrxID</TableHead><TableHead>Status</TableHead></TableRow>
+            <TableRow><TableHead>Name</TableHead><TableHead>Type</TableHead><TableHead>Date/Time</TableHead><TableHead>TrxID</TableHead><TableHead>Coupon</TableHead><TableHead>Status</TableHead></TableRow>
           </TableHeader>
           <TableBody>
             {recent.map((b: any) => (
@@ -236,11 +245,12 @@ function RecentBookings() {
                 <TableCell className="text-xs">{b.session_type}</TableCell>
                 <TableCell className="text-xs">{b.preferred_date} {b.preferred_time}</TableCell>
                 <TableCell className="font-mono text-xs">{b.bkash_transaction_id}</TableCell>
+                <TableCell><CouponBadge code={b.coupon_code} /></TableCell>
                 <TableCell><StatusBadge s={b.status} /></TableCell>
               </TableRow>
             ))}
             {recent.length === 0 && (
-              <TableRow><TableCell colSpan={5} className="text-center text-muted-foreground py-8">No bookings yet.</TableCell></TableRow>
+              <TableRow><TableCell colSpan={6} className="text-center text-muted-foreground py-8">No bookings yet.</TableCell></TableRow>
             )}
           </TableBody>
         </Table>
@@ -340,8 +350,9 @@ function Bookings() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Ref</TableHead><TableHead>Name</TableHead><TableHead>Phone</TableHead>
+                    <TableHead>Ref</TableHead><TableHead>Name</TableHead>
                     <TableHead>Type</TableHead><TableHead>When</TableHead><TableHead>TrxID</TableHead>
+                    <TableHead>Coupon</TableHead>
                     <TableHead>Status</TableHead><TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -353,6 +364,7 @@ function Bookings() {
                       <TableCell className="text-xs">{b.session_type}</TableCell>
                       <TableCell className="text-xs">{b.preferred_date}<br/>{b.preferred_time}</TableCell>
                       <TableCell className="font-mono text-xs">{b.bkash_transaction_id}</TableCell>
+                      <TableCell><CouponBadge code={b.coupon_code} /></TableCell>
                       <TableCell><StatusBadge s={b.status} /></TableCell>
                       <TableCell>
                         <div className="flex gap-1 flex-wrap">

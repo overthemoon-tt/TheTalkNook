@@ -189,6 +189,12 @@ function StatusBadge({
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `text-[11px] px-2 py-0.5 rounded-full border ${map[s] || ""}`, children: s.replace("_", " ") });
 }
+function CouponBadge({
+  code
+}) {
+  if (!code) return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "—" });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-block rounded-full bg-accent/15 text-accent border border-accent/30 px-2.5 py-0.5 text-xs font-semibold font-mono", children: code });
+}
 function ErrorState({
   message,
   onRetry
@@ -196,7 +202,6 @@ function ErrorState({
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-2xl border border-destructive/30 bg-destructive/5 p-5 flex items-start gap-3", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CircleAlert, { className: "h-5 w-5 text-destructive mt-0.5 shrink-0" }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
-      "``",
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-destructive font-medium", children: "Couldn't load data" }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs text-muted-foreground mt-1", children: message }),
       onRetry && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: onRetry, className: "mt-3 text-xs px-3 py-1 rounded-full bg-destructive/10 text-destructive", children: "Retry" })
@@ -286,7 +291,7 @@ function RecentBookings() {
       const {
         data,
         error: error2
-      } = await supabase.from("bookings").select("id,user_name,session_type,preferred_date,preferred_time,bkash_transaction_id,status,created_at").order("created_at", {
+      } = await supabase.from("bookings").select("id,user_name,session_type,preferred_date,preferred_time,bkash_transaction_id,coupon_code,status,created_at").order("created_at", {
         ascending: false
       }).range(0, 9);
       if (error2) throw error2;
@@ -310,6 +315,7 @@ function RecentBookings() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Type" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Date/Time" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "TrxID" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Coupon" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Status" })
       ] }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(TableBody, { children: [
@@ -322,9 +328,10 @@ function RecentBookings() {
             b.preferred_time
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "font-mono text-xs", children: b.bkash_transaction_id }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CouponBadge, { code: b.coupon_code }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { s: b.status }) })
         ] }, b.id)),
-        recent.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(TableRow, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { colSpan: 5, className: "text-center text-muted-foreground py-8", children: "No bookings yet." }) })
+        recent.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(TableRow, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { colSpan: 6, className: "text-center text-muted-foreground py-8", children: "No bookings yet." }) })
       ] })
     ] })
   ] });
@@ -419,10 +426,10 @@ function Bookings() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(TableHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(TableRow, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Ref" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Name" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Phone" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Type" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "When" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "TrxID" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Coupon" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Status" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TableHead, { children: "Actions" })
         ] }) }),
@@ -437,6 +444,7 @@ function Bookings() {
               b.preferred_time
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { className: "font-mono text-xs", children: b.bkash_transaction_id }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CouponBadge, { code: b.coupon_code }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(StatusBadge, { s: b.status }) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(TableCell, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex gap-1 flex-wrap", children: [
               b.status === "pending_verification" && /* @__PURE__ */ jsxRuntimeExports.jsx("button", { onClick: () => updateStatus(b, "confirmed"), className: "text-xs px-2 py-1 rounded bg-primary text-primary-foreground", children: "Confirm" }),
